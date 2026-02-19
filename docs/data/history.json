@@ -5,8 +5,8 @@
       "score": 100.0,
       "passed": 80,
       "total": 80,
-      "total_cost_usd": 5.2562,
-      "total_duration_ms": 942645,
+      "total_cost_usd": 5.2769,
+      "total_duration_ms": 915100,
       "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.47 (Claude Code)"
     }
