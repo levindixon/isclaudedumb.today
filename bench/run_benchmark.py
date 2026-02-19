@@ -34,6 +34,21 @@ MAX_BUDGET_USD = 0.10
 DISALLOWED_TOOLS = "Bash,WebFetch,WebSearch,Task,NotebookEdit,Write"
 MAX_ATTEMPTS = 2
 
+_logged_cli_keys = False
+
+
+def _get_first(data: dict, default, *keys):
+    """Return the value of the first key that exists in data, else default.
+
+    Unlike `data.get(k1) or data.get(k2)`, this correctly handles falsy
+    values like 0, False, and {} — it only falls through when the key is
+    truly absent from the dict.
+    """
+    for key in keys:
+        if key in data:
+            return data[key]
+    return default
+
 
 def get_claude_version() -> str:
     """Get the Claude CLI version string."""
@@ -236,6 +251,11 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
     try:
         data = json.loads(result.stdout)
     except (json.JSONDecodeError, TypeError):
+        print(f"    [debug] Failed to parse CLI JSON output")
+        if result.stdout:
+            print(f"    [debug] stdout (first 500 chars): {result.stdout[:500]}")
+        if result.stderr:
+            print(f"    [debug] stderr (first 500 chars): {result.stderr[:500]}")
         return {
             "session_id": session_id,
             "duration_ms": duration_ms,
@@ -251,18 +271,28 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
             },
         }
 
-    # Extract fields from Claude CLI JSON output
-    is_error = data.get("isError", False) or data.get("is_error", False)
-    subtype = data.get("subtype") or data.get("errorType")
+    # Log CLI output keys once for diagnostics
+    global _logged_cli_keys
+    if not _logged_cli_keys:
+        print(f"    [debug] CLI JSON top-level keys: {sorted(data.keys())}")
+        cost_val = data.get("total_cost_usd", "MISSING")
+        print(f"    [debug] total_cost_usd = {cost_val}")
+        _logged_cli_keys = True
+
+    # Extract fields from Claude CLI JSON output.
+    # The CLI uses snake_case for top-level fields (session_id, num_turns,
+    # is_error, total_cost_usd) but camelCase for modelUsage.
+    is_error = _get_first(data, False, "is_error", "isError")
+    subtype = _get_first(data, None, "subtype", "errorType")
     if is_error and not subtype:
         subtype = "claude_error"
 
     return {
-        "session_id": data.get("sessionId") or data.get("session_id") or session_id,
+        "session_id": _get_first(data, session_id, "session_id", "sessionId"),
         "duration_ms": duration_ms,
-        "num_turns": data.get("numTurns", 0) or data.get("num_turns", 0),
-        "total_cost_usd": data.get("costUSD", 0) or data.get("cost_usd", 0),
-        "model_usage": data.get("modelUsage", {}) or data.get("model_usage", {}),
+        "num_turns": _get_first(data, 0, "num_turns", "numTurns"),
+        "total_cost_usd": _get_first(data, 0, "total_cost_usd", "costUSD", "cost_usd"),
+        "model_usage": _get_first(data, {}, "modelUsage", "model_usage"),
         "is_error": is_error,
         "error_subtype": subtype,
         "raw_result": data,
