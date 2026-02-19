@@ -1,0 +1,825 @@
+{
+  "date": "2026-02-19",
+  "suite": "HumanEval-CC40",
+  "score": 100.0,
+  "passed": 40,
+  "total": 40,
+  "total_cost_usd": 2.6788,
+  "total_duration_ms": 327608,
+  "primary_model": "claude-sonnet-4-6",
+  "claude_version": "2.1.47 (Claude Code)",
+  "modelUsage": {
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 4920,
+      "outputTokens": 2986
+    },
+    "claude-sonnet-4-6": {
+      "inputTokens": 483,
+      "outputTokens": 16455
+    }
+  },
+  "started_at": "2026-02-19T17:55:52.396334+00:00",
+  "finished_at": "2026-02-19T18:01:22.447869+00:00",
+  "tasks": [
+    {
+      "task_id": "HumanEval/0",
+      "function_name": "has_close_elements",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 3,
+      "duration_ms_total": 6776,
+      "total_cost_usd_total": 0.107375,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 51
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 288,
+          "outputTokens": 374
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/1",
+      "function_name": "separate_paren_groups",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 10031,
+      "total_cost_usd_total": 0.067718,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 59
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 463
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/2",
+      "function_name": "truncate_number",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7583,
+      "total_cost_usd_total": 0.064324,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 51
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 377
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/3",
+      "function_name": "below_zero",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7055,
+      "total_cost_usd_total": 0.065403,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 92
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 385
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/4",
+      "function_name": "mean_absolute_deviation",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7701,
+      "total_cost_usd_total": 0.065302,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 104
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 380
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/5",
+      "function_name": "intersperse",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7685,
+      "total_cost_usd_total": 0.065715,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 97
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 406
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/6",
+      "function_name": "parse_nested_parens",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8009,
+      "total_cost_usd_total": 0.067454,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 52
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 457
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/7",
+      "function_name": "filter_by_substring",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7663,
+      "total_cost_usd_total": 0.064184,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 50
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 361
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/8",
+      "function_name": "sum_product",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7306,
+      "total_cost_usd_total": 0.065653,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 105
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 395
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/9",
+      "function_name": "rolling_max",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 9659,
+      "total_cost_usd_total": 0.065965,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 127
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 410
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/10",
+      "function_name": "make_palindrome",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 10062,
+      "total_cost_usd_total": 0.070235,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 51
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 542
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/11",
+      "function_name": "string_xor",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7617,
+      "total_cost_usd_total": 0.064469,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 47
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 383
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/12",
+      "function_name": "longest",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8550,
+      "total_cost_usd_total": 0.065257,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 89
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 387
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/13",
+      "function_name": "greatest_common_divisor",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7820,
+      "total_cost_usd_total": 0.063942,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 85
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 363
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/14",
+      "function_name": "all_prefixes",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7271,
+      "total_cost_usd_total": 0.064072,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 81
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 376
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/15",
+      "function_name": "string_sequence",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7164,
+      "total_cost_usd_total": 0.063997,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 88
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 364
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/16",
+      "function_name": "count_distinct_characters",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 6812,
+      "total_cost_usd_total": 0.063497,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 54
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 355
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/17",
+      "function_name": "parse_music",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7820,
+      "total_cost_usd_total": 0.066747,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 99
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 397
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/18",
+      "function_name": "how_many_times",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7960,
+      "total_cost_usd_total": 0.06661,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 82
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 441
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/19",
+      "function_name": "sort_numbers",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8229,
+      "total_cost_usd_total": 0.067249,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 114
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 445
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/20",
+      "function_name": "find_closest_elements",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8434,
+      "total_cost_usd_total": 0.068462,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 52
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 471
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/21",
+      "function_name": "rescale_to_unit",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 9836,
+      "total_cost_usd_total": 0.065865,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 52
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 410
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/22",
+      "function_name": "filter_integers",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7695,
+      "total_cost_usd_total": 0.064796,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 92
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 383
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/23",
+      "function_name": "strlen",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 6785,
+      "total_cost_usd_total": 0.063071,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 105
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 346
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/24",
+      "function_name": "largest_divisor",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7044,
+      "total_cost_usd_total": 0.064583,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 91
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 399
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/25",
+      "function_name": "factorize",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 9585,
+      "total_cost_usd_total": 0.067061,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 57
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 439
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/26",
+      "function_name": "remove_duplicates",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8115,
+      "total_cost_usd_total": 0.065254,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 61
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 402
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/27",
+      "function_name": "flip_case",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7679,
+      "total_cost_usd_total": 0.063409,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 39
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 369
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/28",
+      "function_name": "concatenate",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 6852,
+      "total_cost_usd_total": 0.063365,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 53
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 352
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/29",
+      "function_name": "filter_by_prefix",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7274,
+      "total_cost_usd_total": 0.064458,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 95
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 364
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/30",
+      "function_name": "get_positive",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7057,
+      "total_cost_usd_total": 0.06421,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 61
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 355
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/31",
+      "function_name": "is_prime",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8997,
+      "total_cost_usd_total": 0.066078,
+      "modelUsage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 411
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 46
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/32",
+      "function_name": "find_zero",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 10123,
+      "total_cost_usd_total": 0.071395,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 37
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 506
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/33",
+      "function_name": "sort_third",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8472,
+      "total_cost_usd_total": 0.066981,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 100
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 422
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/34",
+      "function_name": "unique",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 7188,
+      "total_cost_usd_total": 0.06333,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 53
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 353
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/35",
+      "function_name": "max_element",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 6825,
+      "total_cost_usd_total": 0.063766,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 98
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 352
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/36",
+      "function_name": "fizz_buzz",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 9090,
+      "total_cost_usd_total": 0.065869,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 81
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 424
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/37",
+      "function_name": "sort_even",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 8528,
+      "total_cost_usd_total": 0.066521,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 85
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 422
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/38",
+      "function_name": "decode_cyclic",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 13356,
+      "total_cost_usd_total": 0.075932,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 44
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 698
+        }
+      },
+      "error_type": null
+    },
+    {
+      "task_id": "HumanEval/39",
+      "function_name": "prime_fib",
+      "passed": true,
+      "attempts_used": 1,
+      "num_turns_total": 4,
+      "duration_ms_total": 9900,
+      "total_cost_usd_total": 0.069193,
+      "modelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 123,
+          "outputTokens": 106
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 5,
+          "outputTokens": 516
+        }
+      },
+      "error_type": null
+    }
+  ]
+}
