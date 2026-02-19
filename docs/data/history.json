@@ -9,6 +9,17 @@
       "total_duration_ms": 931024,
       "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.47 (Claude Code)"
+    },
+    {
+      "date": "2026-02-19",
+      "run_id": "2026-02-19T22:00:30.300731+00:00",
+      "score": 100.0,
+      "passed": 80,
+      "total": 80,
+      "total_cost_usd": 5.3365,
+      "total_duration_ms": 947779,
+      "primary_model": "claude-opus-4-6",
+      "claude_version": "2.1.47 (Claude Code)"
     }
   ]
 }
