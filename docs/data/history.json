@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "date": "2026-02-19",
+      "score": 100.0,
+      "passed": 40,
+      "total": 40,
+      "total_cost_usd": 0.0,
+      "total_duration_ms": 323816,
+      "primary_model": "claude-sonnet-4-6",
+      "claude_version": "2.1.47 (Claude Code)"
+    }
+  ]
+}
