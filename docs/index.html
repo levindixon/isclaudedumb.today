@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Is Claude Dumb Today?</title>
+  <meta name="description" content="Daily automated benchmark tracking Claude Code's default model quality using HumanEval tasks.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Is Claude Dumb <span>Today?</span></h1>
+      <p class="subtitle">Daily HumanEval-CC40 benchmark for Claude Code's default model</p>
+    </header>
+
+    <section id="verdict">
+      <div class="verdict-pill unknown" id="verdict-pill">...</div>
+      <p class="verdict-subtitle" id="verdict-subtitle">Loading latest results&hellip;</p>
+    </section>
+
+    <section id="summary">
+      <div class="summary-grid" id="summary-grid">
+        <div class="summary-card">
+          <div class="label">Score</div>
+          <div class="value" id="score-value">&mdash;</div>
+          <div class="delta neutral" id="score-delta">&nbsp;</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Model</div>
+          <div class="value" id="model-value" style="font-size:1rem">&mdash;</div>
+          <div class="delta neutral" id="version-value">&nbsp;</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Cost</div>
+          <div class="value" id="cost-value">&mdash;</div>
+          <div class="delta neutral" id="cost-delta">&nbsp;</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Runtime</div>
+          <div class="value" id="runtime-value">&mdash;</div>
+          <div class="delta neutral" id="date-value">&nbsp;</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chart">
+      <h2>Score History (last 30 days)</h2>
+      <div class="chart-container">
+        <canvas id="score-chart"></canvas>
+      </div>
+    </section>
+
+    <section id="tasks">
+      <h2>Per-Task Results</h2>
+      <div class="tasks-table-wrap">
+        <table id="tasks-table">
+          <thead>
+            <tr>
+              <th data-sort="task_id">Task</th>
+              <th data-sort="function_name">Function</th>
+              <th data-sort="passed">Result</th>
+              <th data-sort="attempts_used">Attempts</th>
+              <th data-sort="num_turns_total">Turns</th>
+              <th data-sort="total_cost_usd_total">Cost</th>
+              <th data-sort="error_type">Error</th>
+            </tr>
+          </thead>
+          <tbody id="tasks-body">
+            <tr><td colspan="7" class="loading">Loading&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <p>Benchmark uses a fixed 40-task subset of <a href="https://github.com/openai/human-eval">HumanEval</a> (MIT) run via Claude Code CLI with pay-as-you-go API key.</p>
+      <div class="links">
+        <a href="data/latest.json">Raw JSON</a>
+        <a href="data/history.json">History</a>
+        <a href="https://github.com/levindixon/isclaudedumb.today">Source</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
