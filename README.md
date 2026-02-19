@@ -1,16 +1,16 @@
 # isclaudedumb.today
 
-Daily automated benchmark tracking Claude Code's default model quality.
+Automated benchmark tracking Claude Code (Opus 4.6) quality on HumanEval coding tasks.
 
 ## What this is
 
 A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers one question every day: **has Claude Code's default model gotten worse?**
 
-It runs a fixed 40-task subset of [HumanEval](https://github.com/openai/human-eval) (MIT-licensed) via the Claude Code CLI in headless mode. GitHub Actions runs the benchmark daily at 6 AM UTC, commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
+It runs a fixed 80-task subset of [HumanEval](https://github.com/openai/human-eval) (MIT-licensed) via the Claude Code CLI (`--model opus`) in headless mode. GitHub Actions runs the benchmark every 8 hours, commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
 
 ## How the benchmark works
 
-1. **40 HumanEval tasks** (HumanEval/0–39) are presented to Claude Code one at a time
+1. **80 HumanEval tasks** (HumanEval/0–79) are presented to Claude Code one at a time
 2. Each task gives Claude a function signature + docstring in `solution.py` and asks it to implement the function
 3. Claude has **no shell access** (`Bash`, `WebFetch`, `WebSearch`, etc. are disabled) — it can only Read and Edit files
 4. Claude **cannot see the tests** (`.claude/settings.json` denies read access to `tests_hidden/`)
@@ -29,12 +29,12 @@ The site compares today's score against the 7-day rolling average:
 
 | Constraint | Value |
 |---|---|
-| Max turns per attempt | 6 |
-| Max cost per attempt | $0.10 |
+| Max turns per attempt | 10 |
+| Max cost per attempt | $1.00 |
 | Max attempts per task | 2 |
 | Allowed tools | Read, Edit only |
 | Test visibility | Denied via permissions |
-| Worst-case daily cost | ~$8 (typical: $2–4) |
+| Worst-case cost per run | ~$160 (typical: $13–15) |
 
 ## Setup
 
@@ -83,7 +83,7 @@ bench/
   generate_tasks.py       # Downloads HumanEval, creates task workspaces
   run_benchmark.py        # Main benchmark harness
   data/
-    humaneval_cc40.json   # Pre-generated 40-task dataset
+    humaneval_cc80.json   # Pre-generated 80-task dataset
 docs/
   index.html              # Dashboard page
   style.css               # Dark-theme styles
@@ -94,17 +94,17 @@ docs/
     history.json          # Summary rows for charting
     YYYY-MM-DD.json       # Daily snapshots
 .github/workflows/
-  benchmark.yml           # Daily cron + manual trigger
+  benchmark.yml           # Every-8-hours cron + manual trigger
 ```
 
 ## Cost
 
-Typical daily run: **$2–4**. Worst case (all tasks fail + retry at max budget): ~$8.
+Typical run: **$13–15**. Worst case (all 80 tasks fail + retry at max budget): ~$160.
 
-The benchmark uses `--max-budget-usd 0.10` per invocation and `--max-turns 6`, so costs are bounded.
+The benchmark uses `--model opus`, `--max-budget-usd 1.00` per invocation and `--max-turns 10`, so costs are bounded. Runs 3x daily (~$400–450/month).
 
 ## Methodology note
 
-This benchmark uses Claude Code CLI with a standard Anthropic API key (pay-as-you-go). The model used is whatever Claude Code's default model is on the day of the run. All raw results are published as JSON for full transparency.
+This benchmark uses Claude Code CLI with `--model opus` and a standard Anthropic API key (pay-as-you-go). All raw results are published as JSON for full transparency.
 
 HumanEval tasks are from OpenAI's [human-eval](https://github.com/openai/human-eval) dataset, released under the MIT license.

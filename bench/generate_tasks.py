@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Download HumanEval and generate the CC40 benchmark task suite.
+"""Download HumanEval and generate the CC80 benchmark task suite.
 
-Creates bench/data/humaneval_cc40.json with the first 40 HumanEval tasks,
+Creates bench/data/humaneval_cc80.json with the first 80 HumanEval tasks,
 and sets up workspace directories for each task with:
   - prompt.md (problem statement)
   - solution.py (stub with function signature)
@@ -19,9 +19,9 @@ HUMANEVAL_URL = (
     "https://github.com/openai/human-eval/raw/master/data/HumanEval.jsonl.gz"
 )
 BENCH_DIR = Path(__file__).resolve().parent
-DATA_FILE = BENCH_DIR / "data" / "humaneval_cc40.json"
+DATA_FILE = BENCH_DIR / "data" / "humaneval_cc80.json"
 WORKSPACE_DIR = BENCH_DIR / "workspace"
-NUM_TASKS = 40
+NUM_TASKS = 80
 
 
 def download_humaneval() -> list[dict]:
@@ -196,14 +196,14 @@ def setup_workspace(task: dict, test_code: str) -> None:
 
 
 def main():
-    # Download and select first 40 tasks
+    # Download and select first NUM_TASKS tasks
     all_tasks = download_humaneval()
     selected = all_tasks[:NUM_TASKS]
 
-    # Build the CC40 dataset
-    cc40_tasks = []
+    # Build the CC80 dataset
+    cc80_tasks = []
     for task in selected:
-        cc40_tasks.append(
+        cc80_tasks.append(
             {
                 "task_id": task["task_id"],
                 "entry_point": task["entry_point"],
@@ -213,23 +213,23 @@ def main():
             }
         )
 
-    cc40 = {
-        "suite_name": "HumanEval-CC40",
+    cc80 = {
+        "suite_name": "HumanEval-CC80",
         "source": "https://github.com/openai/human-eval",
         "license": "MIT",
         "task_count": NUM_TASKS,
-        "task_ids": [t["task_id"] for t in cc40_tasks],
-        "tasks": cc40_tasks,
+        "task_ids": [t["task_id"] for t in cc80_tasks],
+        "tasks": cc80_tasks,
     }
 
     # Save dataset JSON
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps(cc40, indent=2) + "\n")
+    DATA_FILE.write_text(json.dumps(cc80, indent=2) + "\n")
     print(f"Saved {NUM_TASKS} tasks to {DATA_FILE}")
 
     # Create workspaces
     print("Setting up workspaces...")
-    for task in cc40_tasks:
+    for task in cc80_tasks:
         test_code = transform_tests(task)
         setup_workspace(task, test_code)
         print(f"  {task['task_id']}: workspace ready")

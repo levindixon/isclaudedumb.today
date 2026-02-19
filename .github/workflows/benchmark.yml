@@ -2,7 +2,7 @@ name: Daily Benchmark
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # 6 AM UTC daily
+    - cron: '0 2,10,18 * * *'  # Every 8 hours: 2 AM, 10 AM, 6 PM UTC
   workflow_dispatch: {}   # Manual trigger
 
 jobs:

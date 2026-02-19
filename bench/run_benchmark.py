@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Run the HumanEval-CC40 benchmark against Claude Code CLI.
+"""Run the HumanEval-CC80 benchmark against Claude Code CLI (Opus 4.6).
 
-For each of 40 tasks:
+For each of 80 tasks:
   1. Set up workspace (prompt.md, solution.py stub, hidden tests)
   2. Invoke Claude CLI in headless mode to implement the function
   3. Run hidden tests to check correctness
@@ -27,10 +27,10 @@ BENCH_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BENCH_DIR.parent
 WORKSPACE_DIR = BENCH_DIR / "workspace"
 DATA_DIR = PROJECT_ROOT / "docs" / "data"
-TASK_FILE = BENCH_DIR / "data" / "humaneval_cc40.json"
+TASK_FILE = BENCH_DIR / "data" / "humaneval_cc80.json"
 
-MAX_TURNS = 6
-MAX_BUDGET_USD = 0.10
+MAX_TURNS = 10
+MAX_BUDGET_USD = 1.00
 DISALLOWED_TOOLS = "Bash,WebFetch,WebSearch,Task,NotebookEdit,Write"
 MAX_ATTEMPTS = 2
 
@@ -215,6 +215,7 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
         "claude",
         "-p", prompt,
         "--output-format", "json",
+        "--model", "opus",
         "--max-turns", str(MAX_TURNS),
         "--max-budget-usd", str(MAX_BUDGET_USD),
         "--permission-mode", "acceptEdits",
@@ -467,7 +468,7 @@ def aggregate_results(
 
     return {
         "date": started_at[:10],
-        "suite": "HumanEval-CC40",
+        "suite": "HumanEval-CC80",
         "score": score,
         "passed": passed_count,
         "total": total_count,
@@ -518,7 +519,7 @@ def update_history(today_result: dict) -> None:
 
 def main():
     print("=" * 60)
-    print("HumanEval-CC40 Benchmark")
+    print("HumanEval-CC80 Benchmark (Opus 4.6)")
     print("=" * 60)
 
     # Get Claude version
@@ -531,8 +532,8 @@ def main():
         print("Run `python bench/generate_tasks.py` first.")
         sys.exit(1)
 
-    cc40 = json.loads(TASK_FILE.read_text())
-    tasks = cc40["tasks"]
+    task_data = json.loads(TASK_FILE.read_text())
+    tasks = task_data["tasks"]
     print(f"Loaded {len(tasks)} tasks from {TASK_FILE}")
 
     # Record start time
