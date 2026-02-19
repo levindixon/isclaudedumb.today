@@ -6,17 +6,16 @@ Automated benchmark tracking Claude Code (Opus 4.6) quality on HumanEval coding 
 
 A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers one question every day: **has Claude Code's default model gotten worse?**
 
-It runs a fixed 80-task subset of [HumanEval](https://github.com/openai/human-eval) (MIT-licensed) via the Claude Code CLI (`--model opus`) in headless mode. GitHub Actions runs the benchmark every 8 hours, commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
+It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite (MIT-licensed) via the Claude Code CLI (`--model opus`) in headless mode. GitHub Actions runs the benchmark every 8 hours, commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
 
 ## How the benchmark works
 
-1. **80 HumanEval tasks** (HumanEval/0–79) are presented to Claude Code one at a time
+1. **164 HumanEval tasks** (HumanEval/0–163) are presented to Claude Code one at a time
 2. Each task gives Claude a function signature + docstring in `solution.py` and asks it to implement the function
 3. Claude has **no shell access** (`Bash`, `WebFetch`, `WebSearch`, etc. are disabled) — it can only Read and Edit files
 4. Claude **cannot see the tests** (`.claude/settings.json` denies read access to `tests_hidden/`)
 5. After Claude finishes, the harness runs hidden unit tests
-6. On failure, Claude gets one retry attempt with the test output as feedback
-7. Results are scored as pass/fail per task, aggregated into a per-run score (0–100%)
+6. Results are scored as pass/fail per task, aggregated into a per-run score (0–100%)
 
 ### Verdict logic
 
@@ -29,12 +28,12 @@ The site compares the latest run's score against a rolling average of the prior 
 
 | Constraint | Value |
 |---|---|
-| Max turns per attempt | 10 |
+| Max turns per attempt | 6 |
 | Max cost per attempt | $1.00 |
-| Max attempts per task | 2 |
+| Max attempts per task | 1 |
 | Allowed tools | Read, Edit only |
 | Test visibility | Denied via permissions |
-| Worst-case cost per run | ~$160 (typical: $13–15) |
+| Worst-case cost per run | ~$164 (typical: $10–12) |
 
 ## Setup
 
@@ -83,7 +82,7 @@ bench/
   generate_tasks.py       # Downloads HumanEval, creates task workspaces
   run_benchmark.py        # Main benchmark harness
   data/
-    humaneval_cc80.json   # Pre-generated 80-task dataset
+    humaneval_cc164.json  # Pre-generated 164-task dataset
 docs/
   index.html              # Dashboard page
   style.css               # Dark-theme styles
@@ -99,9 +98,9 @@ docs/
 
 ## Cost
 
-Typical run: **$13–15**. Worst case (all 80 tasks fail + retry at max budget): ~$160.
+Typical run: **$10–12**. Worst case (all 164 tasks at max budget): ~$164.
 
-The benchmark uses `--model opus`, `--max-budget-usd 1.00` per invocation and `--max-turns 10`, so costs are bounded. Runs 3x daily (~$400–450/month).
+The benchmark uses `--model opus`, `--max-budget-usd 1.00` per invocation and `--max-turns 6`, so costs are bounded. Runs 3x daily (~$900–1100/month).
 
 ## Methodology note
 

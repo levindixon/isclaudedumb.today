@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-An automated benchmark that runs 80 HumanEval coding tasks against the Claude Code CLI (Opus 4.6) and publishes results to [isclaudedumb.today](https://isclaudedumb.today). GitHub Actions runs the benchmark every 8 hours, commits JSON results, and GitHub Pages serves a dashboard.
+An automated benchmark that runs 164 HumanEval coding tasks against the Claude Code CLI (Opus 4.6) and publishes results to [isclaudedumb.today](https://isclaudedumb.today). GitHub Actions runs the benchmark every 8 hours, commits JSON results, and GitHub Pages serves a dashboard.
 
 ## Commands
 
@@ -22,8 +22,8 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 
 **Benchmark harness** (`bench/`):
 - `generate_tasks.py` — Downloads HumanEval dataset, creates per-task workspace directories under `bench/workspace/` with `prompt.md`, `solution.py` stub, hidden tests, and a `.claude/settings.json` that denies Read access to `tests_hidden/`
-- `run_benchmark.py` — Iterates all 80 tasks, invokes `claude -p --model opus` in headless mode per workspace, runs hidden unit tests, retries once on failure with test output as feedback. Each run outputs a timestamped `YYYY-MM-DD-HHMM.json` file and appends to `history.json` keyed by `run_id` (ISO timestamp)
-- `data/humaneval_cc80.json` — Pre-generated dataset (80 tasks with prompts, canonical solutions, and tests)
+- `run_benchmark.py` — Iterates all 164 tasks, invokes `claude -p --model opus` in headless mode per workspace, runs hidden unit tests. Each run outputs a timestamped `YYYY-MM-DD-HHMM.json` file and appends to `history.json` keyed by `run_id` (ISO timestamp)
+- `data/humaneval_cc164.json` — Pre-generated dataset (164 tasks with prompts, canonical solutions, and tests)
 
 **Static dashboard** (`docs/`):
 - Vanilla HTML/CSS/JS site served by GitHub Pages
@@ -38,7 +38,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 
 - Claude gets only `Read` and `Edit` tools (Bash, WebFetch, WebSearch, Write, etc. are disabled via `--disallowedTools`)
 - Tests are hidden from Claude via permission deny rules in each workspace's `.claude/settings.json`
-- Each task: max 10 turns, max $1.00 budget, max 2 attempts (second attempt includes test failure output)
+- Each task: max 6 turns, max $1.00 budget, 1 attempt (no retry)
 - `--permission-mode acceptEdits` auto-approves file edits
 
 ## Verdict Logic

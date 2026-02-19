@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Download HumanEval and generate the CC80 benchmark task suite.
+"""Download HumanEval and generate the CC164 benchmark task suite.
 
-Creates bench/data/humaneval_cc80.json with the first 80 HumanEval tasks,
+Creates bench/data/humaneval_cc164.json with all 164 HumanEval tasks,
 and sets up workspace directories for each task with:
   - prompt.md (problem statement)
   - solution.py (stub with function signature)
@@ -19,9 +19,9 @@ HUMANEVAL_URL = (
     "https://github.com/openai/human-eval/raw/master/data/HumanEval.jsonl.gz"
 )
 BENCH_DIR = Path(__file__).resolve().parent
-DATA_FILE = BENCH_DIR / "data" / "humaneval_cc80.json"
+DATA_FILE = BENCH_DIR / "data" / "humaneval_cc164.json"
 WORKSPACE_DIR = BENCH_DIR / "workspace"
-NUM_TASKS = 80
+NUM_TASKS = 164
 
 
 def download_humaneval() -> list[dict]:
@@ -200,10 +200,10 @@ def main():
     all_tasks = download_humaneval()
     selected = all_tasks[:NUM_TASKS]
 
-    # Build the CC80 dataset
-    cc80_tasks = []
+    # Build the CC164 dataset
+    cc164_tasks = []
     for task in selected:
-        cc80_tasks.append(
+        cc164_tasks.append(
             {
                 "task_id": task["task_id"],
                 "entry_point": task["entry_point"],
@@ -213,23 +213,23 @@ def main():
             }
         )
 
-    cc80 = {
-        "suite_name": "HumanEval-CC80",
+    cc164 = {
+        "suite_name": "HumanEval-CC164",
         "source": "https://github.com/openai/human-eval",
         "license": "MIT",
         "task_count": NUM_TASKS,
-        "task_ids": [t["task_id"] for t in cc80_tasks],
-        "tasks": cc80_tasks,
+        "task_ids": [t["task_id"] for t in cc164_tasks],
+        "tasks": cc164_tasks,
     }
 
     # Save dataset JSON
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps(cc80, indent=2) + "\n")
+    DATA_FILE.write_text(json.dumps(cc164, indent=2) + "\n")
     print(f"Saved {NUM_TASKS} tasks to {DATA_FILE}")
 
     # Create workspaces
     print("Setting up workspaces...")
-    for task in cc80_tasks:
+    for task in cc164_tasks:
         test_code = transform_tests(task)
         setup_workspace(task, test_code)
         print(f"  {task['task_id']}: workspace ready")

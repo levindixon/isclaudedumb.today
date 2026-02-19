@@ -8,7 +8,7 @@ on:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 240
     permissions:
       contents: write
 
@@ -36,7 +36,7 @@ jobs:
         run: python bench/run_benchmark.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        timeout-minutes: 130
+        timeout-minutes: 210
 
       - name: Commit and push results
         run: |

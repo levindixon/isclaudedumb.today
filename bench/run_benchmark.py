@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Run the HumanEval-CC80 benchmark against Claude Code CLI (Opus 4.6).
+"""Run the HumanEval-CC164 benchmark against Claude Code CLI (Opus 4.6).
 
-For each of 80 tasks:
+For each of 164 tasks:
   1. Set up workspace (prompt.md, solution.py stub, hidden tests)
   2. Invoke Claude CLI in headless mode to implement the function
   3. Run hidden tests to check correctness
-  4. On failure, retry once with test output as feedback
-  5. Record result (passed, attempts, turns, cost, model usage)
+  4. Record result (passed, attempts, turns, cost, model usage)
 
 Outputs:
   - docs/data/YYYY-MM-DD-HHMM.json  (per-run results)
@@ -27,12 +26,12 @@ BENCH_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BENCH_DIR.parent
 WORKSPACE_DIR = BENCH_DIR / "workspace"
 DATA_DIR = PROJECT_ROOT / "docs" / "data"
-TASK_FILE = BENCH_DIR / "data" / "humaneval_cc80.json"
+TASK_FILE = BENCH_DIR / "data" / "humaneval_cc164.json"
 
-MAX_TURNS = 10
+MAX_TURNS = 6
 MAX_BUDGET_USD = 1.00
 DISALLOWED_TOOLS = "Bash,WebFetch,WebSearch,Task,NotebookEdit,Write"
-MAX_ATTEMPTS = 2
+MAX_ATTEMPTS = 1
 
 _logged_cli_keys = False
 
@@ -232,7 +231,7 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
             capture_output=True,
             text=True,
             cwd=str(workspace),
-            timeout=300,  # 5 minute timeout per invocation
+            timeout=600,  # 10 minute timeout per invocation
         )
         duration_ms = int((time.monotonic() - start) * 1000)
     except subprocess.TimeoutExpired:
@@ -469,7 +468,7 @@ def aggregate_results(
     return {
         "date": started_at[:10],
         "run_id": started_at,
-        "suite": "HumanEval-CC80",
+        "suite": "HumanEval-CC164",
         "score": score,
         "passed": passed_count,
         "total": total_count,
@@ -525,7 +524,7 @@ def update_history(today_result: dict) -> None:
 
 def main():
     print("=" * 60)
-    print("HumanEval-CC80 Benchmark (Opus 4.6)")
+    print("HumanEval-CC164 Benchmark (Opus 4.6)")
     print("=" * 60)
 
     # Get Claude version
