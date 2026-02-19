@@ -16,11 +16,11 @@ It runs a fixed 80-task subset of [HumanEval](https://github.com/openai/human-ev
 4. Claude **cannot see the tests** (`.claude/settings.json` denies read access to `tests_hidden/`)
 5. After Claude finishes, the harness runs hidden unit tests
 6. On failure, Claude gets one retry attempt with the test output as feedback
-7. Results are scored as pass/fail per task, aggregated into a daily score (0–100%)
+7. Results are scored as pass/fail per task, aggregated into a per-run score (0–100%)
 
 ### Verdict logic
 
-The site compares today's score against the 7-day rolling average:
+The site compares the latest run's score against a rolling average of the prior 21 entries (≈ 7 days at 3 runs/day):
 - **YES** (dumb): score is 5+ points below the average
 - **MAYBE**: score is 2–5 points below the average
 - **NO** (not dumb): score is within 2 points of the average
@@ -90,9 +90,9 @@ docs/
   app.js                  # Fetches JSON, renders verdict/chart/table
   CNAME                   # Custom domain
   data/                   # Benchmark results (auto-committed by CI)
-    latest.json           # Today's full results
-    history.json          # Summary rows for charting
-    YYYY-MM-DD.json       # Daily snapshots
+    latest.json           # Most recent run's full results
+    history.json          # Summary rows for charting (keyed by run_id)
+    YYYY-MM-DD-HHMM.json # Per-run snapshots (3x daily)
 .github/workflows/
   benchmark.yml           # Every-8-hours cron + manual trigger
 ```

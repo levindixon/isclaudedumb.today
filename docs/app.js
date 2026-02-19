@@ -24,9 +24,10 @@
       return { verdict: "UNKNOWN", reason: "No historical data yet" };
     }
 
-    // Compute 7-day average (excluding today)
-    const prior = history.filter((e) => e.date !== history[history.length - 1]?.date);
-    const recent = prior.slice(-7);
+    // Use last 21 entries (excluding the most recent) as comparison window.
+    // 21 entries ≈ 7 days at 3 runs/day.
+    const prior = history.slice(0, -1);
+    const recent = prior.slice(-21);
 
     if (recent.length === 0) {
       return { verdict: "UNKNOWN", reason: "Not enough history for comparison" };
@@ -38,18 +39,18 @@
     if (todayScore <= avg - 5) {
       return {
         verdict: "YES",
-        reason: `Score ${todayScore}% is ${Math.abs(delta).toFixed(1)}pp below 7-day avg (${avg.toFixed(1)}%)`,
+        reason: `Score ${todayScore}% is ${Math.abs(delta).toFixed(1)}pp below rolling avg (${avg.toFixed(1)}%)`,
       };
     }
     if (todayScore <= avg - 2) {
       return {
         verdict: "MAYBE",
-        reason: `Score ${todayScore}% is ${Math.abs(delta).toFixed(1)}pp below 7-day avg (${avg.toFixed(1)}%)`,
+        reason: `Score ${todayScore}% is ${Math.abs(delta).toFixed(1)}pp below rolling avg (${avg.toFixed(1)}%)`,
       };
     }
     return {
       verdict: "NO",
-      reason: `Score ${todayScore}% is on par with 7-day avg (${avg.toFixed(1)}%)`,
+      reason: `Score ${todayScore}% is on par with rolling avg (${avg.toFixed(1)}%)`,
     };
   }
 
@@ -69,13 +70,13 @@
     const scoreEl = document.getElementById("score-value");
     scoreEl.textContent = latest.score + "%";
 
-    // Score delta vs yesterday
+    // Score delta vs previous run
     const deltaEl = document.getElementById("score-delta");
     if (history.length >= 2) {
-      const yesterday = history[history.length - 2];
-      const d = latest.score - yesterday.score;
+      const previous = history[history.length - 2];
+      const d = latest.score - previous.score;
       const arrow = d > 0 ? "↑" : d < 0 ? "↓" : "→";
-      deltaEl.textContent = `${arrow} ${Math.abs(d).toFixed(1)}pp vs yesterday`;
+      deltaEl.textContent = `${arrow} ${Math.abs(d).toFixed(1)}pp vs previous run`;
       deltaEl.className = "delta " + (d > 0 ? "positive" : d < 0 ? "negative" : "neutral");
     }
 
@@ -89,7 +90,7 @@
     if (history.length >= 2) {
       const yCost = history[history.length - 2].total_cost_usd;
       const cd = latest.total_cost_usd - yCost;
-      costDeltaEl.textContent = (cd >= 0 ? "+$" : "-$") + Math.abs(cd).toFixed(2) + " vs yesterday";
+      costDeltaEl.textContent = (cd >= 0 ? "+$" : "-$") + Math.abs(cd).toFixed(2) + " vs previous run";
       costDeltaEl.className = "delta " + (cd > 0 ? "negative" : cd < 0 ? "positive" : "neutral");
     }
 
@@ -103,10 +104,24 @@
     const ctx = document.getElementById("score-chart");
     if (!ctx || history.length === 0) return;
 
-    // Last 30 days
-    const data = history.slice(-30);
-    const labels = data.map((e) => e.date.slice(5)); // MM-DD
+    // Last 90 entries (≈ 30 days at 3 runs/day)
+    const data = history.slice(-90);
     const scores = data.map((e) => e.score);
+
+    // Smart x-axis labels: show MM-DD for first run of each day, HH:mm for subsequent same-day runs
+    let prevDate = null;
+    const labels = data.map((e) => {
+      const dateStr = e.date.slice(5); // MM-DD
+      if (dateStr !== prevDate) {
+        prevDate = dateStr;
+        return dateStr;
+      }
+      // Same day — show time from run_id if available
+      if (e.run_id) {
+        return e.run_id.slice(11, 16); // HH:mm
+      }
+      return "";
+    });
 
     new Chart(ctx, {
       type: "line",
@@ -149,7 +164,12 @@
             callbacks: {
               title: (items) => {
                 const idx = items[0].dataIndex;
-                return data[idx].date;
+                const entry = data[idx];
+                // Show full date + time if run_id is available
+                if (entry.run_id) {
+                  return entry.date + " " + entry.run_id.slice(11, 16) + " UTC";
+                }
+                return entry.date;
               },
               label: (item) =>
                 `Score: ${item.raw}% (${data[item.dataIndex].passed}/${data[item.dataIndex].total})`,

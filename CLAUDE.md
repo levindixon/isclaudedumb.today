@@ -16,13 +16,13 @@ python bench/generate_tasks.py
 ANTHROPIC_API_KEY=sk-... python bench/run_benchmark.py
 ```
 
-Results are written to `docs/data/` as `YYYY-MM-DD.json`, `latest.json`, and appended to `history.json`.
+Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest.json`, and appended to `history.json` (with `run_id` timestamps for dedup).
 
 ## Architecture
 
 **Benchmark harness** (`bench/`):
 - `generate_tasks.py` — Downloads HumanEval dataset, creates per-task workspace directories under `bench/workspace/` with `prompt.md`, `solution.py` stub, hidden tests, and a `.claude/settings.json` that denies Read access to `tests_hidden/`
-- `run_benchmark.py` — Iterates all 80 tasks, invokes `claude -p --model opus` in headless mode per workspace, runs hidden unit tests, retries once on failure with test output as feedback. Outputs aggregated JSON to `docs/data/`
+- `run_benchmark.py` — Iterates all 80 tasks, invokes `claude -p --model opus` in headless mode per workspace, runs hidden unit tests, retries once on failure with test output as feedback. Each run outputs a timestamped `YYYY-MM-DD-HHMM.json` file and appends to `history.json` keyed by `run_id` (ISO timestamp)
 - `data/humaneval_cc80.json` — Pre-generated dataset (80 tasks with prompts, canonical solutions, and tests)
 
 **Static dashboard** (`docs/`):
@@ -43,7 +43,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD.json`, `latest.json`, and app
 
 ## Verdict Logic
 
-The dashboard compares today's score against the 7-day rolling average (excluding today):
+The dashboard compares the latest run's score against a rolling average of the prior 21 entries (≈ 7 days at 3 runs/day):
 - **YES** (dumb): score is 5+ points below average
 - **MAYBE**: score is 2–5 points below average
 - **NO** (not dumb): score is within 2 points of average

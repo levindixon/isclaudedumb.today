@@ -9,9 +9,9 @@ For each of 80 tasks:
   5. Record result (passed, attempts, turns, cost, model usage)
 
 Outputs:
-  - docs/data/YYYY-MM-DD.json  (full daily results)
-  - docs/data/latest.json      (copy of today's results)
-  - docs/data/history.json     (append summary row for charting)
+  - docs/data/YYYY-MM-DD-HHMM.json  (per-run results)
+  - docs/data/latest.json            (copy of most recent run)
+  - docs/data/history.json           (append summary row for charting)
 """
 
 import json
@@ -468,6 +468,7 @@ def aggregate_results(
 
     return {
         "date": started_at[:10],
+        "run_id": started_at,
         "suite": "HumanEval-CC80",
         "score": score,
         "passed": passed_count,
@@ -493,8 +494,10 @@ def update_history(today_result: dict) -> None:
         history = {"entries": []}
 
     # Build summary entry
+    run_id = today_result.get("run_id") or today_result["started_at"]
     entry = {
         "date": today_result["date"],
+        "run_id": run_id,
         "score": today_result["score"],
         "passed": today_result["passed"],
         "total": today_result["total"],
@@ -504,14 +507,17 @@ def update_history(today_result: dict) -> None:
         "claude_version": today_result["claude_version"],
     }
 
-    # Remove existing entry for today (idempotent reruns)
+    # Remove existing entry with same run_id (idempotent reruns).
+    # For legacy entries without run_id, fall back to date-based dedup.
     history["entries"] = [
-        e for e in history["entries"] if e["date"] != entry["date"]
+        e for e in history["entries"]
+        if e.get("run_id", e["date"]) != entry["run_id"]
     ]
     history["entries"].append(entry)
 
-    # Sort by date
-    history["entries"].sort(key=lambda e: e["date"])
+    # Sort by run_id (ISO timestamps sort lexicographically).
+    # Legacy entries without run_id sort by date.
+    history["entries"].sort(key=lambda e: e.get("run_id", e["date"]))
 
     history_file.write_text(json.dumps(history, indent=2) + "\n")
     print(f"Updated {history_file} ({len(history['entries'])} entries)")
@@ -560,7 +566,9 @@ def main():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     today = results["date"]
 
-    daily_file = DATA_DIR / f"{today}.json"
+    # Extract HHMM from started_at ISO timestamp (e.g. "2026-02-19T02:00:05+00:00" → "0200")
+    hhmm = results["started_at"][11:13] + results["started_at"][14:16]
+    daily_file = DATA_DIR / f"{today}-{hhmm}.json"
     daily_file.write_text(json.dumps(results, indent=2) + "\n")
     print(f"\nWrote {daily_file}")
 
