@@ -5,8 +5,8 @@
       "score": 100.0,
       "passed": 40,
       "total": 40,
-      "total_cost_usd": 2.6788,
-      "total_duration_ms": 327608,
+      "total_cost_usd": 2.6752,
+      "total_duration_ms": 327744,
       "primary_model": "claude-sonnet-4-6",
       "claude_version": "2.1.47 (Claude Code)"
     }
