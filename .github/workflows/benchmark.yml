@@ -29,6 +29,9 @@ jobs:
       - name: Verify Claude Code
         run: claude --version
 
+      - name: Install Python dependencies
+        run: pip install evalplus
+
       - name: Generate task workspaces
         run: python bench/generate_tasks.py
 

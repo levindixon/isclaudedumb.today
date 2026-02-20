@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Download HumanEval and generate the CC164 benchmark task suite.
+"""Download HumanEval and generate the HumanEvalPlus-CC164 benchmark task suite.
 
-Creates bench/data/humaneval_cc164.json with all 164 HumanEval tasks,
-and sets up workspace directories for each task with:
+Creates bench/data/humaneval_plus_cc164.json with all 164 HumanEval tasks
+plus EvalPlus edge-case tests, and sets up workspace directories for each
+task with:
   - prompt.md (problem statement)
   - solution.py (stub with function signature)
-  - tests_hidden/test_solution.py (unittest-based tests)
+  - tests_hidden/test_solution.py (unittest-based tests + EvalPlus tests)
   - .claude/settings.json (deny read on tests_hidden)
 """
 
 import gzip
 import json
+import signal
 import shutil
 import urllib.request
 from pathlib import Path
@@ -19,7 +21,7 @@ HUMANEVAL_URL = (
     "https://github.com/openai/human-eval/raw/master/data/HumanEval.jsonl.gz"
 )
 BENCH_DIR = Path(__file__).resolve().parent
-DATA_FILE = BENCH_DIR / "data" / "humaneval_cc164.json"
+DATA_FILE = BENCH_DIR / "data" / "humaneval_plus_cc164.json"
 WORKSPACE_DIR = BENCH_DIR / "workspace"
 NUM_TASKS = 164
 
@@ -36,7 +38,63 @@ def download_humaneval() -> list[dict]:
     return tasks
 
 
-def transform_tests(task: dict) -> str:
+def compute_evalplus_tests(task: dict, evalplus_problem: dict) -> list[dict]:
+    """Pre-compute EvalPlus edge-case test assertions for a task.
+
+    Executes the canonical solution against each EvalPlus plus_input,
+    captures the expected output, and formats it as an assertion string.
+    Only uses plus_input (not base_input, which overlaps with original tests).
+
+    Returns a list of dicts with key: assert_str
+    """
+    # Build the function from prompt + canonical solution
+    func_code = task["prompt"] + task["canonical_solution"]
+    entry_point = task["entry_point"]
+
+    # Execute to define the function
+    namespace = {}
+    try:
+        exec(func_code, namespace)
+    except Exception:
+        return []
+
+    func = namespace.get(entry_point)
+    if func is None:
+        return []
+
+    plus_inputs = evalplus_problem.get("plus_input", [])
+    atol = evalplus_problem.get("atol", 0)
+
+    # Timeout handler for long-running canonical executions (large inputs)
+    def _timeout_handler(signum, frame):
+        raise TimeoutError
+
+    tests = []
+    for inp in plus_inputs:
+        try:
+            # 5-second timeout per input to avoid hanging on O(n²+) solutions
+            old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
+            signal.alarm(5)
+            try:
+                result = func(*inp)
+            finally:
+                signal.alarm(0)
+                signal.signal(signal.SIGALRM, old_handler)
+            # Build assertion string using repr for exact round-trip
+            args_str = ", ".join(repr(a) for a in inp)
+            if atol and isinstance(result, float):
+                assert_str = f"assert abs({entry_point}({args_str}) - {repr(result)}) <= {atol}"
+            else:
+                assert_str = f"assert {entry_point}({args_str}) == {repr(result)}"
+            tests.append({"assert_str": assert_str})
+        except Exception:
+            # Skip inputs that cause errors or timeout
+            continue
+
+    return tests
+
+
+def transform_tests(task: dict, evalplus_tests: list[dict] | None = None) -> str:
     """Transform HumanEval check(candidate) tests into unittest format.
 
     HumanEval tests look like:
@@ -54,6 +112,8 @@ def transform_tests(task: dict) -> str:
             def test_0(self):
                 assert entry_point(...) == ...
             ...
+
+    If evalplus_tests are provided, they are appended as test_plus_N methods.
 
     Uses `from solution import *` because some tasks have helper functions
     (e.g., encode_cyclic) defined in the prompt that tests also reference.
@@ -117,6 +177,11 @@ def transform_tests(task: dict) -> str:
     for idx, method_lines in test_methods:
         body = "\n        ".join(method_lines)
         methods_code.append(f"    def test_{idx}(self):\n        {body}")
+
+    # Append EvalPlus edge-case tests
+    if evalplus_tests:
+        for i, test in enumerate(evalplus_tests):
+            methods_code.append(f"    def test_plus_{i}(self):\n        {test['assert_str']}")
 
     methods_str = "\n\n".join(methods_code)
 
@@ -200,23 +265,38 @@ def main():
     all_tasks = download_humaneval()
     selected = all_tasks[:NUM_TASKS]
 
-    # Build the CC164 dataset
+    # Load EvalPlus edge-case inputs
+    from evalplus.data import get_human_eval_plus
+    evalplus_data = get_human_eval_plus(mini=True)
+    print(f"Loaded EvalPlus data for {len(evalplus_data)} tasks (mini=True)")
+
+    # Build the CC164 dataset with EvalPlus tests
     cc164_tasks = []
+    total_plus_tests = 0
     for task in selected:
+        task_id = task["task_id"]
+        evalplus_problem = evalplus_data.get(task_id, {})
+        evalplus_tests = compute_evalplus_tests(task, evalplus_problem)
+        total_plus_tests += len(evalplus_tests)
+
         cc164_tasks.append(
             {
-                "task_id": task["task_id"],
+                "task_id": task_id,
                 "entry_point": task["entry_point"],
                 "prompt": task["prompt"],
                 "canonical_solution": task["canonical_solution"],
                 "test": task["test"],
+                "evalplus_tests": evalplus_tests,
             }
         )
 
+    print(f"Pre-computed {total_plus_tests} EvalPlus edge-case tests across {NUM_TASKS} tasks")
+
     cc164 = {
-        "suite_name": "HumanEval-CC164",
+        "suite_name": "HumanEvalPlus-CC164",
         "source": "https://github.com/openai/human-eval",
-        "license": "MIT",
+        "evalplus_source": "https://github.com/evalplus/evalplus",
+        "license": "MIT / Apache-2.0",
         "task_count": NUM_TASKS,
         "task_ids": [t["task_id"] for t in cc164_tasks],
         "tasks": cc164_tasks,
@@ -230,9 +310,10 @@ def main():
     # Create workspaces
     print("Setting up workspaces...")
     for task in cc164_tasks:
-        test_code = transform_tests(task)
+        test_code = transform_tests(task, evalplus_tests=task.get("evalplus_tests"))
         setup_workspace(task, test_code)
-        print(f"  {task['task_id']}: workspace ready")
+        plus_count = len(task.get("evalplus_tests", []))
+        print(f"  {task['task_id']}: workspace ready (+{plus_count} evalplus tests)")
 
     print(f"\nDone. {NUM_TASKS} task workspaces created in {WORKSPACE_DIR}")
 
