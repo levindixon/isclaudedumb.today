@@ -1,12 +1,20 @@
 # isclaudedumb.today
 
+<p align="center">
+  <img src="docs/claude_not_dumb.png" alt="Claude: Not Dumb" width="200" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/claude_dumb.png" alt="Claude: Dumb" width="200" />
+</p>
+
+<p align="center"><b>Is Claude dumb today?</b></p>
+
 Automated benchmark tracking Claude Code (Opus 4.6) quality on HumanEval + EvalPlus edge-case coding tasks.
 
-## What this is
+## What is this?
 
-A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers one question every day: **has Claude Code's default model gotten worse?**
+A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers one question every day: **is Claude dumb today?**
 
-It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI (`--model opus`) in headless mode. GitHub Actions runs the benchmark every 8 hours, commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
+It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI (`--model opus`) in headless mode. GitHub Actions runs the benchmark twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
 
 ## How the benchmark works
 
@@ -19,7 +27,7 @@ It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suit
 
 ### Verdict logic
 
-The site compares the latest run's score against a rolling average of the prior 21 entries (≈ 7 days at 3 runs/day):
+The site compares the latest run's score against a rolling average of the prior 14 entries (≈ 7 days at 2 runs/day):
 - **YES** (dumb): score is 5+ points below the average
 - **MAYBE**: score is 2–5 points below the average
 - **NO** (not dumb): score is no more than 2 points below the average
@@ -33,7 +41,6 @@ The site compares the latest run's score against a rolling average of the prior 
 | Max attempts per task | 1 |
 | Allowed tools | Read, Edit, Glob, Grep |
 | Test visibility | Denied via permissions |
-| Worst-case cost per run | ~$164 (typical: $10–12) |
 
 ## Setup
 
@@ -94,16 +101,10 @@ docs/
   data/                   # Benchmark results (auto-committed by CI)
     latest.json           # Most recent run's full results
     history.json          # Summary rows for charting (keyed by run_id)
-    YYYY-MM-DD-HHMM.json # Per-run snapshots (3x daily)
+    YYYY-MM-DD-HHMM.json # Per-run snapshots (2x daily)
 .github/workflows/
-  benchmark.yml           # Every-8-hours cron + manual trigger
+  benchmark.yml           # Twice-daily cron + manual trigger
 ```
-
-## Cost
-
-Typical run: **$10–12**. Worst case (all 164 tasks at max budget): ~$164.
-
-The benchmark uses `--model opus`, `--max-budget-usd 1.00` per invocation and `--max-turns 3`, so costs are bounded. Runs 3x daily (~$900–1,100/month).
 
 ## Methodology note
 

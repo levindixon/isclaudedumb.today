@@ -24,10 +24,10 @@
       return { verdict: "UNKNOWN", reason: "No historical data yet" };
     }
 
-    // Use last 21 entries (excluding the most recent) as comparison window.
-    // 21 entries ≈ 7 days at 3 runs/day.
+    // Use last 14 entries (excluding the most recent) as comparison window.
+    // 14 entries ≈ 7 days at 2 runs/day.
     const prior = history.slice(0, -1);
-    const recent = prior.slice(-21);
+    const recent = prior.slice(-14);
 
     if (recent.length === 0) {
       return { verdict: "UNKNOWN", reason: "Not enough history for comparison" };

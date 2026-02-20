@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-An automated benchmark that runs 164 HumanEval coding tasks with EvalPlus edge-case tests against the Claude Code CLI (Opus 4.6) and publishes results to [isclaudedumb.today](https://isclaudedumb.today). GitHub Actions runs the benchmark every 8 hours, commits JSON results, and GitHub Pages serves a dashboard.
+An automated benchmark that runs 164 HumanEval coding tasks with EvalPlus edge-case tests against the Claude Code CLI (Opus 4.6) and publishes results to [isclaudedumb.today](https://isclaudedumb.today). GitHub Actions runs the benchmark twice daily (7 AM GMT / 7 AM PST), commits JSON results, and GitHub Pages serves a dashboard.
 
 ## Commands
 
@@ -31,7 +31,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 - Dark theme, responsive, no build step
 
 **CI** (`.github/workflows/benchmark.yml`):
-- Cron every 8 hours (2 AM, 10 AM, 6 PM UTC) + manual `workflow_dispatch`
+- Cron twice daily (7 AM UTC, 3 PM UTC) + manual `workflow_dispatch`
 - Installs Claude Code CLI, generates workspaces, runs benchmark, commits results to `docs/data/`
 
 ## Key Design Constraints
@@ -43,7 +43,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 
 ## Verdict Logic
 
-The dashboard compares the latest run's score against a rolling average of the prior 21 entries (≈ 7 days at 3 runs/day):
+The dashboard compares the latest run's score against a rolling average of the prior 14 entries (≈ 7 days at 2 runs/day):
 - **YES** (dumb): score is 5+ points below average
 - **MAYBE**: score is 2–5 points below average
 - **NO** (not dumb): score is no more than 2 points below average
