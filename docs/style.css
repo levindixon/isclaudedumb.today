@@ -69,6 +69,15 @@ header .subtitle {
   padding: 2rem 0;
 }
 
+.verdict-mascot {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+  display: block;
+  border-radius: 50%;
+}
+
 .verdict-pill {
   display: inline-block;
   font-size: 3rem;
@@ -288,6 +297,11 @@ footer .links a {
 @media (max-width: 640px) {
   header h1 {
     font-size: 1.5rem;
+  }
+
+  .verdict-mascot {
+    width: 120px;
+    height: 120px;
   }
 
   .verdict-pill {

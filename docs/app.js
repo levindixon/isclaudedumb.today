@@ -57,10 +57,25 @@
   function renderVerdict(verdictInfo) {
     const pill = document.getElementById("verdict-pill");
     const subtitle = document.getElementById("verdict-subtitle");
+    const mascot = document.getElementById("verdict-mascot");
 
     pill.textContent = verdictInfo.verdict;
     pill.className = "verdict-pill " + verdictInfo.verdict.toLowerCase();
     subtitle.textContent = verdictInfo.reason;
+
+    const mascotMap = {
+      YES: "claude_dumb.png",
+      MAYBE: "claude_dumb.png",
+      NO: "claude_not_dumb.png",
+    };
+    const src = mascotMap[verdictInfo.verdict];
+    if (src) {
+      mascot.src = src;
+      mascot.alt = verdictInfo.verdict === "NO" ? "Claude is not dumb today" : "Claude is dumb today";
+      mascot.style.display = "";
+    } else {
+      mascot.style.display = "none";
+    }
   }
 
   function renderSummary(latest, history) {
