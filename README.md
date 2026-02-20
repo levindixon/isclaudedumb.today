@@ -12,7 +12,7 @@ It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suit
 
 1. **164 HumanEval tasks** (HumanEval/0–163) are presented to Claude Code one at a time
 2. Each task gives Claude a function signature + docstring in `solution.py` and asks it to implement the function
-3. Claude has **no shell access** (`Bash`, `WebFetch`, `WebSearch`, etc. are disabled) — it can only Read and Edit files
+3. Claude has **no shell access** (`Bash`, `WebFetch`, `WebSearch`, `Task`, `NotebookEdit`, `Write` are disabled) — it can only Read, Edit, Glob, and Grep
 4. Claude **cannot see the tests** (`.claude/settings.json` denies read access to `tests_hidden/`)
 5. After Claude finishes, the harness runs hidden unit tests — both the original HumanEval tests and ~16 [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests per task (empty inputs, large inputs, boundary conditions, etc.)
 6. Results are scored as pass/fail per task, aggregated into a per-run score (0–100%)
@@ -22,7 +22,7 @@ It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suit
 The site compares the latest run's score against a rolling average of the prior 21 entries (≈ 7 days at 3 runs/day):
 - **YES** (dumb): score is 5+ points below the average
 - **MAYBE**: score is 2–5 points below the average
-- **NO** (not dumb): score is within 2 points of the average
+- **NO** (not dumb): score is no more than 2 points below the average
 
 ### Safety constraints
 
@@ -31,7 +31,7 @@ The site compares the latest run's score against a rolling average of the prior 
 | Max turns per attempt | 3 |
 | Max cost per attempt | $1.00 |
 | Max attempts per task | 1 |
-| Allowed tools | Read, Edit only |
+| Allowed tools | Read, Edit, Glob, Grep |
 | Test visibility | Denied via permissions |
 | Worst-case cost per run | ~$164 (typical: $10–12) |
 
@@ -103,7 +103,7 @@ docs/
 
 Typical run: **$10–12**. Worst case (all 164 tasks at max budget): ~$164.
 
-The benchmark uses `--model opus`, `--max-budget-usd 1.00` per invocation and `--max-turns 3`, so costs are bounded. Runs 3x daily (~$600–900/month).
+The benchmark uses `--model opus`, `--max-budget-usd 1.00` per invocation and `--max-turns 3`, so costs are bounded. Runs 3x daily (~$900–1,100/month).
 
 ## Methodology note
 

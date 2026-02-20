@@ -36,7 +36,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 
 ## Key Design Constraints
 
-- Claude gets only `Read` and `Edit` tools (Bash, WebFetch, WebSearch, Write, etc. are disabled via `--disallowedTools`)
+- Claude gets only `Read`, `Edit`, `Glob`, and `Grep` tools (Bash, WebFetch, WebSearch, Task, NotebookEdit, Write are disabled via `--disallowedTools`)
 - Tests are hidden from Claude via permission deny rules in each workspace's `.claude/settings.json`
 - Each task: max 3 turns, max $1.00 budget, 1 attempt (no retry)
 - `--permission-mode acceptEdits` auto-approves file edits
@@ -46,4 +46,4 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 The dashboard compares the latest run's score against a rolling average of the prior 21 entries (≈ 7 days at 3 runs/day):
 - **YES** (dumb): score is 5+ points below average
 - **MAYBE**: score is 2–5 points below average
-- **NO** (not dumb): score is within 2 points of average
+- **NO** (not dumb): score is no more than 2 points below average
