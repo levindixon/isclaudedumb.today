@@ -78,6 +78,59 @@
     }
   }
 
+  function relativeTime(date) {
+    const diffMs = Date.now() - date.getTime();
+    const mins = Math.floor(diffMs / 60000);
+    if (mins < 1) return "just now";
+    if (mins < 60) return mins + " minute" + (mins === 1 ? "" : "s") + " ago";
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return hrs + " hour" + (hrs === 1 ? "" : "s") + " ago";
+    if (hrs < 48) return "yesterday";
+    const days = Math.floor(hrs / 24);
+    return days + " day" + (days === 1 ? "" : "s") + " ago";
+  }
+
+  function nextRunRelative() {
+    const now = new Date();
+    const utcH = now.getUTCHours();
+    const utcM = now.getUTCMinutes();
+    const next = new Date(now);
+    next.setUTCSeconds(0, 0);
+    if (utcH < 7 || (utcH === 7 && utcM === 0)) {
+      next.setUTCHours(7, 0);
+    } else if (utcH < 15 || (utcH === 15 && utcM === 0)) {
+      next.setUTCHours(15, 0);
+    } else {
+      next.setUTCDate(next.getUTCDate() + 1);
+      next.setUTCHours(7, 0);
+    }
+    const diffMs = next.getTime() - now.getTime();
+    const mins = Math.round(diffMs / 60000);
+    if (mins < 60) return "in ~" + mins + " minute" + (mins === 1 ? "" : "s");
+    const hrs = Math.round(mins / 60);
+    return "in ~" + hrs + " hour" + (hrs === 1 ? "" : "s");
+  }
+
+  function formatTimestamp(isoStr) {
+    const d = new Date(isoStr);
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const mon = months[d.getUTCMonth()];
+    const day = d.getUTCDate();
+    const hh = String(d.getUTCHours()).padStart(2, "0");
+    const mm = String(d.getUTCMinutes()).padStart(2, "0");
+    return mon + " " + day + ", " + hh + ":" + mm + " UTC";
+  }
+
+  function renderRunTiming(latest) {
+    const el = document.getElementById("run-timing");
+    if (!el) return;
+    const ts = latest.finished_at || latest.run_id;
+    if (!ts) { el.textContent = ""; return; }
+    const lastChecked = relativeTime(new Date(ts));
+    const nextCheck = nextRunRelative();
+    el.textContent = "Last checked " + lastChecked + " \u00B7 Next check " + nextCheck;
+  }
+
   function renderSummary(latest, history) {
     if (!latest) return;
 
@@ -112,7 +165,8 @@
     // Runtime
     const mins = (latest.total_duration_ms / 60000).toFixed(1);
     document.getElementById("runtime-value").textContent = mins + " min";
-    document.getElementById("date-value").textContent = latest.date;
+    const ts = latest.finished_at || latest.run_id;
+    document.getElementById("date-value").textContent = ts ? formatTimestamp(ts) : latest.date;
   }
 
   function renderChart(history) {
@@ -243,6 +297,7 @@
 
     const verdictInfo = computeVerdict(latest.score, history);
     renderVerdict(verdictInfo);
+    renderRunTiming(latest);
     renderSummary(latest, history);
     renderChart(history);
     renderTaskTable(latest.tasks);

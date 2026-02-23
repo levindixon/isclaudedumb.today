@@ -113,6 +113,14 @@ header .subtitle {
   font-size: 0.95rem;
 }
 
+.run-timing {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 /* Summary */
 #summary {
   padding: 1.5rem 0;
