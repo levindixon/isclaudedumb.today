@@ -197,6 +197,17 @@
       "total_duration_ms": 2100590,
       "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.59 (Claude Code)"
+    },
+    {
+      "date": "2026-02-27",
+      "run_id": "2026-02-27T07:20:16.078392+00:00",
+      "score": 92.7,
+      "passed": 152,
+      "total": 164,
+      "total_cost_usd": 11.2553,
+      "total_duration_ms": 2079473,
+      "primary_model": "claude-opus-4-6",
+      "claude_version": "2.1.62 (Claude Code)"
     }
   ]
 }
