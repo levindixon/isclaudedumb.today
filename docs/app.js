@@ -1,6 +1,98 @@
 (function () {
   "use strict";
 
+  const MODEL_STYLES = {
+    "claude-opus-4-6": { line: "#58a6ff", pillBg: "rgba(88, 166, 255, 0.18)" },
+    "claude-opus-4-7": { line: "#a371f7", pillBg: "rgba(163, 113, 247, 0.18)" },
+  };
+  const DEFAULT_MODEL_STYLE = { line: "#58a6ff", pillBg: "rgba(88, 166, 255, 0.18)" };
+
+  function modelStyle(model) {
+    return MODEL_STYLES[model] || DEFAULT_MODEL_STYLE;
+  }
+
+  function formatModelLabel(model) {
+    if (!model) return "Unknown";
+    const m = /^claude-([a-z]+)-(\d)-(\d+)/.exec(model);
+    if (!m) return model;
+    return m[1].charAt(0).toUpperCase() + m[1].slice(1) + " " + m[2] + "." + m[3];
+  }
+
+  function computeModelBoundaries(data) {
+    const out = [];
+    for (let i = 1; i < data.length; i++) {
+      const a = data[i - 1].primary_model;
+      const b = data[i].primary_model;
+      if (a && b && a !== b) out.push({ index: i, from: a, to: b });
+    }
+    return out;
+  }
+
+  const modelBoundaryPlugin = {
+    id: "modelBoundary",
+    afterDatasetsDraw(chart, _args, opts) {
+      const boundaries = opts && opts.boundaries;
+      if (!boundaries || boundaries.length === 0) return;
+      const { ctx, chartArea, scales } = chart;
+      const xScale = scales.x;
+      ctx.save();
+      for (const b of boundaries) {
+        const xLeft = xScale.getPixelForValue(b.index - 1);
+        const xRight = xScale.getPixelForValue(b.index);
+        const x = (xLeft + xRight) / 2;
+        const style = modelStyle(b.to);
+
+        // Vertical dashed divider spanning the plot area.
+        ctx.beginPath();
+        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = style.line;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(x, chartArea.top);
+        ctx.lineTo(x, chartArea.bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Pill label near the top of the plot area.
+        ctx.font = "600 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+        const label = "\u2192 " + formatModelLabel(b.to);
+        const padX = 7;
+        const labelW = ctx.measureText(label).width;
+        const boxW = labelW + padX * 2;
+        const boxH = 18;
+        const gap = 4;
+        const boxX =
+          x + gap + boxW <= chartArea.right - 2 ? x + gap : x - gap - boxW;
+        const boxY = chartArea.top + 4;
+        const r = 4;
+
+        ctx.fillStyle = style.pillBg;
+        ctx.beginPath();
+        ctx.moveTo(boxX + r, boxY);
+        ctx.lineTo(boxX + boxW - r, boxY);
+        ctx.quadraticCurveTo(boxX + boxW, boxY, boxX + boxW, boxY + r);
+        ctx.lineTo(boxX + boxW, boxY + boxH - r);
+        ctx.quadraticCurveTo(
+          boxX + boxW,
+          boxY + boxH,
+          boxX + boxW - r,
+          boxY + boxH
+        );
+        ctx.lineTo(boxX + r, boxY + boxH);
+        ctx.quadraticCurveTo(boxX, boxY + boxH, boxX, boxY + boxH - r);
+        ctx.lineTo(boxX, boxY + r);
+        ctx.quadraticCurveTo(boxX, boxY, boxX + r, boxY);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = style.line;
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(label, boxX + padX, boxY + boxH / 2);
+      }
+      ctx.restore();
+    },
+  };
+
   async function loadJSON(url) {
     try {
       const resp = await fetch(url);
@@ -169,6 +261,37 @@
     document.getElementById("date-value").textContent = ts ? formatTimestamp(ts) : latest.date;
   }
 
+  function renderChartLegend(data) {
+    const el = document.getElementById("chart-legend");
+    if (!el) return;
+    const seen = new Set();
+    const models = [];
+    for (const e of data) {
+      const m = e.primary_model;
+      if (m && !seen.has(m)) {
+        seen.add(m);
+        models.push(m);
+      }
+    }
+    if (models.length <= 1) {
+      el.innerHTML = "";
+      return;
+    }
+    el.innerHTML = models
+      .map((m) => {
+        const s = modelStyle(m);
+        return (
+          '<span class="chart-legend-item">' +
+          '<span class="chart-legend-swatch" style="background:' +
+          s.line +
+          '"></span>' +
+          formatModelLabel(m) +
+          "</span>"
+        );
+      })
+      .join("");
+  }
+
   function renderChart(history) {
     const ctx = document.getElementById("score-chart");
     if (!ctx || history.length === 0) return;
@@ -192,6 +315,9 @@
       return "";
     });
 
+    const boundaries = computeModelBoundaries(data);
+    renderChartLegend(data);
+
     new Chart(ctx, {
       type: "line",
       data: {
@@ -209,6 +335,17 @@
             ),
             fill: true,
             tension: 0.2,
+            segment: {
+              borderColor: (c) => {
+                const entry = data[c.p1DataIndex];
+                return modelStyle(entry && entry.primary_model).line;
+              },
+              borderDash: (c) => {
+                const from = data[c.p0DataIndex] && data[c.p0DataIndex].primary_model;
+                const to = data[c.p1DataIndex] && data[c.p1DataIndex].primary_model;
+                return from && to && from !== to ? [4, 4] : undefined;
+              },
+            },
           },
         ],
       },
@@ -229,6 +366,7 @@
         },
         plugins: {
           legend: { display: false },
+          modelBoundary: { boundaries },
           tooltip: {
             callbacks: {
               title: (items) => {
@@ -242,10 +380,15 @@
               },
               label: (item) =>
                 `Score: ${item.raw}% (${data[item.dataIndex].passed}/${data[item.dataIndex].total})`,
+              afterLabel: (item) => {
+                const m = data[item.dataIndex].primary_model;
+                return m ? "Model: " + formatModelLabel(m) : "";
+              },
             },
           },
         },
       },
+      plugins: [modelBoundaryPlugin],
     });
   }
 
