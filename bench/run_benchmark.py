@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the HumanEvalPlus-CC164 benchmark against Claude Code CLI (Opus 4.6).
+"""Run the HumanEvalPlus-CC164 benchmark against Claude Code CLI (Opus 4.7).
 
 For each of 164 tasks:
   1. Set up workspace (prompt.md, solution.py stub, hidden tests)
@@ -218,7 +218,7 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
         "claude",
         "-p", prompt,
         "--output-format", "json",
-        "--model", "opus",
+        "--model", "claude-opus-4-7",
         "--max-turns", str(MAX_TURNS),
         "--max-budget-usd", str(MAX_BUDGET_USD),
         "--permission-mode", "acceptEdits",
@@ -528,7 +528,7 @@ def update_history(today_result: dict) -> None:
 
 def main():
     print("=" * 60)
-    print("HumanEvalPlus-CC164 Benchmark (Opus 4.6)")
+    print("HumanEvalPlus-CC164 Benchmark (Opus 4.7)")
     print("=" * 60)
 
     # Get Claude version

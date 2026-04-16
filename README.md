@@ -8,13 +8,13 @@
 
 <p align="center"><b>Is Claude dumb today?</b></p>
 
-Automated benchmark tracking Claude Code (Opus 4.6) quality on HumanEval + EvalPlus edge-case coding tasks.
+Automated benchmark tracking Claude Code (Opus 4.7) quality on HumanEval + EvalPlus edge-case coding tasks.
 
 ## What is this?
 
 A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers one question every day: **is Claude dumb today?**
 
-It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI (`--model opus`) in headless mode. GitHub Actions runs the benchmark twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
+It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI (`--model claude-opus-4-7`) in headless mode. GitHub Actions runs the benchmark twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
 
 ## How the benchmark works
 
@@ -108,6 +108,6 @@ docs/
 
 ## Methodology note
 
-This benchmark uses Claude Code CLI with `--model opus` and a standard Anthropic API key (pay-as-you-go). All raw results are published as JSON for full transparency.
+This benchmark uses Claude Code CLI with `--model claude-opus-4-7` and a standard Anthropic API key (pay-as-you-go). All raw results are published as JSON for full transparency.
 
 HumanEval tasks are from OpenAI's [human-eval](https://github.com/openai/human-eval) dataset (MIT license). Edge-case tests are from [EvalPlus](https://github.com/evalplus/evalplus) (Apache-2.0 license).
