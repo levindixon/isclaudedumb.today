@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the HumanEvalPlus-CC164 benchmark against Claude Code CLI (Opus 4.7).
+"""Run the HumanEvalPlus-CC164 benchmark against Claude Code CLI.
 
 For each of 164 tasks:
   1. Set up workspace (prompt.md, solution.py stub, hidden tests)
@@ -7,14 +7,18 @@ For each of 164 tasks:
   3. Run hidden tests (original HumanEval + EvalPlus edge cases) to check correctness
   4. Record result (passed, attempts, turns, cost, model usage)
 
+Model and effort are controlled via env vars so CI can run the same harness
+for multiple models (e.g. shipping model + a reference baseline).
+
 Outputs:
-  - docs/data/YYYY-MM-DD-HHMM.json  (per-run results)
-  - docs/data/latest.json            (copy of most recent run)
-  - docs/data/history.json           (append summary row for charting)
+  - docs/data/YYYY-MM-DD-HHMM-<tag>.json  (per-run results, model-tagged)
+  - docs/data/latest.json                  (most recent PRIMARY_MODEL run)
+  - docs/data/history.json                 (append summary row for charting)
 """
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -32,6 +36,20 @@ MAX_TURNS = 3
 MAX_BUDGET_USD = 1.00
 DISALLOWED_TOOLS = "Bash,WebFetch,WebSearch,Task,NotebookEdit,Write"
 MAX_ATTEMPTS = 1
+
+# The "shipping" model the dashboard verdict tracks. Runs with this model
+# overwrite latest.json; runs with any other model only append to history.
+PRIMARY_MODEL = "claude-opus-4-7"
+MODEL = os.environ.get("BENCH_MODEL", PRIMARY_MODEL)
+EFFORT = os.environ.get("BENCH_EFFORT", "high")
+
+
+def model_tag(model: str) -> str:
+    """Short, filename-safe tag for a model id (e.g. claude-opus-4-7 -> opus47)."""
+    m = re.match(r"^claude-([a-z]+)-(\d+)-(\d+)", model)
+    if m:
+        return f"{m.group(1)}{m.group(2)}{m.group(3)}"
+    return re.sub(r"[^a-z0-9]+", "", model.lower()) or "model"
 
 _logged_cli_keys = False
 
@@ -218,7 +236,8 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
         "claude",
         "-p", prompt,
         "--output-format", "json",
-        "--model", "claude-opus-4-7",
+        "--model", MODEL,
+        "--effort", EFFORT,
         "--max-turns", str(MAX_TURNS),
         "--max-budget-usd", str(MAX_BUDGET_USD),
         "--permission-mode", "acceptEdits",
@@ -510,11 +529,16 @@ def update_history(today_result: dict) -> None:
         "claude_version": today_result["claude_version"],
     }
 
-    # Remove existing entry with same run_id (idempotent reruns).
-    # For legacy entries without run_id, fall back to date-based dedup.
+    # Remove any existing entry for the same (run_id, primary_model) pair
+    # so reruns are idempotent but multiple models at the same timestamp
+    # (e.g. 4.6 and 4.7 both running in the same CI job) both persist.
+    # Legacy entries without run_id fall back to date-based dedup.
     history["entries"] = [
         e for e in history["entries"]
-        if e.get("run_id", e["date"]) != entry["run_id"]
+        if not (
+            e.get("run_id", e["date"]) == entry["run_id"]
+            and e.get("primary_model") == entry.get("primary_model")
+        )
     ]
     history["entries"].append(entry)
 
@@ -528,7 +552,7 @@ def update_history(today_result: dict) -> None:
 
 def main():
     print("=" * 60)
-    print("HumanEvalPlus-CC164 Benchmark (Opus 4.7)")
+    print(f"HumanEvalPlus-CC164 Benchmark  model={MODEL}  effort={EFFORT}")
     print("=" * 60)
 
     # Get Claude version
@@ -571,13 +595,19 @@ def main():
 
     # Extract HHMM from started_at ISO timestamp (e.g. "2026-02-19T02:00:05+00:00" → "0200")
     hhmm = results["started_at"][11:13] + results["started_at"][14:16]
-    daily_file = DATA_DIR / f"{today}-{hhmm}.json"
+    tag = model_tag(MODEL)
+    daily_file = DATA_DIR / f"{today}-{hhmm}-{tag}.json"
     daily_file.write_text(json.dumps(results, indent=2) + "\n")
     print(f"\nWrote {daily_file}")
 
-    latest_file = DATA_DIR / "latest.json"
-    latest_file.write_text(json.dumps(results, indent=2) + "\n")
-    print(f"Wrote {latest_file}")
+    # Only the primary model owns latest.json; reference-model runs show up
+    # on the dashboard through history.json alone.
+    if MODEL == PRIMARY_MODEL:
+        latest_file = DATA_DIR / "latest.json"
+        latest_file.write_text(json.dumps(results, indent=2) + "\n")
+        print(f"Wrote {latest_file}")
+    else:
+        print(f"Skipped latest.json (non-primary model: {MODEL})")
 
     update_history(results)
 

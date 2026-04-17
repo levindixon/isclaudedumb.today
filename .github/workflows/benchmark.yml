@@ -35,11 +35,22 @@ jobs:
       - name: Generate task workspaces
         run: python bench/generate_tasks.py
 
-      - name: Run benchmark
+      - name: Run benchmark (Opus 4.7 — primary)
         run: python bench/run_benchmark.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        timeout-minutes: 210
+          BENCH_MODEL: claude-opus-4-7
+          BENCH_EFFORT: high
+        timeout-minutes: 105
+
+      - name: Run benchmark (Opus 4.6 — reference baseline)
+        if: always()
+        run: python bench/run_benchmark.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BENCH_MODEL: claude-opus-4-6
+          BENCH_EFFORT: high
+        timeout-minutes: 105
 
       - name: Commit and push results
         run: |
