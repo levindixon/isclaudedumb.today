@@ -1418,6 +1418,28 @@
       "total_duration_ms": 1818776,
       "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.114 (Claude Code)"
+    },
+    {
+      "date": "2026-04-19",
+      "run_id": "2026-04-19T15:14:53.592147+00:00",
+      "score": 90.2,
+      "passed": 148,
+      "total": 164,
+      "total_cost_usd": 16.1434,
+      "total_duration_ms": 1546700,
+      "primary_model": "claude-opus-4-7",
+      "claude_version": "2.1.114 (Claude Code)"
+    },
+    {
+      "date": "2026-04-19",
+      "run_id": "2026-04-19T15:40:54.062716+00:00",
+      "score": 92.1,
+      "passed": 151,
+      "total": 164,
+      "total_cost_usd": 13.0553,
+      "total_duration_ms": 1875119,
+      "primary_model": "claude-opus-4-6",
+      "claude_version": "2.1.114 (Claude Code)"
     }
   ]
 }
