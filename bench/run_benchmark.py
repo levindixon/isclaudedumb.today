@@ -459,11 +459,18 @@ def _build_result(
 
 def aggregate_results(
     task_results: list[dict],
+    run_id: str,
     started_at: str,
     finished_at: str,
     claude_version: str,
 ) -> dict:
-    """Build the full daily results JSON."""
+    """Build the full daily results JSON.
+
+    `run_id` is the shared-schedule identifier (same value for all models
+    benchmarked by one cron fire). `started_at`/`finished_at` are the true
+    wall-clock bounds of this specific invocation and may differ from
+    `run_id` when paired runs execute sequentially.
+    """
     passed_count = sum(1 for r in task_results if r["passed"])
     total_count = len(task_results)
     score = round((passed_count / total_count) * 100, 1) if total_count else 0
@@ -489,8 +496,8 @@ def aggregate_results(
         )
 
     return {
-        "date": started_at[:10],
-        "run_id": started_at,
+        "date": run_id[:10],
+        "run_id": run_id,
         "suite": "HumanEvalPlus-CC164",
         "score": score,
         "passed": passed_count,
@@ -569,8 +576,13 @@ def main():
     tasks = task_data["tasks"]
     print(f"Loaded {len(tasks)} tasks from {TASK_FILE}")
 
-    # Record start time
+    # Record true wall-clock start (differs between sequential paired runs).
     started_at = datetime.now(timezone.utc).isoformat()
+
+    # Shared run id aligns paired runs (e.g. 4.6 + 4.7 from one cron fire)
+    # on the dashboard. Defaults to started_at for local / single-model runs.
+    run_id = os.environ.get("BENCH_RUN_ID") or started_at
+    print(f"Run ID: {run_id}")
 
     # Run all tasks sequentially
     task_results = []
@@ -587,14 +599,14 @@ def main():
     finished_at = datetime.now(timezone.utc).isoformat()
 
     # Aggregate results
-    results = aggregate_results(task_results, started_at, finished_at, claude_version)
+    results = aggregate_results(task_results, run_id, started_at, finished_at, claude_version)
 
     # Write output files
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     today = results["date"]
 
-    # Extract HHMM from started_at ISO timestamp (e.g. "2026-02-19T02:00:05+00:00" → "0200")
-    hhmm = results["started_at"][11:13] + results["started_at"][14:16]
+    # Extract HHMM from run_id so paired runs share a filename prefix.
+    hhmm = run_id[11:13] + run_id[14:16]
     tag = model_tag(MODEL)
     daily_file = DATA_DIR / f"{today}-{hhmm}-{tag}.json"
     daily_file.write_text(json.dumps(results, indent=2) + "\n")

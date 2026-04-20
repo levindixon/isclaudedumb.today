@@ -35,6 +35,10 @@ jobs:
       - name: Generate task workspaces
         run: python bench/generate_tasks.py
 
+      - name: Compute shared run id
+        run: |
+          echo "BENCH_RUN_ID=$(python -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc).isoformat())')" >> "$GITHUB_ENV"
+
       - name: Run benchmark (Opus 4.7 — primary)
         run: python bench/run_benchmark.py
         env:
