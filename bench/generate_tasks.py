@@ -94,35 +94,17 @@ def compute_evalplus_tests(task: dict, evalplus_problem: dict) -> list[dict]:
     return tests
 
 
-def transform_tests(task: dict, evalplus_tests: list[dict] | None = None) -> str:
-    """Transform HumanEval check(candidate) tests into unittest format.
+def _build_base_test_methods(task: dict) -> list[str]:
+    """Extract the original HumanEval check() asserts as unittest methods.
 
-    HumanEval tests look like:
-        def check(candidate):
-            assert candidate(...) == ...
-            ...
-
-    We transform these into:
-        import unittest
-        import sys, os
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-        from solution import *
-
-        class TestSolution(unittest.TestCase):
-            def test_0(self):
-                assert entry_point(...) == ...
-            ...
-
-    If evalplus_tests are provided, they are appended as test_plus_N methods.
-
-    Uses `from solution import *` because some tasks have helper functions
-    (e.g., encode_cyclic) defined in the prompt that tests also reference.
+    Returns a list of formatted method strings like
+    ["    def test_0(self):\\n        assert ...", ...].
     """
     entry_point = task["entry_point"]
     test_code = task["test"]
 
-    # Extract the body of check(candidate) function
-    # Find lines after "def check(candidate):" and before METADATA or end
+    # Extract the body of check(candidate): everything between the def line
+    # and the next top-level def / METADATA block.
     lines = test_code.split("\n")
     in_check = False
     check_body = []
@@ -136,26 +118,23 @@ def transform_tests(task: dict, evalplus_tests: list[dict] | None = None) -> str
                 stripped.startswith("def ") and "check" not in stripped
             ):
                 break
-            # Keep empty lines to preserve structure
             if stripped:
-                # Replace 'candidate' with the actual function name
                 transformed = line.replace("candidate", entry_point)
-                # De-indent one level (remove first 4 spaces)
                 if transformed.startswith("    "):
                     transformed = transformed[4:]
                 check_body.append(transformed)
 
-    # Determine if this is a "simple" test (only assert statements at top level)
-    # or a "complex" test (has setup code, loops, imports, etc.)
+    # If the body is just a list of asserts, we can split each into its own
+    # test_N method for granular pass/fail. Anything more complex (loops,
+    # setup, imports, helpers) goes in a single test method so we don't break
+    # semantics.
     top_level_lines = [l for l in check_body if not l.startswith(" ")]
     is_simple = all(l.startswith("assert") for l in top_level_lines if l.strip())
 
     if is_simple and check_body:
-        # Split each assert into its own test method for granularity
         test_methods = []
         method_idx = 0
         current_lines = []
-
         for line in check_body:
             if line.startswith("assert"):
                 if current_lines:
@@ -164,28 +143,27 @@ def transform_tests(task: dict, evalplus_tests: list[dict] | None = None) -> str
                     current_lines = []
                 current_lines.append(line)
             else:
-                # Continuation of multi-line assert
                 current_lines.append(line)
-
         if current_lines:
             test_methods.append((method_idx, current_lines))
     else:
-        # Complex test: keep everything in one test method
         test_methods = [(0, check_body)] if check_body else [(0, ["pass"])]
 
-    methods_code = []
-    for idx, method_lines in test_methods:
-        body = "\n        ".join(method_lines)
-        methods_code.append(f"    def test_{idx}(self):\n        {body}")
+    return [
+        f"    def test_{idx}(self):\n        " + "\n        ".join(lines)
+        for idx, lines in test_methods
+    ]
 
-    # Append EvalPlus edge-case tests
-    if evalplus_tests:
-        for i, test in enumerate(evalplus_tests):
-            methods_code.append(f"    def test_plus_{i}(self):\n        {test['assert_str']}")
 
-    methods_str = "\n\n".join(methods_code)
+def _build_evalplus_test_methods(evalplus_tests: list[dict]) -> list[str]:
+    """One unittest method per EvalPlus edge-case assertion."""
+    return [
+        f"    def test_plus_{i}(self):\n        {test['assert_str']}"
+        for i, test in enumerate(evalplus_tests)
+    ]
 
-    test_file = f"""\
+
+_TEST_FILE_TEMPLATE = """\
 import unittest
 import sys
 import os
@@ -193,14 +171,51 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from solution import *
 
-class TestSolution(unittest.TestCase):
-{methods_str}
+class {class_name}(unittest.TestCase):
+{methods}
 
 
 if __name__ == '__main__':
     unittest.main()
 """
-    return test_file
+
+
+def build_base_test_file(task: dict) -> str:
+    """Test file containing ONLY the original HumanEval `check()` asserts.
+
+    Split from EvalPlus edge cases so the benchmark can report two scores:
+    base HumanEval (pure capability) vs EvalPlus (spec-ambiguity edge cases).
+    """
+    methods = _build_base_test_methods(task)
+    return _TEST_FILE_TEMPLATE.format(
+        class_name="TestBase",
+        methods="\n\n".join(methods) or "    pass",
+    )
+
+
+def build_evalplus_test_file(task: dict, evalplus_tests: list[dict]) -> str:
+    """Test file containing ONLY the EvalPlus edge-case asserts."""
+    methods = _build_evalplus_test_methods(evalplus_tests)
+    return _TEST_FILE_TEMPLATE.format(
+        class_name="TestEvalPlus",
+        methods="\n\n".join(methods) or "    pass",
+    )
+
+
+def transform_tests(task: dict, evalplus_tests: list[dict] | None = None) -> str:
+    """Legacy combined test file (base + evalplus in one TestSolution class).
+
+    Kept so `run_benchmark.build_test_file` and the variance probe still work
+    with older workspaces. New code should use build_base_test_file and
+    build_evalplus_test_file to get per-bucket pass/fail.
+    """
+    methods = _build_base_test_methods(task)
+    if evalplus_tests:
+        methods.extend(_build_evalplus_test_methods(evalplus_tests))
+    return _TEST_FILE_TEMPLATE.format(
+        class_name="TestSolution",
+        methods="\n\n".join(methods) or "    pass",
+    )
 
 
 def build_prompt_md(task: dict) -> str:
@@ -229,32 +244,37 @@ def build_solution_stub(task: dict) -> str:
     return prompt.rstrip() + "\n    pass\n"
 
 
-def setup_workspace(task: dict, test_code: str) -> None:
-    """Create workspace directory structure for a task."""
+def setup_workspace(task: dict, evalplus_tests: list[dict] | None = None) -> None:
+    """Create workspace directory structure for a task.
+
+    Writes two separate test files so the runner can score base HumanEval
+    tests independently from EvalPlus edge-case tests:
+      - tests_hidden/test_base.py      (original `check(candidate)` asserts)
+      - tests_hidden/test_evalplus.py  (EvalPlus plus_input asserts)
+
+    Both classes live in the same dir so `unittest discover` picks up either,
+    but the runner invokes each file directly via `unittest discover -p` so
+    it can record pass/fail per bucket.
+    """
     task_dir_name = task["task_id"].replace("/", "_")
     workspace = WORKSPACE_DIR / task_dir_name
 
-    # Clean existing workspace
     if workspace.exists():
         shutil.rmtree(workspace)
 
-    # Create directories
     workspace.mkdir(parents=True)
     (workspace / "tests_hidden").mkdir()
     (workspace / ".claude").mkdir()
 
-    # Write files
     (workspace / "prompt.md").write_text(build_prompt_md(task))
     (workspace / "solution.py").write_text(build_solution_stub(task))
-    (workspace / "tests_hidden" / "test_solution.py").write_text(test_code)
+    (workspace / "tests_hidden" / "test_base.py").write_text(build_base_test_file(task))
+    (workspace / "tests_hidden" / "test_evalplus.py").write_text(
+        build_evalplus_test_file(task, evalplus_tests or [])
+    )
     (workspace / "tests_hidden" / "__init__.py").write_text("")
 
-    # Claude settings: deny read on tests_hidden
-    settings = {
-        "permissions": {
-            "deny": ["Read(tests_hidden/**)"]
-        }
-    }
+    settings = {"permissions": {"deny": ["Read(tests_hidden/**)"]}}
     (workspace / ".claude" / "settings.json").write_text(
         json.dumps(settings, indent=2) + "\n"
     )
@@ -310,8 +330,7 @@ def main():
     # Create workspaces
     print("Setting up workspaces...")
     for task in cc164_tasks:
-        test_code = transform_tests(task, evalplus_tests=task.get("evalplus_tests"))
-        setup_workspace(task, test_code)
+        setup_workspace(task, evalplus_tests=task.get("evalplus_tests"))
         plus_count = len(task.get("evalplus_tests", []))
         print(f"  {task['task_id']}: workspace ready (+{plus_count} evalplus tests)")
 

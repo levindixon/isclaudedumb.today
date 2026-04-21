@@ -339,10 +339,18 @@
     });
   }
 
+  function miniBadge(flag) {
+    // Three-state: true=PASS (pill green), false=FAIL (pill red),
+    // undefined=— (legacy runs that didn't record the split).
+    if (flag === true) return '<span class="badge pass">P</span>';
+    if (flag === false) return '<span class="badge fail">F</span>';
+    return '<span class="rate">—</span>';
+  }
+
   function renderTaskTable(tasks) {
     const tbody = document.getElementById("tasks-body");
     if (!tasks || tasks.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" class="loading">No task data available</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" class="loading">No task data available</td></tr>';
       return;
     }
 
@@ -353,6 +361,8 @@
         <td>${t.task_id}</td>
         <td><code>${t.function_name}</code></td>
         <td><span class="badge ${t.passed ? "pass" : "fail"}">${t.passed ? "PASS" : "FAIL"}</span></td>
+        <td>${miniBadge(t.passed_base)}</td>
+        <td>${miniBadge(t.passed_evalplus)}</td>
         <td>${t.attempts_used}</td>
         <td>${t.num_turns_total}</td>
         <td>$${t.total_cost_usd_total.toFixed(3)}</td>
@@ -361,7 +371,6 @@
       )
       .join("");
 
-    // Sortable headers
     document.querySelectorAll("#tasks-table th[data-sort]").forEach((th) => {
       th.addEventListener("click", () => {
         const key = th.dataset.sort;
@@ -377,6 +386,163 @@
     });
   }
 
+  // --- Divergence view -------------------------------------------------
+
+  function bitmapToBool(bitmap, idx) {
+    if (!bitmap || idx >= bitmap.length) return null;
+    const c = bitmap[idx];
+    if (c === "1") return true;
+    if (c === "0") return false;
+    return null;
+  }
+
+  function computeTaskStats(history) {
+    // Use the last N runs that carry bitmaps. Entries produced before the
+    // split-scoring reform have no bitmap and are simply skipped.
+    const WINDOW = 14; // ~7 days at 2 paired runs/day
+
+    const withBitmaps = history.filter(
+      (e) => e.pass_bitmap_base && e.pass_bitmap_evalplus && e.task_ids && e.task_ids.length
+    );
+    if (withBitmaps.length === 0) return null;
+
+    // Trim to the last WINDOW runs per model so an asymmetric backlog
+    // doesn't bias the pass-rate.
+    const byModel = {};
+    for (const e of withBitmaps) {
+      (byModel[e.primary_model] = byModel[e.primary_model] || []).push(e);
+    }
+    for (const m of Object.keys(byModel)) {
+      byModel[m] = byModel[m].slice(-WINDOW);
+    }
+    const models = Object.keys(byModel);
+    if (models.length < 2) return null;
+
+    // Canonical task_ids list: use the most recent run's order. Runs are
+    // expected to share the same set post-quarantine, but we tolerate drift
+    // by using the superset.
+    const latestTaskIds = withBitmaps[withBitmaps.length - 1].task_ids;
+    const taskIdIndex = new Map(latestTaskIds.map((t, i) => [t, i]));
+
+    // For each task, collect per-run pass/fail per model.
+    const stats = latestTaskIds.map((task_id) => {
+      const perModel = {};
+      for (const m of models) {
+        const runs = byModel[m];
+        const trail = runs.map((e) => {
+          const idx = e.task_ids.indexOf(task_id);
+          if (idx < 0) return null;
+          const base = bitmapToBool(e.pass_bitmap_base, idx);
+          const plus = bitmapToBool(e.pass_bitmap_evalplus, idx);
+          if (base == null || plus == null) return null;
+          return base && plus; // combined = pass both
+        }).filter((v) => v != null);
+        const passed = trail.filter((v) => v).length;
+        perModel[m] = { passed, total: trail.length, trail };
+      }
+      return { task_id, perModel };
+    });
+    return { stats, models };
+  }
+
+  function rateCell(passed, total) {
+    if (total === 0) return '<span class="rate">—</span>';
+    const pct = Math.round((passed / total) * 100);
+    const cls = pct >= 80 ? "high" : pct <= 20 ? "low" : "";
+    return `<span class="rate ${cls}">${passed}/${total}<span class="pct">${pct}%</span></span>`;
+  }
+
+  function sparkdots(trail) {
+    // One 8px dot per run. Left = oldest, right = newest, matching the
+    // line chart's direction so viewers can correlate at a glance.
+    return (
+      '<span class="sparkdots" aria-hidden="true">' +
+      trail.map((v) => `<span class="${v ? "p" : "f"}"></span>`).join("") +
+      "</span>"
+    );
+  }
+
+  function renderDivergenceTable(history) {
+    const tbody = document.getElementById("divergence-body");
+    const note = document.getElementById("divergence-note");
+    if (!tbody) return;
+
+    const computed = computeTaskStats(history);
+    if (!computed) {
+      tbody.innerHTML =
+        '<tr><td colspan="4" class="loading">No bitmap history yet — this view populates once runs have recorded the new pass bitmaps.</td></tr>';
+      return;
+    }
+
+    const { stats, models } = computed;
+    // Prefer 4.7 as "primary" column, 4.6 as "reference"; fall back to
+    // whatever two models we have (alphabetical order) so the view still
+    // works if the lineup changes.
+    const preferred = ["claude-opus-4-7", "claude-opus-4-6"];
+    let mA, mB;
+    if (preferred.every((m) => models.includes(m))) {
+      [mA, mB] = preferred;
+    } else {
+      const sorted = [...models].sort();
+      [mA, mB] = [sorted[sorted.length - 1], sorted[0]];
+    }
+
+    // Row is "interesting" iff the two models have different pass rates
+    // over the window. Ties (0-0, N-N) are dropped — they're not signal.
+    const rows = stats
+      .map((s) => {
+        const a = s.perModel[mA] || { passed: 0, total: 0, trail: [] };
+        const b = s.perModel[mB] || { passed: 0, total: 0, trail: [] };
+        const rateA = a.total ? a.passed / a.total : 0;
+        const rateB = b.total ? b.passed / b.total : 0;
+        const delta = rateA - rateB;
+        return { ...s, a, b, delta };
+      })
+      .filter((r) => Math.abs(r.delta) > 1e-6)
+      .sort((x, y) => Math.abs(y.delta) - Math.abs(x.delta));
+
+    if (rows.length === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="4" class="loading">No per-task divergences in the recent window.</td></tr>';
+      return;
+    }
+
+    const header = document.querySelector("#divergence-table thead tr");
+    if (header) {
+      header.innerHTML = `
+        <th>Task</th>
+        <th>${formatModelLabel(mA)}</th>
+        <th>${formatModelLabel(mB)}</th>
+        <th>Delta</th>`;
+    }
+
+    const fmtDelta = (d) => {
+      const pp = Math.round(d * 100);
+      const cls = pp === 0 ? "zero" : pp > 0 ? "positive" : "negative";
+      const sign = pp > 0 ? "+" : "";
+      return `<span class="delta-num ${cls}">${sign}${pp}pp</span>`;
+    };
+
+    tbody.innerHTML = rows
+      .map(
+        (r) => `
+      <tr>
+        <td>${r.task_id}</td>
+        <td>${rateCell(r.a.passed, r.a.total)} ${sparkdots(r.a.trail)}</td>
+        <td>${rateCell(r.b.passed, r.b.total)} ${sparkdots(r.b.trail)}</td>
+        <td>${fmtDelta(r.delta)}</td>
+      </tr>`
+      )
+      .join("");
+
+    if (note) {
+      note.insertAdjacentHTML(
+        "beforeend",
+        ` <span class="pct">(window: last ${Math.min(14, Math.max(...models.map((m) => (computed.stats[0].perModel[m] || {}).total || 0)))} runs per model)</span>`
+      );
+    }
+  }
+
   async function init() {
     const { latest, history } = await loadData();
 
@@ -390,6 +556,7 @@
     renderRunTiming(latest);
     renderSummary(latest, history);
     renderChart(history);
+    renderDivergenceTable(history);
     renderTaskTable(latest.tasks);
   }
 

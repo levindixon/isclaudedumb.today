@@ -60,8 +60,34 @@
       <div class="chart-legend" id="chart-legend"></div>
     </section>
 
+    <section id="divergence">
+      <h2>Where the models disagree</h2>
+      <p class="section-note" id="divergence-note">
+        Tasks where Opus 4.6 and 4.7 have different pass rates over recent paired runs.
+        Green = always passes, red = always fails. A task that&rsquo;s green for one model and red for
+        the other reveals a real tradeoff, not noise. Historical divergences include
+        <code>HumanEval/97</code> (Python signed-modulo quirk) and <code>HumanEval/141</code>
+        (Unicode <code>.isalpha()</code> vs literal a&ndash;z range).
+      </p>
+      <div class="tasks-table-wrap">
+        <table id="divergence-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Opus 4.7</th>
+              <th>Opus 4.6</th>
+              <th>Delta</th>
+            </tr>
+          </thead>
+          <tbody id="divergence-body">
+            <tr><td colspan="4" class="loading">Loading&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="tasks">
-      <h2>Per-Task Results</h2>
+      <h2>Per-Task Results (latest run)</h2>
       <div class="tasks-table-wrap">
         <table id="tasks-table">
           <thead>
@@ -69,6 +95,8 @@
               <th data-sort="task_id">Task</th>
               <th data-sort="function_name">Function</th>
               <th data-sort="passed">Result</th>
+              <th data-sort="passed_base">Base</th>
+              <th data-sort="passed_evalplus">EvalPlus</th>
               <th data-sort="attempts_used">Attempts</th>
               <th data-sort="num_turns_total">Turns</th>
               <th data-sort="total_cost_usd_total">Cost</th>
@@ -76,7 +104,7 @@
             </tr>
           </thead>
           <tbody id="tasks-body">
-            <tr><td colspan="7" class="loading">Loading&hellip;</td></tr>
+            <tr><td colspan="9" class="loading">Loading&hellip;</td></tr>
           </tbody>
         </table>
       </div>

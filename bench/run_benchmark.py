@@ -85,8 +85,9 @@ def get_claude_version() -> str:
 def setup_workspace(task: dict) -> Path:
     """Create workspace directory for a task.
 
-    Delegates to generate_tasks.py logic but can also reconstruct
-    from the task data if workspaces were cleaned.
+    Writes two separate test files (base HumanEval + EvalPlus edge cases)
+    so the runner can record per-bucket pass/fail. Structurally matches
+    generate_tasks.setup_workspace so local dev and CI behave identically.
     """
     task_dir_name = task["task_id"].replace("/", "_")
     workspace = WORKSPACE_DIR / task_dir_name
@@ -98,7 +99,6 @@ def setup_workspace(task: dict) -> Path:
     (workspace / "tests_hidden").mkdir()
     (workspace / ".claude").mkdir()
 
-    # Build prompt.md
     prompt_md = f"""\
 # Task: {task['task_id']}
 
@@ -114,17 +114,18 @@ Implement the following function in `solution.py`.
 - The function signature is already provided — fill in the implementation.
 """
     (workspace / "prompt.md").write_text(prompt_md)
-
-    # Build solution.py stub
     (workspace / "solution.py").write_text(task["prompt"].rstrip() + "\n    pass\n")
 
-    # Build test file (import from generate_tasks for consistency)
-    # We re-use the transform logic inline to avoid import complications
-    test_code = build_test_file(task)
-    (workspace / "tests_hidden" / "test_solution.py").write_text(test_code)
+    # Two independent test files: test_base.py for the original HumanEval
+    # asserts, test_evalplus.py for the EvalPlus edge-case asserts. The
+    # runner invokes each file separately so a failure on one bucket does
+    # not mask the other.
+    (workspace / "tests_hidden" / "test_base.py").write_text(build_base_test_source(task))
+    (workspace / "tests_hidden" / "test_evalplus.py").write_text(
+        build_evalplus_test_source(task)
+    )
     (workspace / "tests_hidden" / "__init__.py").write_text("")
 
-    # Claude settings: deny read on tests_hidden
     settings = {"permissions": {"deny": ["Read(tests_hidden/**)"]}}
     (workspace / ".claude" / "settings.json").write_text(
         json.dumps(settings, indent=2) + "\n"
@@ -133,77 +134,23 @@ Implement the following function in `solution.py`.
     return workspace
 
 
+# Delegate test-file construction to generate_tasks so local dev and CI use
+# one authoritative implementation. Importing at module top avoids the cost
+# of doing it per-task.
+from generate_tasks import build_base_test_file as build_base_test_source
+from generate_tasks import build_evalplus_test_file as _build_evalplus_test_source
+
+
+def build_evalplus_test_source(task: dict) -> str:
+    """Wrap generate_tasks.build_evalplus_test_file to accept the task dict directly."""
+    return _build_evalplus_test_source(task, task.get("evalplus_tests", []))
+
+
 def build_test_file(task: dict) -> str:
-    """Build unittest test file from HumanEval task data."""
-    entry_point = task["entry_point"]
-    test_code = task["test"]
-
-    lines = test_code.split("\n")
-    in_check = False
-    check_body = []
-    for line in lines:
-        if "def check(candidate)" in line:
-            in_check = True
-            continue
-        if in_check:
-            stripped = line.strip()
-            if stripped.startswith("METADATA") or (
-                stripped.startswith("def ") and "check" not in stripped
-            ):
-                break
-            if stripped:
-                transformed = line.replace("candidate", entry_point)
-                if transformed.startswith("    "):
-                    transformed = transformed[4:]
-                check_body.append(transformed)
-
-    top_level = [l for l in check_body if not l.startswith(" ")]
-    is_simple = all(l.startswith("assert") for l in top_level if l.strip())
-
-    if is_simple and check_body:
-        methods = []
-        idx = 0
-        current = []
-        for line in check_body:
-            if line.startswith("assert"):
-                if current:
-                    methods.append((idx, current))
-                    idx += 1
-                    current = []
-                current.append(line)
-            else:
-                current.append(line)
-        if current:
-            methods.append((idx, current))
-    else:
-        methods = [(0, check_body)] if check_body else [(0, ["pass"])]
-
-    methods_code = []
-    for idx, method_lines in methods:
-        body = "\n        ".join(method_lines)
-        methods_code.append(f"    def test_{idx}(self):\n        {body}")
-
-    # Append EvalPlus edge-case tests
-    for i, test in enumerate(task.get("evalplus_tests", [])):
-        methods_code.append(f"    def test_plus_{i}(self):\n        {test['assert_str']}")
-
-    methods_str = "\n\n".join(methods_code)
-
-    return f"""\
-import unittest
-import sys
-import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from solution import *
-
-class TestSolution(unittest.TestCase):
-{methods_str}
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
+    """Legacy combined test file (base + evalplus). Used by the variance
+    probe and any other tooling that predates the base/plus split."""
+    from generate_tasks import transform_tests
+    return transform_tests(task, evalplus_tests=task.get("evalplus_tests"))
 
 
 def build_prompt(task: dict) -> str:
@@ -322,34 +269,69 @@ def run_claude(prompt: str, workspace: Path, session_id: str | None = None) -> d
     }
 
 
-def run_tests(workspace: Path) -> tuple[bool, str]:
-    """Run hidden tests and return (passed, output)."""
+def _run_test_module(workspace: Path, module: str, timeout: int = 30) -> tuple[bool, str]:
+    """Run a single test module (e.g. test_base) and return (passed, output)."""
     try:
         result = subprocess.run(
-            [sys.executable, "-m", "unittest", "discover", "-s", "tests_hidden", "-q"],
+            [sys.executable, "-m", "unittest", "-q", f"tests_hidden.{module}"],
             capture_output=True,
             text=True,
             cwd=str(workspace),
-            timeout=30,
+            timeout=timeout,
         )
         output = (result.stdout + "\n" + result.stderr).strip()
-        passed = result.returncode == 0
-        return passed, output
+        return result.returncode == 0, output
     except subprocess.TimeoutExpired:
-        return False, "Test execution timed out (30s)"
+        return False, f"Test execution timed out ({timeout}s)"
     except Exception as e:
         return False, f"Test execution error: {e}"
 
 
+def run_tests(workspace: Path) -> tuple[bool, bool, str]:
+    """Run base + evalplus tests independently.
+
+    Returns (passed_base, passed_evalplus, combined_output). If the EvalPlus
+    test file is empty (no plus_input for this task), passed_evalplus defaults
+    to True so it doesn't count as a false failure against the model.
+    """
+    passed_base, out_base = _run_test_module(workspace, "test_base")
+
+    evalplus_path = workspace / "tests_hidden" / "test_evalplus.py"
+    if evalplus_path.exists() and "test_plus_" in evalplus_path.read_text():
+        passed_plus, out_plus = _run_test_module(workspace, "test_evalplus")
+    else:
+        passed_plus, out_plus = True, "(no evalplus tests for this task)"
+
+    combined = (
+        f"--- BASE ({'PASS' if passed_base else 'FAIL'}) ---\n{out_base}\n"
+        f"--- EVALPLUS ({'PASS' if passed_plus else 'FAIL'}) ---\n{out_plus}"
+    )
+    return passed_base, passed_plus, combined
+
+
+def _read_solution(workspace: Path) -> str:
+    """Read the solution.py Claude produced. Returns '' if missing."""
+    path = workspace / "solution.py"
+    if not path.exists():
+        return ""
+    try:
+        return path.read_text()
+    except Exception:
+        return ""
+
+
 def run_task(task: dict) -> dict:
-    """Run a single benchmark task through the full lifecycle."""
+    """Run a single benchmark task through the full lifecycle.
+
+    Returns a per-task result dict with separate base/evalplus pass flags,
+    the generated solution.py contents, and all runtime metrics.
+    """
     task_id = task["task_id"]
     entry_point = task["entry_point"]
     print(f"\n{'='*60}")
     print(f"Task: {task_id} ({entry_point})")
     print(f"{'='*60}")
 
-    # Setup workspace
     workspace = setup_workspace(task)
     print(f"  Workspace: {workspace}")
 
@@ -359,27 +341,21 @@ def run_task(task: dict) -> dict:
     merged_model_usage = {}
     session_id = None
     error_type = None
+    passed_base = False
+    passed_plus = False
 
     for attempt in range(1, MAX_ATTEMPTS + 1):
         print(f"\n  Attempt {attempt}/{MAX_ATTEMPTS}")
+        prompt = build_prompt(task) if attempt == 1 else build_retry_prompt(test_output)
 
-        # Build prompt
-        if attempt == 1:
-            prompt = build_prompt(task)
-        else:
-            prompt = build_retry_prompt(test_output)
-
-        # Run Claude
         print(f"    Invoking Claude CLI...")
         result = run_claude(prompt, workspace, session_id=session_id)
 
-        # Accumulate metrics
         session_id = result["session_id"]
         total_turns += result["num_turns"]
         total_cost += result["total_cost_usd"]
         total_duration_ms += result["duration_ms"]
 
-        # Merge model usage
         for model, usage in result["model_usage"].items():
             if model not in merged_model_usage:
                 merged_model_usage[model] = {"inputTokens": 0, "outputTokens": 0}
@@ -389,72 +365,86 @@ def run_task(task: dict) -> dict:
         if result["is_error"]:
             error_type = result["error_subtype"] or "claude_error"
             print(f"    Claude error: {error_type}")
-            # Still try running tests — Claude may have produced partial output
-            passed, test_output = run_tests(workspace)
-            if passed:
-                print(f"    Tests PASSED (despite Claude error)")
-                error_type = None
-                return _build_result(
-                    task, True, attempt, total_turns, total_duration_ms,
-                    total_cost, merged_model_usage, None
-                )
-            print(f"    Tests FAILED")
-            if attempt >= MAX_ATTEMPTS:
-                return _build_result(
-                    task, False, attempt, total_turns, total_duration_ms,
-                    total_cost, merged_model_usage, error_type
-                )
-            continue
 
-        # Run tests
+        # Always run tests — even after a Claude error the workspace may have
+        # a usable solution.py from earlier turns.
         print(f"    Running tests...")
-        passed, test_output = run_tests(workspace)
+        passed_base, passed_plus, test_output = run_tests(workspace)
+        passed_all = passed_base and passed_plus
 
-        if passed:
-            print(f"    PASSED (attempt {attempt})")
+        bucket = f"base={'P' if passed_base else 'F'} plus={'P' if passed_plus else 'F'}"
+        if passed_all:
+            print(f"    PASSED (attempt {attempt}, {bucket})")
+            error_type = None if not result["is_error"] else error_type
             return _build_result(
-                task, True, attempt, total_turns, total_duration_ms,
-                total_cost, merged_model_usage, None
+                task, passed_base, passed_plus, attempt, total_turns,
+                total_duration_ms, total_cost, merged_model_usage,
+                None if passed_all else error_type, _read_solution(workspace),
             )
-        else:
-            print(f"    FAILED")
-            if attempt >= MAX_ATTEMPTS:
-                error_type = "tests_failed"
-                return _build_result(
-                    task, False, attempt, total_turns, total_duration_ms,
-                    total_cost, merged_model_usage, error_type
-                )
-            print(f"    Will retry with feedback...")
 
-    # Should not reach here, but just in case
+        print(f"    FAILED ({bucket})")
+        if attempt >= MAX_ATTEMPTS:
+            if not error_type:
+                error_type = "tests_failed"
+            return _build_result(
+                task, passed_base, passed_plus, attempt, total_turns,
+                total_duration_ms, total_cost, merged_model_usage,
+                error_type, _read_solution(workspace),
+            )
+        print(f"    Will retry with feedback...")
+
+    # Fallthrough for safety (MAX_ATTEMPTS=0 or similar pathological config)
     return _build_result(
-        task, False, MAX_ATTEMPTS, total_turns, total_duration_ms,
-        total_cost, merged_model_usage, error_type or "tests_failed"
+        task, passed_base, passed_plus, MAX_ATTEMPTS, total_turns,
+        total_duration_ms, total_cost, merged_model_usage,
+        error_type or "tests_failed", _read_solution(workspace),
     )
 
 
 def _build_result(
     task: dict,
-    passed: bool,
+    passed_base: bool,
+    passed_plus: bool,
     attempts: int,
     turns: int,
     duration_ms: int,
     cost: float,
     model_usage: dict,
     error_type: str | None,
+    solution: str,
 ) -> dict:
-    """Build the per-task result dict."""
+    """Build the per-task result dict.
+
+    `passed` (aggregate) is preserved for backward compatibility with the
+    dashboard; new fields `passed_base` and `passed_evalplus` let viewers
+    separate pure-capability failures from interpretation-edge-case failures.
+    """
     return {
         "task_id": task["task_id"],
         "function_name": task["entry_point"],
-        "passed": passed,
+        "passed": passed_base and passed_plus,
+        "passed_base": passed_base,
+        "passed_evalplus": passed_plus,
         "attempts_used": attempts,
         "num_turns_total": turns,
         "duration_ms_total": duration_ms,
         "total_cost_usd_total": round(cost, 6),
         "modelUsage": model_usage,
         "error_type": error_type,
+        "solution": solution,
     }
+
+
+def _pct(num: int, denom: int) -> float:
+    """Percentage with 1dp precision, guarding against zero denom."""
+    return round((num / denom) * 100, 1) if denom else 0.0
+
+
+def _bitmap(flags: list[bool]) -> str:
+    """Compact 0/1 string of pass flags — one char per task, index-aligned
+    with aggregate_results['task_ids']. Used by the dashboard to build the
+    per-task divergence view without loading every per-run JSON."""
+    return "".join("1" if f else "0" for f in flags)
 
 
 def aggregate_results(
@@ -463,22 +453,27 @@ def aggregate_results(
     started_at: str,
     finished_at: str,
     claude_version: str,
+    quarantined: list[str] | None = None,
 ) -> dict:
     """Build the full daily results JSON.
 
     `run_id` is the shared-schedule identifier (same value for all models
     benchmarked by one cron fire). `started_at`/`finished_at` are the true
-    wall-clock bounds of this specific invocation and may differ from
-    `run_id` when paired runs execute sequentially.
+    wall-clock bounds of this specific invocation.
+
+    `quarantined` is a list of task_ids excluded from the benchmark because
+    their canonical solution fails its own tests (broken EvalPlus inputs).
+    They contribute no results but are listed so the dashboard can call
+    out what was skipped.
     """
-    passed_count = sum(1 for r in task_results if r["passed"])
     total_count = len(task_results)
-    score = round((passed_count / total_count) * 100, 1) if total_count else 0
+    passed_count = sum(1 for r in task_results if r["passed"])
+    passed_base = sum(1 for r in task_results if r.get("passed_base"))
+    passed_plus = sum(1 for r in task_results if r.get("passed_evalplus"))
 
     total_cost = round(sum(r["total_cost_usd_total"] for r in task_results), 4)
     total_duration_ms = sum(r["duration_ms_total"] for r in task_results)
 
-    # Merge all model usage
     merged_usage = {}
     for r in task_results:
         for model, usage in r["modelUsage"].items():
@@ -487,7 +482,6 @@ def aggregate_results(
             for key in ("inputTokens", "outputTokens"):
                 merged_usage[model][key] += usage.get(key, 0)
 
-    # Extract primary model name (the one with most tokens)
     primary_model = "unknown"
     if merged_usage:
         primary_model = max(
@@ -499,9 +493,14 @@ def aggregate_results(
         "date": run_id[:10],
         "run_id": run_id,
         "suite": "HumanEvalPlus-CC164",
-        "score": score,
+        "score": _pct(passed_count, total_count),
+        "score_base": _pct(passed_base, total_count),
+        "score_evalplus": _pct(passed_plus, total_count),
         "passed": passed_count,
+        "passed_base": passed_base,
+        "passed_evalplus": passed_plus,
         "total": total_count,
+        "quarantined": quarantined or [],
         "total_cost_usd": total_cost,
         "total_duration_ms": total_duration_ms,
         "primary_model": primary_model,
@@ -509,6 +508,9 @@ def aggregate_results(
         "modelUsage": merged_usage,
         "started_at": started_at,
         "finished_at": finished_at,
+        "task_ids": [r["task_id"] for r in task_results],
+        "pass_bitmap_base": _bitmap([r.get("passed_base", False) for r in task_results]),
+        "pass_bitmap_evalplus": _bitmap([r.get("passed_evalplus", False) for r in task_results]),
         "tasks": task_results,
     }
 
@@ -522,18 +524,29 @@ def update_history(today_result: dict) -> None:
     else:
         history = {"entries": []}
 
-    # Build summary entry
+    # Build summary entry. The pass_bitmap_* fields are ~164 chars each and
+    # let the dashboard compute per-task divergence without loading every
+    # per-run JSON. Keeping them in history.json (rather than a separate
+    # file) keeps the client's network fetches unchanged.
     run_id = today_result.get("run_id") or today_result["started_at"]
     entry = {
         "date": today_result["date"],
         "run_id": run_id,
         "score": today_result["score"],
+        "score_base": today_result.get("score_base"),
+        "score_evalplus": today_result.get("score_evalplus"),
         "passed": today_result["passed"],
+        "passed_base": today_result.get("passed_base"),
+        "passed_evalplus": today_result.get("passed_evalplus"),
         "total": today_result["total"],
+        "quarantined": today_result.get("quarantined", []),
         "total_cost_usd": today_result["total_cost_usd"],
         "total_duration_ms": today_result["total_duration_ms"],
         "primary_model": today_result["primary_model"],
         "claude_version": today_result["claude_version"],
+        "task_ids": today_result.get("task_ids", []),
+        "pass_bitmap_base": today_result.get("pass_bitmap_base", ""),
+        "pass_bitmap_evalplus": today_result.get("pass_bitmap_evalplus", ""),
     }
 
     # Remove any existing entry for the same (run_id, primary_model) pair
@@ -557,49 +570,92 @@ def update_history(today_result: dict) -> None:
     print(f"Updated {history_file} ({len(history['entries'])} entries)")
 
 
+def validate_canonicals(tasks: list[dict]) -> tuple[list[dict], list[str]]:
+    """Run each task's canonical solution against its own tests.
+
+    Returns (usable_tasks, quarantined_task_ids). A task whose canonical
+    solution fails its own generated tests has a broken test spec (e.g.
+    HumanEval/70's impossible assertion on empty input) and contributes
+    noise to the benchmark rather than signal. We skip those and record
+    which ones were skipped so the dashboard can surface it.
+    """
+    import tempfile
+
+    usable, quarantined = [], []
+    for task in tasks:
+        task_id = task["task_id"]
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            (td / "solution.py").write_text(
+                task["prompt"].rstrip() + "\n" + task["canonical_solution"] + "\n"
+            )
+            (td / "tests_hidden").mkdir()
+            (td / "tests_hidden" / "__init__.py").write_text("")
+            (td / "tests_hidden" / "test_base.py").write_text(build_base_test_source(task))
+            (td / "tests_hidden" / "test_evalplus.py").write_text(build_evalplus_test_source(task))
+            base_ok, _, _ = run_tests(td)
+            evalplus_exists = "test_plus_" in (td / "tests_hidden" / "test_evalplus.py").read_text()
+            plus_ok = True
+            if evalplus_exists:
+                plus_ok, _ = _run_test_module(td, "test_evalplus")
+        if base_ok and plus_ok:
+            usable.append(task)
+        else:
+            quarantined.append(task_id)
+            reason = []
+            if not base_ok:
+                reason.append("base")
+            if not plus_ok:
+                reason.append("evalplus")
+            print(f"  QUARANTINED {task_id}: canonical fails its own {'+'.join(reason)} tests")
+    return usable, quarantined
+
+
 def main():
     print("=" * 60)
     print(f"HumanEvalPlus-CC164 Benchmark  model={MODEL}  effort={EFFORT}")
     print("=" * 60)
 
-    # Get Claude version
     claude_version = get_claude_version()
     print(f"Claude CLI version: {claude_version}")
 
-    # Load tasks
     if not TASK_FILE.exists():
         print(f"Error: Task file not found: {TASK_FILE}")
         print("Run `python bench/generate_tasks.py` first.")
         sys.exit(1)
 
     task_data = json.loads(TASK_FILE.read_text())
-    tasks = task_data["tasks"]
-    print(f"Loaded {len(tasks)} tasks from {TASK_FILE}")
+    all_tasks = task_data["tasks"]
+    print(f"Loaded {len(all_tasks)} tasks from {TASK_FILE}")
 
-    # Record true wall-clock start (differs between sequential paired runs).
+    # Pre-flight: skip tasks whose canonical fails its own tests. Currently
+    # HumanEval/70 has `assert strange_sort_list([]) == [-5, 10, 0, 5]` which
+    # is impossible; without this check it contributes ~0.6% noise to every
+    # score.
+    print("Validating canonical solutions...")
+    tasks, quarantined = validate_canonicals(all_tasks)
+    if quarantined:
+        print(f"Skipping {len(quarantined)} quarantined task(s): {quarantined}")
+    else:
+        print("All canonicals pass their own tests.")
+
     started_at = datetime.now(timezone.utc).isoformat()
-
-    # Shared run id aligns paired runs (e.g. 4.6 + 4.7 from one cron fire)
-    # on the dashboard. Defaults to started_at for local / single-model runs.
     run_id = os.environ.get("BENCH_RUN_ID") or started_at
     print(f"Run ID: {run_id}")
 
-    # Run all tasks sequentially
     task_results = []
     for i, task in enumerate(tasks):
         print(f"\n[{i+1}/{len(tasks)}]", end="")
         result = run_task(task)
         task_results.append(result)
-
-        # Progress summary
         passed_so_far = sum(1 for r in task_results if r["passed"])
         print(f"\n  Running score: {passed_so_far}/{len(task_results)}")
 
-    # Record finish time
     finished_at = datetime.now(timezone.utc).isoformat()
 
-    # Aggregate results
-    results = aggregate_results(task_results, run_id, started_at, finished_at, claude_version)
+    results = aggregate_results(
+        task_results, run_id, started_at, finished_at, claude_version, quarantined,
+    )
 
     # Write output files
     DATA_DIR.mkdir(parents=True, exist_ok=True)

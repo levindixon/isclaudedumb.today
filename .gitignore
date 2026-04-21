@@ -1,4 +1,6 @@
 bench/workspace/
+bench/*.log
+bench/smoke_test.json
 __pycache__/
 *.pyc
 .DS_Store

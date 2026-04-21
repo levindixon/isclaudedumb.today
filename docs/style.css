@@ -295,6 +295,77 @@ tr.fail td:first-child {
   color: var(--fail);
 }
 
+/* Divergence table: spot tasks where 4.6 and 4.7 genuinely disagree.
+   Cursor on th disabled (no sorting); tr hover cues that details would
+   land here later (per-task solution diff, etc.). */
+#divergence {
+  padding: 1.5rem 0;
+}
+
+#divergence h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.section-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  max-width: 60ch;
+}
+
+.section-note code {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 0.25em;
+  padding: 0 0.3em;
+  font-size: 0.85em;
+}
+
+#divergence-table th {
+  cursor: default;
+}
+
+/* Rate cell: "5/7 (71%)" — small muted percentage next to the fraction */
+.rate {
+  font-variant-numeric: tabular-nums;
+}
+
+.rate .pct {
+  color: var(--text-muted);
+  margin-left: 0.25em;
+  font-size: 0.85em;
+}
+
+.rate.high { color: var(--pass); }
+.rate.low { color: var(--fail); }
+
+.delta-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.delta-num.negative { color: var(--fail); }
+.delta-num.positive { color: var(--pass); }
+.delta-num.zero { color: var(--text-muted); }
+
+/* Inline spark-dots for the per-run bitmap previews (one dot per recent run) */
+.sparkdots {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 0.4em;
+  vertical-align: middle;
+}
+.sparkdots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--border);
+}
+.sparkdots span.p { background: var(--pass); }
+.sparkdots span.f { background: var(--fail); }
+
 /* Footer */
 footer {
   text-align: center;
