@@ -14,7 +14,12 @@ Automated benchmark tracking Claude Code (Opus 4.7) quality on HumanEval + EvalP
 
 A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers one question every day: **is Claude dumb today?**
 
-It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI (`--model claude-opus-4-7`) in headless mode. GitHub Actions runs the benchmark twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data.
+It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI in headless mode. Each scheduled job runs two models back-to-back on the same task set:
+
+- **Opus 4.7** — the primary model the verdict tracks
+- **Opus 4.6** — a reference baseline, so drift in 4.7 can be distinguished from a bad day across the fleet
+
+Both runs use `--effort high` (extended thinking). GitHub Actions runs twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data — including a per-task divergence view highlighting tasks where the two models disagree.
 
 ## How the benchmark works
 
@@ -23,19 +28,26 @@ It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suit
 3. Claude has **no shell access** (`Bash`, `WebFetch`, `WebSearch`, `Task`, `NotebookEdit`, `Write` are disabled) — it can only Read, Edit, Glob, and Grep
 4. Claude **cannot see the tests** (`.claude/settings.json` denies read access to `tests_hidden/`)
 5. After Claude finishes, the harness runs hidden unit tests — both the original HumanEval tests and ~16 [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests per task (empty inputs, large inputs, boundary conditions, etc.)
-6. Results are scored as pass/fail per task, aggregated into a per-run score (0–100%)
+6. Each task records two pass flags: **Base** (original HumanEval tests) and **EvalPlus** (edge cases). A task counts as passing only when both pass. The dashboard shows the combined score plus the per-side breakdown, so edge-case regressions stand out from overall quality drops.
 
 ### Verdict logic
 
-The site compares the latest run's score against a rolling average of the prior 14 entries (≈ 7 days at 2 runs/day):
+The site compares the latest Opus 4.7 run against a rolling average of the prior 14 Opus 4.7 entries (≈ 7 days at 2 runs/day). Reference-baseline 4.6 runs are kept out of the verdict window so adding the baseline can't skew the average:
 - **YES** (dumb): score is 5+ points below the average
 - **MAYBE**: score is 2–5 points below the average
 - **NO** (not dumb): score is no more than 2 points below the average
+
+### Divergence view
+
+The dashboard also flags HumanEval tasks where 4.7 and 4.6 have different pass rates over the recent window. A task that's consistently green for one model and red for the other reveals a real tradeoff, not noise — e.g. `HumanEval/97` (Python signed-modulo semantics) or `HumanEval/141` (Unicode `.isalpha()` vs literal `a–z` range).
 
 ### Safety constraints
 
 | Constraint | Value |
 |---|---|
+| Primary model | `claude-opus-4-7` |
+| Reference baseline | `claude-opus-4-6` |
+| Thinking effort | `high` (extended thinking) |
 | Max turns per attempt | 3 |
 | Max cost per attempt | $1.00 |
 | Max attempts per task | 1 |
@@ -96,18 +108,18 @@ bench/
 docs/
   index.html              # Dashboard page
   style.css               # Dark-theme styles
-  app.js                  # Fetches JSON, renders verdict/chart/table
+  app.js                  # Fetches JSON, renders verdict/chart/divergence/table
   CNAME                   # Custom domain
   data/                   # Benchmark results (auto-committed by CI)
-    latest.json           # Most recent run's full results
-    history.json          # Summary rows for charting (keyed by run_id)
-    YYYY-MM-DD-HHMM.json # Per-run snapshots (2x daily)
+    latest.json           # Most recent primary-model (4.7) run's full results
+    history.json          # Summary rows for charting (keyed by run_id, tagged per model)
+    YYYY-MM-DD-HHMM-<tag>.json  # Per-run snapshots, e.g. -opus47 / -opus46 (4 files/day)
 .github/workflows/
   benchmark.yml           # Twice-daily cron + manual trigger
 ```
 
 ## Methodology note
 
-This benchmark uses Claude Code CLI with `--model claude-opus-4-7` and a standard Anthropic API key (pay-as-you-go). All raw results are published as JSON for full transparency.
+This benchmark uses Claude Code CLI (`--effort high`, `--permission-mode acceptEdits`) with a standard Anthropic API key (pay-as-you-go). Each scheduled job runs both `claude-opus-4-7` (primary) and `claude-opus-4-6` (reference baseline) against the same task workspaces, sharing a single `run_id` so the two runs are directly comparable. All raw results are published as JSON for full transparency.
 
 HumanEval tasks are from OpenAI's [human-eval](https://github.com/openai/human-eval) dataset (MIT license). Edge-case tests are from [EvalPlus](https://github.com/evalplus/evalplus) (Apache-2.0 license).

@@ -73,16 +73,15 @@ header .subtitle {
   width: 160px;
   height: 160px;
   object-fit: contain;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.75rem;
   display: block;
-  border-radius: 50%;
 }
 
 .verdict-pill {
   display: inline-block;
   font-size: 3rem;
   font-weight: 800;
-  padding: 0.3em 0.8em;
+  padding: 0.25em 0.75em;
   border-radius: 1rem;
   letter-spacing: 0.02em;
 }
@@ -150,6 +149,11 @@ header .subtitle {
 .summary-card .value {
   font-size: 1.5rem;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-card .value.compact {
+  font-size: 1rem;
 }
 
 .summary-card .delta {
@@ -169,16 +173,20 @@ header .subtitle {
   color: var(--text-muted);
 }
 
+/* Section headings — shared across chart, divergence, and tasks.
+   Clearer hierarchy than the previous muted style; the sections still
+   read quiet because the surrounding cards carry the visual weight. */
+section > h2 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 /* Chart */
 #chart {
   padding: 1.5rem 0;
-}
-
-#chart h2 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: var(--text-muted);
-  font-weight: 500;
 }
 
 .chart-container {
@@ -221,13 +229,6 @@ header .subtitle {
   padding: 1.5rem 0 3rem;
 }
 
-#tasks h2 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
 .tasks-table-wrap {
   overflow-x: auto;
   background: var(--bg-surface);
@@ -241,9 +242,11 @@ table {
   font-size: 0.875rem;
 }
 
+/* 9-column data tables are tight at container width; keep horizontal
+   padding lean so the Error column stays in view without scroll. */
 th {
   text-align: left;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.55rem;
   font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -255,14 +258,25 @@ th {
   white-space: nowrap;
 }
 
+th:first-child, td:first-child { padding-left: 0.9rem; }
+th:last-child, td:last-child { padding-right: 0.9rem; }
+
 th:hover {
   color: var(--text);
 }
 
 td {
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 0.55rem;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
+}
+
+tbody tr {
+  transition: background 0.12s ease;
+}
+
+tbody tr:hover {
+  background: var(--bg-surface-raised);
 }
 
 tr:last-child td {
@@ -302,13 +316,6 @@ tr.fail td:first-child {
   padding: 1.5rem 0;
 }
 
-#divergence h2 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
 .section-note {
   font-size: 0.875rem;
   color: var(--text-muted);
@@ -322,6 +329,15 @@ tr.fail td:first-child {
   border-radius: 0.25em;
   padding: 0 0.3em;
   font-size: 0.85em;
+}
+
+/* JS appends a "(window: last N runs per model)" caption to this note;
+   put it on its own line so the paragraph reads cleanly. */
+.section-note .pct {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
 }
 
 #divergence-table th {
