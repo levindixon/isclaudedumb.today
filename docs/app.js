@@ -7,9 +7,119 @@
   };
   const DEFAULT_MODEL_STYLE = { line: "#58a6ff", bandBg: "rgba(88, 166, 255, 0.05)" };
 
+  // External events worth correlating with the score timeline. The marker
+  // is anchored to the first run on or after `date`, so it lands at the
+  // moment the change becomes visible in the data going forward. `tone`
+  // selects color: "danger" for "thing got worse here", "warning" for
+  // "thing got fixed here". Order in this array also drives vertical
+  // staggering so adjacent labels don't overlap.
+  const EVENT_MARKERS = [
+    {
+      date: "2026-04-16",
+      tone: "danger",
+      label: "Verbosity bug",
+      url: "https://www.anthropic.com/engineering/april-23-postmortem",
+      description:
+        "Anthropic's April 23 postmortem: a system-prompt verbosity instruction shipped on April 16 that degraded Claude responses. Reverted April 20 (v2.1.116).",
+    },
+    {
+      date: "2026-04-20",
+      tone: "warning",
+      label: "Anthropic fix",
+      url: "https://www.anthropic.com/engineering/april-23-postmortem",
+      description:
+        "Anthropic's April 23 postmortem: three Claude quality issues (reasoning-effort default, caching bug, verbosity instruction) — all resolved by April 20 (v2.1.116).",
+    },
+  ];
+
+  const TONE_STROKE = {
+    danger: "rgba(248, 81, 73, 0.65)",
+    warning: "rgba(210, 153, 34, 0.65)",
+  };
+
   function modelStyle(model) {
     return MODEL_STYLES[model] || DEFAULT_MODEL_STYLE;
   }
+
+  function resolveEventMarkers(data, markers) {
+    return markers
+      .map((m) => {
+        const idx = data.findIndex((e) => e.date >= m.date);
+        return idx >= 0 ? Object.assign({}, m, { index: idx }) : null;
+      })
+      .filter(Boolean);
+  }
+
+  // Two-phase plugin: afterDatasetsDraw paints the dashed line on the
+  // canvas (so it sits cleanly behind the data points and obeys
+  // chartArea bounds); afterRender syncs an absolutely-positioned HTML
+  // <a> element so the label is a real, focusable, clickable link
+  // rather than a non-interactive canvas drawing.
+  const eventMarkerPlugin = {
+    id: "eventMarker",
+    afterDatasetsDraw(chart, _args, opts) {
+      const markers = (opts && opts.markers) || [];
+      if (markers.length === 0) return;
+      const { ctx, chartArea, scales } = chart;
+      const xScale = scales.x;
+      ctx.save();
+      for (const m of markers) {
+        const x = xScale.getPixelForValue(m.index);
+        ctx.beginPath();
+        ctx.setLineDash([4, 3]);
+        ctx.strokeStyle = TONE_STROKE[m.tone] || TONE_STROKE.warning;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(x, chartArea.top);
+        ctx.lineTo(x, chartArea.bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      ctx.restore();
+    },
+    afterRender(chart, _args, opts) {
+      const markers = (opts && opts.markers) || [];
+      const container = chart.canvas.parentElement;
+      if (!container) return;
+      let overlay = container.querySelector(".event-markers-overlay");
+      if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.className = "event-markers-overlay";
+        container.appendChild(overlay);
+      }
+      if (markers.length === 0) {
+        overlay.innerHTML = "";
+        return;
+      }
+      // Canvas position within container: padding pushes the canvas
+      // inward, so chart-pixel coords need that offset added to land in
+      // the overlay's coordinate space.
+      const canvasRect = chart.canvas.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const xOffset = canvasRect.left - containerRect.left;
+      const yOffset = canvasRect.top - containerRect.top;
+      // Stagger labels by array order so adjacent dates don't overlap.
+      const ROW_STEP = 26;
+      overlay.innerHTML = markers
+        .map((m, i) => {
+          const x = chart.scales.x.getPixelForValue(m.index);
+          const left = (x + xOffset).toFixed(1);
+          const top = (chart.chartArea.top + yOffset + i * ROW_STEP).toFixed(1);
+          const desc = m.description.replace(/"/g, "&quot;");
+          const tone = m.tone || "warning";
+          return (
+            '<a class="event-marker-link tone-' + tone +
+            '" href="' + m.url +
+            '" target="_blank" rel="noopener noreferrer"' +
+            ' style="left:' + left + 'px;top:' + top + 'px"' +
+            ' title="' + desc + '">' +
+            m.label +
+            ' <span aria-hidden="true">↗</span>' +
+            "</a>"
+          );
+        })
+        .join("");
+    },
+  };
 
   function formatModelLabel(model) {
     if (!model) return "Unknown";
@@ -286,10 +396,12 @@
     });
 
     renderChartLegend(data);
+    const eventMarkers = resolveEventMarkers(data, EVENT_MARKERS);
 
     new Chart(ctx, {
       type: "line",
       data: { labels, datasets },
+      plugins: [eventMarkerPlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -314,6 +426,7 @@
         },
         plugins: {
           legend: { display: false },
+          eventMarker: { markers: eventMarkers },
           tooltip: {
             // Only show the dataset the user is actually hovering. With
             // sparse per-model series, the non-hovered datasets contribute

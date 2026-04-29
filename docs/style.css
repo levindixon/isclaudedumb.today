@@ -190,11 +190,61 @@ section > h2 {
 }
 
 .chart-container {
+  position: relative;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
   padding: 1.25rem;
   height: 300px;
+}
+
+/* Event marker overlay: anchors clickable HTML labels over the chart
+   canvas. Pointer-events disabled on the wrapper so the chart's own
+   tooltip still works; re-enabled on the link so it stays clickable. */
+.event-markers-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.event-marker-link {
+  position: absolute;
+  transform: translate(-50%, 4px);
+  pointer-events: auto;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.3rem;
+  background: rgba(210, 153, 34, 0.18);
+  color: var(--verdict-maybe);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid rgba(210, 153, 34, 0.4);
+  transition: background 0.15s ease, border-color 0.15s ease;
+  z-index: 2;
+}
+
+.event-marker-link:hover,
+.event-marker-link:focus-visible {
+  background: rgba(210, 153, 34, 0.32);
+  border-color: rgba(210, 153, 34, 0.7);
+  outline: none;
+  text-decoration: none;
+}
+
+/* Danger tone: marks the moment a regression / bug landed. Tracks the
+   verdict-yes red so the meaning ("things got worse here") matches the
+   site's existing color vocabulary. */
+.event-marker-link.tone-danger {
+  background: rgba(248, 81, 73, 0.16);
+  color: var(--verdict-yes);
+  border-color: rgba(248, 81, 73, 0.4);
+}
+
+.event-marker-link.tone-danger:hover,
+.event-marker-link.tone-danger:focus-visible {
+  background: rgba(248, 81, 73, 0.3);
+  border-color: rgba(248, 81, 73, 0.7);
 }
 
 .chart-legend {
