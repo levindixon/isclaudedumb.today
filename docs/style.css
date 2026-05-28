@@ -359,7 +359,7 @@ tr.fail td:first-child {
   color: var(--fail);
 }
 
-/* Divergence table: spot tasks where 4.6 and 4.7 genuinely disagree.
+/* Divergence table: spot tasks where the tracked models genuinely disagree.
    Cursor on th disabled (no sorting); tr hover cues that details would
    land here later (per-task solution diff, etc.). */
 #divergence {

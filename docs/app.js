@@ -4,6 +4,7 @@
   const MODEL_STYLES = {
     "claude-opus-4-6": { line: "#58a6ff", bandBg: "rgba(88, 166, 255, 0.05)" },
     "claude-opus-4-7": { line: "#a371f7", bandBg: "rgba(163, 113, 247, 0.10)" },
+    "claude-opus-4-8": { line: "#3fb950", bandBg: "rgba(63, 185, 80, 0.10)" },
   };
   const DEFAULT_MODEL_STYLE = { line: "#58a6ff", bandBg: "rgba(88, 166, 255, 0.05)" };
 
@@ -338,8 +339,8 @@
     const ctx = document.getElementById("score-chart");
     if (!ctx || history.length === 0) return;
 
-    // Last 90 entries across all models. With two models running per
-    // schedule, that's ≈ 22 days of paired runs — enough to see regression
+    // Last 90 entries across all models. With three models running per
+    // schedule, that's ≈ 15 days of runs — enough to see regression
     // signals without crowding the axis.
     const data = history.slice(-90);
 
@@ -583,75 +584,76 @@
     const computed = computeTaskStats(history);
     if (!computed) {
       tbody.innerHTML =
-        '<tr><td colspan="4" class="loading">No bitmap history yet — this view populates once runs have recorded the new pass bitmaps.</td></tr>';
+        '<tr><td colspan="5" class="loading">No bitmap history yet — this view populates once runs have recorded the new pass bitmaps.</td></tr>';
       return;
     }
 
-    const { stats, models } = computed;
-    // Prefer 4.7 as "primary" column, 4.6 as "reference"; fall back to
-    // whatever two models we have (alphabetical order) so the view still
-    // works if the lineup changes.
-    const preferred = ["claude-opus-4-7", "claude-opus-4-6"];
-    let mA, mB;
-    if (preferred.every((m) => models.includes(m))) {
-      [mA, mB] = preferred;
-    } else {
-      const sorted = [...models].sort();
-      [mA, mB] = [sorted[sorted.length - 1], sorted[0]];
-    }
+    // Column order: newest model first. Model ids sort lexicographically
+    // (claude-opus-4-6 < -4-7 < -4-8), so a descending sort puts the newest
+    // release in the leftmost data column. The view auto-advances as new
+    // models join the lineup — no hardcoded pair to maintain.
+    const models = [...computed.models].sort().reverse();
+    const colCount = models.length + 2; // Task + one per model + Spread
 
-    // Row is "interesting" iff the two models have different pass rates
-    // over the window. Ties (0-0, N-N) are dropped — they're not signal.
-    const rows = stats
+    // A row is "interesting" iff the models that have data for it disagree.
+    // Spread = (max pass-rate − min pass-rate) across models WITH runs for
+    // this task. Models with no runs yet (total 0) are excluded so a freshly
+    // promoted model with thin history doesn't make every task look divergent
+    // (i.e. the view stays a clean 4.7-vs-4.6 comparison until 4.8 has data,
+    // then becomes three-way on its own).
+    const rows = computed.stats
       .map((s) => {
-        const a = s.perModel[mA] || { passed: 0, total: 0, trail: [] };
-        const b = s.perModel[mB] || { passed: 0, total: 0, trail: [] };
-        const rateA = a.total ? a.passed / a.total : 0;
-        const rateB = b.total ? b.passed / b.total : 0;
-        const delta = rateA - rateB;
-        return { ...s, a, b, delta };
+        const cells = models.map(
+          (m) => s.perModel[m] || { passed: 0, total: 0, trail: [] }
+        );
+        const rates = cells.filter((c) => c.total > 0).map((c) => c.passed / c.total);
+        const spread =
+          rates.length >= 2 ? Math.max(...rates) - Math.min(...rates) : 0;
+        return { task_id: s.task_id, cells, spread };
       })
-      .filter((r) => Math.abs(r.delta) > 1e-6)
-      .sort((x, y) => Math.abs(y.delta) - Math.abs(x.delta));
+      .filter((r) => r.spread > 1e-6)
+      .sort((x, y) => y.spread - x.spread);
 
     if (rows.length === 0) {
       tbody.innerHTML =
-        '<tr><td colspan="4" class="loading">No per-task divergences in the recent window.</td></tr>';
+        `<tr><td colspan="${colCount}" class="loading">No per-task divergences in the recent window.</td></tr>`;
       return;
     }
 
     const header = document.querySelector("#divergence-table thead tr");
     if (header) {
-      header.innerHTML = `
-        <th>Task</th>
-        <th>${formatModelLabel(mA)}</th>
-        <th>${formatModelLabel(mB)}</th>
-        <th>Delta</th>`;
+      header.innerHTML =
+        "<th>Task</th>" +
+        models.map((m) => `<th>${formatModelLabel(m)}</th>`).join("") +
+        "<th>Spread</th>";
     }
 
-    const fmtDelta = (d) => {
-      const pp = Math.round(d * 100);
-      const cls = pp === 0 ? "zero" : pp > 0 ? "positive" : "negative";
-      const sign = pp > 0 ? "+" : "";
-      return `<span class="delta-num ${cls}">${sign}${pp}pp</span>`;
-    };
+    // Spread is a directionless magnitude (which model wins is already legible
+    // from the per-model rate cells), so it borrows .delta-num's tabular-nums
+    // weight without a pass/fail color modifier.
+    const fmtSpread = (d) => `<span class="delta-num">${Math.round(d * 100)}pp</span>`;
 
     tbody.innerHTML = rows
       .map(
-        (r) => `
-      <tr>
-        <td>${r.task_id}</td>
-        <td>${rateCell(r.a.passed, r.a.total)} ${sparkdots(r.a.trail)}</td>
-        <td>${rateCell(r.b.passed, r.b.total)} ${sparkdots(r.b.trail)}</td>
-        <td>${fmtDelta(r.delta)}</td>
-      </tr>`
+        (r) =>
+          "<tr>" +
+          `<td>${r.task_id}</td>` +
+          r.cells
+            .map((c) => `<td>${rateCell(c.passed, c.total)} ${sparkdots(c.trail)}</td>`)
+            .join("") +
+          `<td>${fmtSpread(r.spread)}</td>` +
+          "</tr>"
       )
       .join("");
 
     if (note) {
+      const windowN = Math.max(
+        0,
+        ...models.map((m) => (computed.stats[0].perModel[m] || {}).total || 0)
+      );
       note.insertAdjacentHTML(
         "beforeend",
-        ` <span class="pct">(window: last ${Math.min(14, Math.max(...models.map((m) => (computed.stats[0].perModel[m] || {}).total || 0)))} runs per model)</span>`
+        ` <span class="pct">(window: last ${Math.min(14, windowN)} runs per model)</span>`
       );
     }
   }

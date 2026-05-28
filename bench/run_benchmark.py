@@ -39,7 +39,7 @@ MAX_ATTEMPTS = 1
 
 # The "shipping" model the dashboard verdict tracks. Runs with this model
 # overwrite latest.json; runs with any other model only append to history.
-PRIMARY_MODEL = "claude-opus-4-7"
+PRIMARY_MODEL = "claude-opus-4-8"
 MODEL = os.environ.get("BENCH_MODEL", PRIMARY_MODEL)
 EFFORT = os.environ.get("BENCH_EFFORT", "high")
 

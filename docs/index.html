@@ -16,7 +16,7 @@
   <div class="container">
     <header>
       <h1>Is Claude Dumb Today?</h1>
-      <p class="subtitle">Daily HumanEvalPlus-CC164 benchmark for Claude Code (Opus 4.7)</p>
+      <p class="subtitle">Daily HumanEvalPlus-CC164 benchmark for Claude Code (Opus 4.8)</p>
     </header>
 
     <section id="verdict">
@@ -63,24 +63,25 @@
     <section id="divergence">
       <h2>Where the models disagree</h2>
       <p class="section-note" id="divergence-note">
-        Tasks where Opus 4.6 and 4.7 have different pass rates over recent paired runs.
-        Green = always passes, red = always fails. A task that&rsquo;s green for one model and red for
-        the other reveals a real tradeoff, not noise. Historical divergences include
-        <code>HumanEval/97</code> (Python signed-modulo quirk) and <code>HumanEval/141</code>
-        (Unicode <code>.isalpha()</code> vs literal a&ndash;z range).
+        Tasks where Opus 4.8, 4.7, and 4.6 have different pass rates over recent paired runs.
+        Green = always passes, red = always fails. <em>Spread</em> is the gap between the best and
+        worst model on that task &mdash; a high spread reveals a real tradeoff, not noise. Historical
+        divergences include <code>HumanEval/97</code> (Python signed-modulo quirk) and
+        <code>HumanEval/141</code> (Unicode <code>.isalpha()</code> vs literal a&ndash;z range).
       </p>
       <div class="tasks-table-wrap">
         <table id="divergence-table">
           <thead>
             <tr>
               <th>Task</th>
+              <th>Opus 4.8</th>
               <th>Opus 4.7</th>
               <th>Opus 4.6</th>
-              <th>Delta</th>
+              <th>Spread</th>
             </tr>
           </thead>
           <tbody id="divergence-body">
-            <tr><td colspan="4" class="loading">Loading&hellip;</td></tr>
+            <tr><td colspan="5" class="loading">Loading&hellip;</td></tr>
           </tbody>
         </table>
       </div>
@@ -111,7 +112,7 @@
     </section>
 
     <footer>
-      <p>Benchmark uses the full 164-task <a href="https://github.com/openai/human-eval">HumanEval</a> suite with <a href="https://github.com/evalplus/evalplus">EvalPlus</a> edge-case tests, run via Claude Code CLI (Opus 4.7) with pay-as-you-go API key.</p>
+      <p>Benchmark uses the full 164-task <a href="https://github.com/openai/human-eval">HumanEval</a> suite with <a href="https://github.com/evalplus/evalplus">EvalPlus</a> edge-case tests, run via Claude Code CLI (Opus 4.8) with pay-as-you-go API key.</p>
       <div class="links">
         <a href="data/latest.json">Raw JSON</a>
         <a href="data/history.json">History</a>
