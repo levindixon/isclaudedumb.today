@@ -482,12 +482,12 @@ def aggregate_results(
             for key in ("inputTokens", "outputTokens"):
                 merged_usage[model][key] += usage.get(key, 0)
 
-    primary_model = "unknown"
-    if merged_usage:
-        primary_model = max(
-            merged_usage,
-            key=lambda m: merged_usage[m]["inputTokens"] + merged_usage[m]["outputTokens"],
-        )
+    # primary_model is the model we explicitly benchmarked (BENCH_MODEL),
+    # taken directly rather than inferred from token usage. Claude Code uses
+    # helper models internally (e.g. Haiku for sub-tasks) whose input-heavy
+    # usage can outweigh a terse run's own tokens; a token-argmax here
+    # misattributed ~27% of Opus 4.6 runs to Haiku.
+    primary_model = MODEL
 
     return {
         "date": run_id[:10],

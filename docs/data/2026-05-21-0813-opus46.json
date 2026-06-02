@@ -14,7 +14,7 @@
   ],
   "total_cost_usd": 12.3907,
   "total_duration_ms": 1778119,
-  "primary_model": "claude-haiku-4-5-20251001",
+  "primary_model": "claude-opus-4-6",
   "claude_version": "2.1.146 (Claude Code)",
   "modelUsage": {
     "claude-haiku-4-5-20251001": {

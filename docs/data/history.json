@@ -43401,7 +43401,7 @@
       ],
       "total_cost_usd": 12.3284,
       "total_duration_ms": 2181056,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.142 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -43771,7 +43771,7 @@
       ],
       "total_cost_usd": 12.304,
       "total_duration_ms": 1848041,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.143 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -44141,7 +44141,7 @@
       ],
       "total_cost_usd": 12.3128,
       "total_duration_ms": 1907287,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.143 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -44511,7 +44511,7 @@
       ],
       "total_cost_usd": 12.3718,
       "total_duration_ms": 2134329,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.143 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -44881,7 +44881,7 @@
       ],
       "total_cost_usd": 12.2702,
       "total_duration_ms": 1886543,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.143 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -45251,7 +45251,7 @@
       ],
       "total_cost_usd": 12.3421,
       "total_duration_ms": 1929874,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.143 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -45621,7 +45621,7 @@
       ],
       "total_cost_usd": 12.2368,
       "total_duration_ms": 1823288,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.143 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -45991,7 +45991,7 @@
       ],
       "total_cost_usd": 12.5064,
       "total_duration_ms": 1963420,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.144 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -46361,7 +46361,7 @@
       ],
       "total_cost_usd": 13.5438,
       "total_duration_ms": 1774952,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.144 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -46731,7 +46731,7 @@
       ],
       "total_cost_usd": 12.3926,
       "total_duration_ms": 1853022,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.145 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -47101,7 +47101,7 @@
       ],
       "total_cost_usd": 12.4557,
       "total_duration_ms": 2094160,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.145 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -47471,7 +47471,7 @@
       ],
       "total_cost_usd": 12.3907,
       "total_duration_ms": 1778119,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.146 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -47841,7 +47841,7 @@
       ],
       "total_cost_usd": 12.4671,
       "total_duration_ms": 1896101,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.146 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -48211,7 +48211,7 @@
       ],
       "total_cost_usd": 12.5444,
       "total_duration_ms": 1891534,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.148 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -48951,7 +48951,7 @@
       ],
       "total_cost_usd": 12.4002,
       "total_duration_ms": 1730055,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.150 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -49321,7 +49321,7 @@
       ],
       "total_cost_usd": 12.4424,
       "total_duration_ms": 1844200,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.150 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -50431,7 +50431,7 @@
       ],
       "total_cost_usd": 12.5098,
       "total_duration_ms": 1955412,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.150 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -50801,7 +50801,7 @@
       ],
       "total_cost_usd": 12.4384,
       "total_duration_ms": 1819042,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.150 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -51171,7 +51171,7 @@
       ],
       "total_cost_usd": 12.4512,
       "total_duration_ms": 1830359,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.150 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -53021,7 +53021,7 @@
       ],
       "total_cost_usd": 12.5201,
       "total_duration_ms": 1839604,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.153 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -53946,7 +53946,7 @@
       ],
       "total_cost_usd": 12.8435,
       "total_duration_ms": 1794544,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.156 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -54501,7 +54501,7 @@
       ],
       "total_cost_usd": 12.6785,
       "total_duration_ms": 1952213,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.158 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -55056,7 +55056,7 @@
       ],
       "total_cost_usd": 12.6322,
       "total_duration_ms": 1824216,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.158 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -56166,7 +56166,7 @@
       ],
       "total_cost_usd": 12.6214,
       "total_duration_ms": 1844629,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.158 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
@@ -56721,7 +56721,7 @@
       ],
       "total_cost_usd": 12.6158,
       "total_duration_ms": 1769597,
-      "primary_model": "claude-haiku-4-5-20251001",
+      "primary_model": "claude-opus-4-6",
       "claude_version": "2.1.159 (Claude Code)",
       "task_ids": [
         "HumanEval/0",
