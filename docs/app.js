@@ -5,18 +5,41 @@
     "claude-opus-4-6": { line: "#58a6ff", bandBg: "rgba(88, 166, 255, 0.05)" },
     "claude-opus-4-7": { line: "#a371f7", bandBg: "rgba(163, 113, 247, 0.10)" },
     "claude-opus-4-8": { line: "#3fb950", bandBg: "rgba(63, 185, 80, 0.10)" },
+    "claude-opus-5": { line: "#f0883e", bandBg: "rgba(240, 136, 62, 0.10)" },
   };
   const DEFAULT_MODEL_STYLE = { line: "#58a6ff", bandBg: "rgba(88, 166, 255, 0.05)" };
+
+  // Models still benchmarked on every scheduled run. Retired models stay in
+  // history (and on the chart) forever, but the divergence table advertises
+  // "recent paired runs" — a retired model's frozen final window would read
+  // as current, so that view is scoped to this list.
+  const ACTIVE_MODELS = ["claude-opus-5", "claude-opus-4-8"];
 
   function modelStyle(model) {
     return MODEL_STYLES[model] || DEFAULT_MODEL_STYLE;
   }
 
+  // Minor segment is optional: claude-opus-4-8 -> [4, 8], claude-opus-5 -> [5, 0].
+  function modelVersion(model) {
+    const m = /^claude-([a-z]+)-(\d+)(?:-(\d+))?/.exec(model || "");
+    if (!m) return null;
+    return { family: m[1], major: Number(m[2]), minor: m[3] ? Number(m[3]) : null };
+  }
+
   function formatModelLabel(model) {
     if (!model) return "Unknown";
-    const m = /^claude-([a-z]+)-(\d)-(\d+)/.exec(model);
-    if (!m) return model;
-    return m[1].charAt(0).toUpperCase() + m[1].slice(1) + " " + m[2] + "." + m[3];
+    const v = modelVersion(model);
+    if (!v) return model;
+    const name = v.family.charAt(0).toUpperCase() + v.family.slice(1);
+    return name + " " + v.major + (v.minor == null ? "" : "." + v.minor);
+  }
+
+  // Newest release first. Compares version numerically rather than
+  // lexicographically, so "claude-opus-10" would not sort below "claude-opus-5".
+  function byNewestModel(a, b) {
+    const va = modelVersion(a) || { major: 0, minor: 0 };
+    const vb = modelVersion(b) || { major: 0, minor: 0 };
+    return vb.major - va.major || (vb.minor || 0) - (va.minor || 0);
   }
 
   async function loadJSON(url) {
@@ -229,9 +252,9 @@
     const ctx = document.getElementById("score-chart");
     if (!ctx || history.length === 0) return;
 
-    // Last 90 entries across all models. With three models running per
-    // schedule, that's ≈ 15 days of runs — enough to see regression
-    // signals without crowding the axis.
+    // Last 90 entries across all models, including retired ones. With two
+    // models running per schedule, that's ≈ 22 days of runs — enough to see
+    // regression signals without crowding the axis.
     const data = history.slice(-90);
 
     // Show MM-DD only on the first run of each day; blank for subsequent
@@ -416,6 +439,17 @@
     for (const m of Object.keys(byModel)) {
       byModel[m] = byModel[m].slice(-WINDOW);
     }
+
+    // Scope to the currently-benchmarked models. Falls back to every model in
+    // history while a newly-promoted primary has no runs yet, so the table
+    // shows the old comparison instead of going blank for a cycle.
+    const active = Object.keys(byModel).filter((m) => ACTIVE_MODELS.includes(m));
+    if (active.length >= 2) {
+      for (const m of Object.keys(byModel)) {
+        if (!active.includes(m)) delete byModel[m];
+      }
+    }
+
     const models = Object.keys(byModel);
     if (models.length < 2) return null;
 
@@ -475,19 +509,16 @@
       return;
     }
 
-    // Column order: newest model first. Model ids sort lexicographically
-    // (claude-opus-4-6 < -4-7 < -4-8), so a descending sort puts the newest
-    // release in the leftmost data column. The view auto-advances as new
-    // models join the lineup — no hardcoded pair to maintain.
-    const models = [...computed.models].sort().reverse();
+    // Column order: newest model first, so the current primary is the
+    // leftmost data column. The view auto-advances as new models join the
+    // lineup — no hardcoded pair to maintain.
+    const models = [...computed.models].sort(byNewestModel);
     const colCount = models.length + 2; // Task + one per model + Spread
 
     // A row is "interesting" iff the models that have data for it disagree.
     // Spread = (max pass-rate − min pass-rate) across models WITH runs for
     // this task. Models with no runs yet (total 0) are excluded so a freshly
-    // promoted model with thin history doesn't make every task look divergent
-    // (i.e. the view stays a clean 4.7-vs-4.6 comparison until 4.8 has data,
-    // then becomes three-way on its own).
+    // promoted model with thin history doesn't make every task look divergent.
     const rows = computed.stats
       .map((s) => {
         const cells = models.map(

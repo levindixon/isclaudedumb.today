@@ -8,9 +8,9 @@ on:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
-    # Three models run back-to-back, each capped at 105 min (3 × 105 = 315),
+    # Two models run back-to-back, each capped at 105 min (2 × 105 = 210),
     # plus setup + commit. Kept under the 360-min hard runner ceiling.
-    timeout-minutes: 345
+    timeout-minutes: 240
     permissions:
       contents: write
 
@@ -41,29 +41,20 @@ jobs:
         run: |
           echo "BENCH_RUN_ID=$(python -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc).isoformat())')" >> "$GITHUB_ENV"
 
-      - name: Run benchmark (Opus 4.8 — primary)
+      - name: Run benchmark (Opus 5 — primary)
+        run: python bench/run_benchmark.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BENCH_MODEL: claude-opus-5
+          BENCH_EFFORT: high
+        timeout-minutes: 105
+
+      - name: Run benchmark (Opus 4.8 — reference baseline)
+        if: always()
         run: python bench/run_benchmark.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           BENCH_MODEL: claude-opus-4-8
-          BENCH_EFFORT: high
-        timeout-minutes: 105
-
-      - name: Run benchmark (Opus 4.7 — reference baseline)
-        if: always()
-        run: python bench/run_benchmark.py
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BENCH_MODEL: claude-opus-4-7
-          BENCH_EFFORT: high
-        timeout-minutes: 105
-
-      - name: Run benchmark (Opus 4.6 — reference baseline)
-        if: always()
-        run: python bench/run_benchmark.py
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BENCH_MODEL: claude-opus-4-6
           BENCH_EFFORT: high
         timeout-minutes: 105
 

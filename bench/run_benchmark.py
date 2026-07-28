@@ -39,16 +39,20 @@ MAX_ATTEMPTS = 1
 
 # The "shipping" model the dashboard verdict tracks. Runs with this model
 # overwrite latest.json; runs with any other model only append to history.
-PRIMARY_MODEL = "claude-opus-4-8"
+PRIMARY_MODEL = "claude-opus-5"
 MODEL = os.environ.get("BENCH_MODEL", PRIMARY_MODEL)
 EFFORT = os.environ.get("BENCH_EFFORT", "high")
 
 
 def model_tag(model: str) -> str:
-    """Short, filename-safe tag for a model id (e.g. claude-opus-4-7 -> opus47)."""
-    m = re.match(r"^claude-([a-z]+)-(\d+)-(\d+)", model)
+    """Short, filename-safe tag for a model id.
+
+    The minor segment is optional so single-segment ids parse too:
+    claude-opus-4-8 -> opus48, claude-opus-5 -> opus5.
+    """
+    m = re.match(r"^claude-([a-z]+)-(\d+)(?:-(\d+))?", model)
     if m:
-        return f"{m.group(1)}{m.group(2)}{m.group(3)}"
+        return f"{m.group(1)}{m.group(2)}{m.group(3) or ''}"
     return re.sub(r"[^a-z0-9]+", "", model.lower()) or "model"
 
 _logged_cli_keys = False

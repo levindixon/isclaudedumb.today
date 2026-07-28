@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-An automated benchmark that runs 164 HumanEval coding tasks with EvalPlus edge-case tests against the Claude Code CLI (Opus 4.8 as the tracked primary, with Opus 4.7 and 4.6 as reference baselines) and publishes results to [isclaudedumb.today](https://isclaudedumb.today). GitHub Actions runs the benchmark twice daily (7 AM GMT / 7 AM PST), commits JSON results, and GitHub Pages serves a dashboard.
+An automated benchmark that runs 164 HumanEval coding tasks with EvalPlus edge-case tests against the Claude Code CLI (Opus 5 as the tracked primary, with Opus 4.8 as the reference baseline) and publishes results to [isclaudedumb.today](https://isclaudedumb.today). GitHub Actions runs the benchmark twice daily (7 AM GMT / 7 AM PST), commits JSON results, and GitHub Pages serves a dashboard.
 
 ## Commands
 
@@ -22,7 +22,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 
 **Benchmark harness** (`bench/`):
 - `generate_tasks.py` — Downloads HumanEval dataset + EvalPlus edge-case inputs, pre-computes test assertions, creates per-task workspace directories under `bench/workspace/` with `prompt.md`, `solution.py` stub, hidden tests (original + EvalPlus), and a `.claude/settings.json` that denies Read access to `tests_hidden/`
-- `run_benchmark.py` — Iterates all 164 tasks, invokes `claude -p --model $BENCH_MODEL` (defaults to the primary `claude-opus-4-8`; CI also runs `claude-opus-4-7` and `claude-opus-4-6`) in headless mode per workspace, runs hidden unit tests. Each run outputs a timestamped `YYYY-MM-DD-HHMM-<tag>.json` file and appends to `history.json` keyed by `run_id` (ISO timestamp). Only the primary model's run overwrites `latest.json`
+- `run_benchmark.py` — Iterates all 164 tasks, invokes `claude -p --model $BENCH_MODEL` (defaults to the primary `claude-opus-5`; CI also runs `claude-opus-4-8` as a reference baseline) in headless mode per workspace, runs hidden unit tests. Each run outputs a timestamped `YYYY-MM-DD-HHMM-<tag>.json` file and appends to `history.json` keyed by `run_id` (ISO timestamp). Only the primary model's run overwrites `latest.json`
 - `data/humaneval_plus_cc164.json` — Pre-generated dataset (164 tasks with prompts, canonical solutions, original tests, and EvalPlus edge-case tests)
 
 **Static dashboard** (`docs/`):
