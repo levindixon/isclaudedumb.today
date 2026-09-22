@@ -6,6 +6,7 @@
     "claude-opus-4-7": { line: "#a371f7", bandBg: "rgba(163, 113, 247, 0.10)" },
     "claude-opus-4-8": { line: "#3fb950", bandBg: "rgba(63, 185, 80, 0.10)" },
     "claude-opus-5": { line: "#f0883e", bandBg: "rgba(240, 136, 62, 0.10)" },
+    "claude-opus-5-5": { line: "#f778ba", bandBg: "rgba(247, 120, 186, 0.10)" },
   };
   const DEFAULT_MODEL_STYLE = { line: "#58a6ff", bandBg: "rgba(88, 166, 255, 0.05)" };
 
@@ -13,7 +14,7 @@
   // history (and on the chart) forever, but the divergence table advertises
   // "recent paired runs" — a retired model's frozen final window would read
   // as current, so that view is scoped to this list.
-  const ACTIVE_MODELS = ["claude-opus-5", "claude-opus-4-8"];
+  const ACTIVE_MODELS = ["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8"];
 
   function modelStyle(model) {
     return MODEL_STYLES[model] || DEFAULT_MODEL_STYLE;
