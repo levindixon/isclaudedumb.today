@@ -8,7 +8,7 @@
 
 <p align="center"><b>Is Claude dumb today?</b></p>
 
-Automated benchmark tracking Claude Code (Opus 5) quality on HumanEval + EvalPlus edge-case coding tasks.
+Automated benchmark tracking Claude Code (Opus 5.5) quality on HumanEval + EvalPlus edge-case coding tasks.
 
 ## What is this?
 
@@ -16,9 +16,9 @@ A static site at [isclaudedumb.today](https://isclaudedumb.today) that answers o
 
 It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suite with [EvalPlus](https://github.com/evalplus/evalplus) edge-case tests via the Claude Code CLI in headless mode. Each scheduled job runs three models back-to-back on the same task set:
 
-- **Opus 5** — the primary model the verdict tracks
-- **Opus 5.5** — the newest release, benchmarked alongside Opus 5 (added 2026-09-22)
-- **Opus 4.8** — a reference baseline, the prior flagship, so drift in Opus 5 can be distinguished from a bad day across the fleet
+- **Opus 5.5** — the primary model the verdict tracks (primary since 2026-09-23)
+- **Opus 5** — a reference baseline, the prior flagship
+- **Opus 4.8** — a second reference baseline, so drift in Opus 5.5 can be distinguished from a bad day across the fleet
 
 Opus 4.7 and 4.6 were reference baselines until 2026-07-28 and are no longer run. Their historical results stay in `history.json` and on the chart.
 
@@ -35,7 +35,7 @@ All runs use `--effort high` (extended thinking). GitHub Actions runs twice dail
 
 ### Verdict logic
 
-The site compares the latest Opus 5 run against a rolling average of the prior 14 Opus 5 entries (≈ 7 days at 2 runs/day). Runs from any other model are kept out of the verdict window so baselines can't skew the average:
+The site compares the latest Opus 5.5 run against a rolling average of the prior 14 Opus 5.5 entries (≈ 7 days at 2 runs/day). Runs from any other model are kept out of the verdict window so baselines can't skew the average:
 - **YES** (dumb): score is 5+ points below the average
 - **MAYBE**: score is 2–5 points below the average
 - **NO** (not dumb): score is no more than 2 points below the average
@@ -50,9 +50,8 @@ This view is scoped to `ACTIVE_MODELS` in `docs/app.js` rather than everything i
 
 | Constraint | Value |
 |---|---|
-| Primary model | `claude-opus-5` |
-| Additional model | `claude-opus-5-5` |
-| Reference baseline | `claude-opus-4-8` |
+| Primary model | `claude-opus-5-5` |
+| Reference baselines | `claude-opus-5`, `claude-opus-4-8` |
 | Thinking effort | `high` (extended thinking) |
 | Max turns per attempt | 3 |
 | Max cost per attempt | $1.00 |
@@ -117,15 +116,15 @@ docs/
   app.js                  # Fetches JSON, renders verdict/chart/divergence/table
   CNAME                   # Custom domain
   data/                   # Benchmark results (auto-committed by CI)
-    latest.json           # Most recent primary-model (Opus 5) run's full results
+    latest.json           # Most recent primary-model (Opus 5.5) run's full results
     history.json          # Summary rows for charting (keyed by run_id, tagged per model)
-    YYYY-MM-DD-HHMM-<tag>.json  # Per-run snapshots, e.g. -opus5 / -opus55 / -opus48 (6 files/day)
+    YYYY-MM-DD-HHMM-<tag>.json  # Per-run snapshots, e.g. -opus55 / -opus5 / -opus48 (6 files/day)
 .github/workflows/
   benchmark.yml           # Twice-daily cron + manual trigger
 ```
 
 ## Methodology note
 
-This benchmark uses Claude Code CLI (`--effort high`, `--permission-mode acceptEdits`) with a standard Anthropic API key (pay-as-you-go). Each scheduled job runs `claude-opus-5` (primary), `claude-opus-5-5`, and `claude-opus-4-8` (reference baseline) against the same task workspaces, sharing a single `run_id` so the runs are directly comparable. All raw results are published as JSON for full transparency.
+This benchmark uses Claude Code CLI (`--effort high`, `--permission-mode acceptEdits`) with a standard Anthropic API key (pay-as-you-go). Each scheduled job runs `claude-opus-5-5` (primary), `claude-opus-5`, and `claude-opus-4-8` (reference baselines) against the same task workspaces, sharing a single `run_id` so the runs are directly comparable. All raw results are published as JSON for full transparency.
 
 HumanEval tasks are from OpenAI's [human-eval](https://github.com/openai/human-eval) dataset (MIT license). Edge-case tests are from [EvalPlus](https://github.com/evalplus/evalplus) (Apache-2.0 license).

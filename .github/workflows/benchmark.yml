@@ -41,20 +41,20 @@ jobs:
         run: |
           echo "BENCH_RUN_ID=$(python -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc).isoformat())')" >> "$GITHUB_ENV"
 
-      - name: Run benchmark (Opus 5 — primary)
-        run: python bench/run_benchmark.py
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BENCH_MODEL: claude-opus-5
-          BENCH_EFFORT: high
-        timeout-minutes: 105
-
-      - name: Run benchmark (Opus 5.5)
-        if: always()
+      - name: Run benchmark (Opus 5.5 — primary)
         run: python bench/run_benchmark.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           BENCH_MODEL: claude-opus-5-5
+          BENCH_EFFORT: high
+        timeout-minutes: 105
+
+      - name: Run benchmark (Opus 5 — reference baseline)
+        if: always()
+        run: python bench/run_benchmark.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BENCH_MODEL: claude-opus-5
           BENCH_EFFORT: high
         timeout-minutes: 105
 
