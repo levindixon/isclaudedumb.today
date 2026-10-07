@@ -16,13 +16,13 @@ python bench/generate_tasks.py
 ANTHROPIC_API_KEY=sk-... python bench/run_benchmark.py
 ```
 
-Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest.json`, and appended to `history.json` (with `run_id` timestamps for dedup).
+Results are written to `docs/data/` as `YYYY-MM-DD-HHMM-<tag>[-<effort>].json` (per-run), `latest.json`, and appended to `history.json` (deduped on `run_id`, model and effort).
 
 ## Architecture
 
 **Benchmark harness** (`bench/`):
 - `generate_tasks.py` — Downloads HumanEval dataset + EvalPlus edge-case inputs, pre-computes test assertions, creates per-task workspace directories under `bench/workspace/` with `prompt.md`, `solution.py` stub, hidden tests (original + EvalPlus), and a `.claude/settings.json` that denies Read access to `tests_hidden/`
-- `run_benchmark.py` — Iterates all 164 tasks, invokes `claude -p --model $BENCH_MODEL` (defaults to the primary `claude-opus-5-5`; CI also runs `claude-opus-5` and `claude-opus-4-8` as reference baselines) in headless mode per workspace, runs hidden unit tests. Each run outputs a timestamped `YYYY-MM-DD-HHMM-<tag>.json` file and appends to `history.json` keyed by `run_id` (ISO timestamp). Only the primary model's run overwrites `latest.json`
+- `run_benchmark.py` — Iterates all 164 tasks, invokes `claude -p --model $BENCH_MODEL` (defaults to the primary `claude-opus-5-5`; CI also runs `claude-opus-5` and `claude-opus-4-8` as reference baselines) in headless mode per workspace, runs hidden unit tests. Each run outputs a timestamped `YYYY-MM-DD-HHMM-<tag>.json` file and appends to `history.json` keyed by `(run_id, primary_model, effort)`. Only the primary model's run at the canonical effort (`high`) overwrites `latest.json`. `BENCH_EFFORT` at any other level marks an effort probe: the per-run file gets an `-<effort>` suffix and the history row's `effort` field makes the dashboard drop it
 - `data/humaneval_plus_cc164.json` — Pre-generated dataset (164 tasks with prompts, canonical solutions, original tests, and EvalPlus edge-case tests)
 
 **Static dashboard** (`docs/`):
@@ -30,9 +30,9 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 - `app.js` fetches `data/latest.json` and `data/history.json`, computes a verdict (YES/MAYBE/NO) by comparing today's score against a 7-day rolling average, renders a Chart.js line chart and a sortable per-task results table
 - Dark theme, responsive, no build step
 
-**CI** (`.github/workflows/benchmark.yml`):
-- Cron twice daily (7 AM UTC, 3 PM UTC) + manual `workflow_dispatch`
-- Installs Claude Code CLI, generates workspaces, runs benchmark, commits results to `docs/data/`
+**CI** (`.github/workflows/`):
+- `benchmark.yml` — Cron twice daily (7 AM UTC, 3 PM UTC) + manual `workflow_dispatch`. Installs Claude Code CLI, generates workspaces, runs the three models, commits results to `docs/data/`
+- `effort-probe.yml` — Manual only. Runs one model at a JSON list of effort levels, N repeats each, committing after every run. Shares the `benchmark-data` concurrency group with `benchmark.yml` so the two never race to push
 
 ## Key Design Constraints
 
@@ -40,6 +40,7 @@ Results are written to `docs/data/` as `YYYY-MM-DD-HHMM.json` (per-run), `latest
 - Tests are hidden from Claude via permission deny rules in each workspace's `.claude/settings.json`
 - Each task: max 3 turns, max $1.00 budget, 1 attempt (no retry)
 - `--permission-mode acceptEdits` auto-approves file edits
+- Scheduled runs are pinned to `--effort high`. The verdict, chart and divergence view only use `high` rows; rows without an `effort` field are legacy `high` runs
 
 ## Verdict Logic
 

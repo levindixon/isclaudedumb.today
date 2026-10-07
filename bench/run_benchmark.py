@@ -8,12 +8,14 @@ For each of 164 tasks:
   4. Record result (passed, attempts, turns, cost, model usage)
 
 Model and effort are controlled via env vars so CI can run the same harness
-for multiple models (e.g. shipping model + a reference baseline).
+for multiple models (e.g. shipping model + a reference baseline) and for
+one-off effort probes.
 
 Outputs:
-  - docs/data/YYYY-MM-DD-HHMM-<tag>.json  (per-run results, model-tagged)
-  - docs/data/latest.json                  (most recent PRIMARY_MODEL run)
-  - docs/data/history.json                 (append summary row for charting)
+  - docs/data/YYYY-MM-DD-HHMM-<tag>.json           (per-run results, model-tagged)
+  - docs/data/YYYY-MM-DD-HHMM-<tag>-<effort>.json  (same, for non-canonical effort)
+  - docs/data/latest.json                           (most recent PRIMARY_MODEL run at CANONICAL_EFFORT)
+  - docs/data/history.json                          (append summary row for charting)
 """
 
 import json
@@ -41,7 +43,11 @@ MAX_ATTEMPTS = 1
 # overwrite latest.json; runs with any other model only append to history.
 PRIMARY_MODEL = "claude-opus-5-5"
 MODEL = os.environ.get("BENCH_MODEL", PRIMARY_MODEL)
-EFFORT = os.environ.get("BENCH_EFFORT", "high")
+
+# Any other BENCH_EFFORT is a probe: suffixed filename, no latest.json, filtered out by the dashboard.
+CANONICAL_EFFORT = "high"
+EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
+EFFORT = os.environ.get("BENCH_EFFORT", CANONICAL_EFFORT)
 
 
 def model_tag(model: str) -> str:
@@ -508,6 +514,7 @@ def aggregate_results(
         "total_cost_usd": total_cost,
         "total_duration_ms": total_duration_ms,
         "primary_model": primary_model,
+        "effort": EFFORT,
         "claude_version": claude_version,
         "modelUsage": merged_usage,
         "started_at": started_at,
@@ -547,21 +554,22 @@ def update_history(today_result: dict) -> None:
         "total_cost_usd": today_result["total_cost_usd"],
         "total_duration_ms": today_result["total_duration_ms"],
         "primary_model": today_result["primary_model"],
+        "effort": today_result.get("effort", CANONICAL_EFFORT),
         "claude_version": today_result["claude_version"],
         "task_ids": today_result.get("task_ids", []),
         "pass_bitmap_base": today_result.get("pass_bitmap_base", ""),
         "pass_bitmap_evalplus": today_result.get("pass_bitmap_evalplus", ""),
     }
 
-    # Remove any existing entry for the same (run_id, primary_model) pair
-    # so reruns are idempotent but multiple models at the same timestamp
-    # (e.g. 4.6 and 4.7 both running in the same CI job) both persist.
-    # Legacy entries without run_id fall back to date-based dedup.
+    # Dedup on (run_id, primary_model, effort) so reruns are idempotent while
+    # paired runs at one timestamp all persist. Legacy entries without run_id
+    # fall back to date; entries without effort predate probes and were all canonical.
     history["entries"] = [
         e for e in history["entries"]
         if not (
             e.get("run_id", e["date"]) == entry["run_id"]
             and e.get("primary_model") == entry.get("primary_model")
+            and e.get("effort", CANONICAL_EFFORT) == entry["effort"]
         )
     ]
     history["entries"].append(entry)
@@ -620,6 +628,10 @@ def main():
     print(f"HumanEvalPlus-CC164 Benchmark  model={MODEL}  effort={EFFORT}")
     print("=" * 60)
 
+    if EFFORT not in EFFORT_LEVELS:
+        print(f"Error: BENCH_EFFORT={EFFORT!r} is not one of {', '.join(EFFORT_LEVELS)}")
+        sys.exit(1)
+
     claude_version = get_claude_version()
     print(f"Claude CLI version: {claude_version}")
 
@@ -668,18 +680,20 @@ def main():
     # Extract HHMM from run_id so paired runs share a filename prefix.
     hhmm = run_id[11:13] + run_id[14:16]
     tag = model_tag(MODEL)
+    if EFFORT != CANONICAL_EFFORT:
+        tag += f"-{EFFORT}"
     daily_file = DATA_DIR / f"{today}-{hhmm}-{tag}.json"
     daily_file.write_text(json.dumps(results, indent=2) + "\n")
     print(f"\nWrote {daily_file}")
 
-    # Only the primary model owns latest.json; reference-model runs show up
-    # on the dashboard through history.json alone.
-    if MODEL == PRIMARY_MODEL:
+    # Only the primary model at the canonical effort owns latest.json;
+    # reference-model runs and effort probes show up through history.json.
+    if MODEL == PRIMARY_MODEL and EFFORT == CANONICAL_EFFORT:
         latest_file = DATA_DIR / "latest.json"
         latest_file.write_text(json.dumps(results, indent=2) + "\n")
         print(f"Wrote {latest_file}")
     else:
-        print(f"Skipped latest.json (non-primary model: {MODEL})")
+        print(f"Skipped latest.json (model={MODEL}, effort={EFFORT})")
 
     update_history(results)
 
@@ -688,7 +702,7 @@ def main():
     print(f"RESULTS: {results['passed']}/{results['total']} passed ({results['score']}%)")
     print(f"Cost: ${results['total_cost_usd']:.4f}")
     print(f"Duration: {results['total_duration_ms'] / 1000:.1f}s")
-    print(f"Model: {results['primary_model']}")
+    print(f"Model: {results['primary_model']}  Effort: {results['effort']}")
     print(f"{'='*60}")
 
     # Clean up workspaces

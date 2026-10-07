@@ -22,7 +22,7 @@ It runs the full 164-task [HumanEval](https://github.com/openai/human-eval) suit
 
 Opus 4.7 and 4.6 were reference baselines until 2026-07-28 and are no longer run. Their historical results stay in `history.json` and on the chart.
 
-All runs use `--effort high` (extended thinking). GitHub Actions runs twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data — including a per-task divergence view highlighting tasks where the models disagree.
+All scheduled runs use `--effort high`. GitHub Actions runs twice daily (7 AM GMT and 7 AM PST), commits results as JSON, and GitHub Pages serves a dashboard that visualizes the data — including a per-task divergence view highlighting tasks where the models disagree. One-off runs at other effort levels go through the [effort probe workflow](#effort-probes); they are tagged and kept out of the verdict.
 
 ## How the benchmark works
 
@@ -52,12 +52,24 @@ This view is scoped to `ACTIVE_MODELS` in `docs/app.js` rather than everything i
 |---|---|
 | Primary model | `claude-opus-5-5` |
 | Reference baselines | `claude-opus-5`, `claude-opus-4-8` |
-| Thinking effort | `high` (extended thinking) |
+| Thinking effort | `high` on scheduled runs (probes at other levels are tagged and excluded from the verdict) |
 | Max turns per attempt | 3 |
 | Max cost per attempt | $1.00 |
 | Max attempts per task | 1 |
 | Allowed tools | Read, Edit, Glob, Grep |
 | Test visibility | Denied via permissions |
+
+### Effort probes
+
+The verdict only means something if the configuration stays fixed, so scheduled runs are pinned to `--effort high`. To measure what another effort level does, run the `Effort Probe` workflow by hand:
+
+```bash
+gh workflow run effort-probe.yml -f model=claude-opus-5-5 -f efforts='["medium","xhigh","max"]' -f repeats=3
+```
+
+Each probe run writes `YYYY-MM-DD-HHMM-<tag>-<effort>.json` and a `history.json` row with an `effort` field. Probe rows never overwrite `latest.json`, and the dashboard drops every non-`high` row before computing the verdict, chart, or divergence table. Rows without an `effort` field predate probes and were all `high` runs.
+
+The probe shares the scheduled benchmark's concurrency group, so the two never push at the same time. GitHub keeps only one queued run per group: start a probe when no scheduled run is waiting, or the queued one gets cancelled.
 
 ## Setup
 
@@ -119,8 +131,10 @@ docs/
     latest.json           # Most recent primary-model (Opus 5.5) run's full results
     history.json          # Summary rows for charting (keyed by run_id, tagged per model)
     YYYY-MM-DD-HHMM-<tag>.json  # Per-run snapshots, e.g. -opus55 / -opus5 / -opus48 (6 files/day)
+    YYYY-MM-DD-HHMM-<tag>-<effort>.json  # Effort-probe snapshots, e.g. -opus55-xhigh
 .github/workflows/
   benchmark.yml           # Twice-daily cron + manual trigger
+  effort-probe.yml        # Manual: one model at chosen effort levels, N repeats each
 ```
 
 ## Methodology note

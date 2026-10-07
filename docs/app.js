@@ -16,6 +16,14 @@
   // as current, so that view is scoped to this list.
   const ACTIVE_MODELS = ["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8"];
 
+  // Probe runs at other efforts stay out of every view so they can't read as
+  // drift. Entries without an effort field predate probes and were all canonical.
+  const CANONICAL_EFFORT = "high";
+
+  function isCanonicalEffort(entry) {
+    return (entry.effort || CANONICAL_EFFORT) === CANONICAL_EFFORT;
+  }
+
   function modelStyle(model) {
     return MODEL_STYLES[model] || DEFAULT_MODEL_STYLE;
   }
@@ -58,7 +66,8 @@
       loadJSON("data/latest.json"),
       loadJSON("data/history.json"),
     ]);
-    return { latest, history: history ? history.entries || [] : [] };
+    const entries = history ? history.entries || [] : [];
+    return { latest, history: entries.filter(isCanonicalEffort) };
   }
 
   function computeVerdict(latest, history) {
@@ -200,7 +209,10 @@
 
     // Model
     document.getElementById("model-value").textContent = latest.primary_model || "unknown";
-    document.getElementById("version-value").textContent = latest.claude_version || "";
+    document.getElementById("version-value").textContent = [
+      latest.claude_version,
+      "effort " + (latest.effort || CANONICAL_EFFORT),
+    ].filter(Boolean).join(" · ");
 
     // Cost
     document.getElementById("cost-value").textContent = "$" + latest.total_cost_usd.toFixed(2);
