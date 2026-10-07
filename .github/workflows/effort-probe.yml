@@ -70,8 +70,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           for i in $(seq 1 "$REPEATS"); do
             echo "::group::$BENCH_MODEL @ $BENCH_EFFORT, run $i of $REPEATS"
-            # Pick up history.json rows pushed by earlier runs, or the rebase below would conflict.
-            git pull --rebase origin "$GITHUB_REF_NAME"
+            # Pick up history.json rows pushed by earlier runs; autostash because
+            # generate_tasks.py rewrites the tracked dataset file.
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
             BENCH_RUN_ID="$(python -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc).isoformat())')" \
               python bench/run_benchmark.py
             git add docs/data/
