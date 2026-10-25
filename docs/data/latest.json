@@ -1,30 +1,30 @@
 {
   "date": "2026-10-25",
-  "run_id": "2026-10-25T07:08:55.578419+00:00",
+  "run_id": "2026-10-25T15:06:08.561224+00:00",
   "suite": "HumanEvalPlus-CC164",
-  "score": 95.7,
+  "score": 96.3,
   "score_base": 100.0,
-  "score_evalplus": 95.7,
-  "passed": 156,
+  "score_evalplus": 96.3,
+  "passed": 157,
   "passed_base": 163,
-  "passed_evalplus": 156,
+  "passed_evalplus": 157,
   "total": 163,
   "quarantined": [
     "HumanEval/70"
   ],
-  "total_cost_usd": 6.8998,
-  "total_duration_ms": 1716292,
+  "total_cost_usd": 6.8578,
+  "total_duration_ms": 1653058,
   "primary_model": "claude-opus-5-5",
   "effort": "high",
   "claude_version": "2.1.310 (Claude Code)",
   "modelUsage": {
     "claude-opus-5-5": {
       "inputTokens": 978,
-      "outputTokens": 109327
+      "outputTokens": 107451
     }
   },
-  "started_at": "2026-10-25T07:09:35.908736+00:00",
-  "finished_at": "2026-10-25T07:38:32.379561+00:00",
+  "started_at": "2026-10-25T15:06:38.989257+00:00",
+  "finished_at": "2026-10-25T15:34:25.611535+00:00",
   "task_ids": [
     "HumanEval/0",
     "HumanEval/1",
@@ -191,7 +191,7 @@
     "HumanEval/163"
   ],
   "pass_bitmap_base": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
-  "pass_bitmap_evalplus": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111010101111111111111111111111100111111111111111101111111101111111111111",
+  "pass_bitmap_evalplus": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111010101111111111111111111111100111111111111111111111111101111111111111",
   "tasks": [
     {
       "task_id": "HumanEval/0",
@@ -201,12 +201,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11719,
-      "total_cost_usd_total": 0.107986,
+      "duration_ms_total": 10564,
+      "total_cost_usd_total": 0.105586,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 784
+          "outputTokens": 695
         }
       },
       "error_type": null,
@@ -220,12 +220,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10320,
-      "total_cost_usd_total": 0.041098,
+      "duration_ms_total": 8950,
+      "total_cost_usd_total": 0.040537,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 638
+          "outputTokens": 610
         }
       },
       "error_type": null,
@@ -239,12 +239,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8582,
-      "total_cost_usd_total": 0.035509,
+      "duration_ms_total": 6224,
+      "total_cost_usd_total": 0.035833,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 415
+          "outputTokens": 432
         }
       },
       "error_type": null,
@@ -258,12 +258,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9313,
-      "total_cost_usd_total": 0.038492,
+      "duration_ms_total": 8527,
+      "total_cost_usd_total": 0.037956,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 535
+          "outputTokens": 506
         }
       },
       "error_type": null,
@@ -277,12 +277,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12188,
-      "total_cost_usd_total": 0.040013,
+      "duration_ms_total": 7982,
+      "total_cost_usd_total": 0.039302,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 601
+          "outputTokens": 564
         }
       },
       "error_type": null,
@@ -296,12 +296,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9443,
-      "total_cost_usd_total": 0.037964,
+      "duration_ms_total": 7327,
+      "total_cost_usd_total": 0.037458,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 521
+          "outputTokens": 495
         }
       },
       "error_type": null,
@@ -315,12 +315,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8713,
-      "total_cost_usd_total": 0.040405,
+      "duration_ms_total": 10849,
+      "total_cost_usd_total": 0.041639,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 609
+          "outputTokens": 661
         }
       },
       "error_type": null,
@@ -334,12 +334,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8805,
-      "total_cost_usd_total": 0.036023,
+      "duration_ms_total": 7865,
+      "total_cost_usd_total": 0.036862,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 429
+          "outputTokens": 471
         }
       },
       "error_type": null,
@@ -353,16 +353,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12464,
-      "total_cost_usd_total": 0.042721,
+      "duration_ms_total": 9483,
+      "total_cost_usd_total": 0.038125,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 748
+          "outputTokens": 518
         }
       },
       "error_type": null,
-      "solution": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n    total = 0\n    product = 1\n    for n in numbers:\n        total += n\n        product *= n\n    return (total, product)\n"
+      "solution": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n    total = 0\n    product = 1\n    for n in numbers:\n        total += n\n        product *= n\n    return total, product\n"
     },
     {
       "task_id": "HumanEval/9",
@@ -372,12 +372,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8005,
-      "total_cost_usd_total": 0.03881,
+      "duration_ms_total": 8027,
+      "total_cost_usd_total": 0.038998,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 562
+          "outputTokens": 570
         }
       },
       "error_type": null,
@@ -391,12 +391,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10677,
-      "total_cost_usd_total": 0.042544,
+      "duration_ms_total": 9873,
+      "total_cost_usd_total": 0.041318,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 693
+          "outputTokens": 631
         }
       },
       "error_type": null,
@@ -410,12 +410,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9871,
-      "total_cost_usd_total": 0.038047,
+      "duration_ms_total": 9291,
+      "total_cost_usd_total": 0.038166,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 548
+          "outputTokens": 554
         }
       },
       "error_type": null,
@@ -429,12 +429,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10015,
-      "total_cost_usd_total": 0.043436,
+      "duration_ms_total": 9167,
+      "total_cost_usd_total": 0.037955,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 786
+          "outputTokens": 512
         }
       },
       "error_type": null,
@@ -448,12 +448,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10264,
-      "total_cost_usd_total": 0.039956,
+      "duration_ms_total": 8991,
+      "total_cost_usd_total": 0.039199,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 631
+          "outputTokens": 592
         }
       },
       "error_type": null,
@@ -467,12 +467,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9513,
-      "total_cost_usd_total": 0.035941,
+      "duration_ms_total": 13884,
+      "total_cost_usd_total": 0.036425,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 451
+          "outputTokens": 476
         }
       },
       "error_type": null,
@@ -486,12 +486,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7739,
-      "total_cost_usd_total": 0.037012,
+      "duration_ms_total": 8524,
+      "total_cost_usd_total": 0.037306,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 498
+          "outputTokens": 512
         }
       },
       "error_type": null,
@@ -505,12 +505,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9656,
-      "total_cost_usd_total": 0.036443,
+      "duration_ms_total": 9016,
+      "total_cost_usd_total": 0.036436,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 471
+          "outputTokens": 470
         }
       },
       "error_type": null,
@@ -524,12 +524,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9631,
-      "total_cost_usd_total": 0.040744,
+      "duration_ms_total": 9569,
+      "total_cost_usd_total": 0.039533,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 609
+          "outputTokens": 547
         }
       },
       "error_type": null,
@@ -543,12 +543,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8409,
-      "total_cost_usd_total": 0.040772,
+      "duration_ms_total": 7874,
+      "total_cost_usd_total": 0.039291,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 650
+          "outputTokens": 577
         }
       },
       "error_type": null,
@@ -562,16 +562,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9892,
-      "total_cost_usd_total": 0.040761,
+      "duration_ms_total": 8881,
+      "total_cost_usd_total": 0.040595,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 624
+          "outputTokens": 615
         }
       },
       "error_type": null,
-      "solution": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    value_map = {\n        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,\n        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9,\n    }\n    words = [w for w in numbers.split() if w]\n    return ' '.join(sorted(words, key=lambda w: value_map[w]))\n"
+      "solution": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    value_map = {\n        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,\n        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9,\n    }\n    words = [w for w in numbers.split(' ') if w]\n    return ' '.join(sorted(words, key=lambda w: value_map[w]))\n"
     },
     {
       "task_id": "HumanEval/20",
@@ -581,12 +581,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 13996,
-      "total_cost_usd_total": 0.051571,
+      "duration_ms_total": 13231,
+      "total_cost_usd_total": 0.05127,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1056
+          "outputTokens": 1045
         }
       },
       "error_type": null,
@@ -600,16 +600,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8807,
-      "total_cost_usd_total": 0.040539,
+      "duration_ms_total": 11152,
+      "total_cost_usd_total": 0.043028,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 618
+          "outputTokens": 729
         }
       },
       "error_type": null,
-      "solution": "from typing import List\n\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n    min_number = min(numbers)\n    max_number = max(numbers)\n    return [(x - min_number) / (max_number - min_number) for x in numbers]\n"
+      "solution": "from typing import List\n\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n    min_number = min(numbers)\n    max_number = max(numbers)\n    span = max_number - min_number\n    if span == 0:\n        return [0.0 for _ in numbers]\n    return [(x - min_number) / span for x in numbers]\n"
     },
     {
       "task_id": "HumanEval/22",
@@ -619,12 +619,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10142,
-      "total_cost_usd_total": 0.040156,
+      "duration_ms_total": 12528,
+      "total_cost_usd_total": 0.038905,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 629
+          "outputTokens": 568
         }
       },
       "error_type": null,
@@ -638,12 +638,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8363,
-      "total_cost_usd_total": 0.03515,
+      "duration_ms_total": 7373,
+      "total_cost_usd_total": 0.034594,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 430
+          "outputTokens": 403
         }
       },
       "error_type": null,
@@ -657,12 +657,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12380,
-      "total_cost_usd_total": 0.048357,
+      "duration_ms_total": 9464,
+      "total_cost_usd_total": 0.042031,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1031
+          "outputTokens": 728
         }
       },
       "error_type": null,
@@ -676,12 +676,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10466,
-      "total_cost_usd_total": 0.041003,
+      "duration_ms_total": 9962,
+      "total_cost_usd_total": 0.040311,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 643
+          "outputTokens": 607
         }
       },
       "error_type": null,
@@ -695,12 +695,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9508,
-      "total_cost_usd_total": 0.037458,
+      "duration_ms_total": 11657,
+      "total_cost_usd_total": 0.036692,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 507
+          "outputTokens": 468
         }
       },
       "error_type": null,
@@ -714,12 +714,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9757,
-      "total_cost_usd_total": 0.039736,
+      "duration_ms_total": 8017,
+      "total_cost_usd_total": 0.037274,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 628
+          "outputTokens": 529
         }
       },
       "error_type": null,
@@ -733,12 +733,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7913,
-      "total_cost_usd_total": 0.035419,
+      "duration_ms_total": 11082,
+      "total_cost_usd_total": 0.034978,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 425
+          "outputTokens": 403
         }
       },
       "error_type": null,
@@ -752,12 +752,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8686,
-      "total_cost_usd_total": 0.036604,
+      "duration_ms_total": 10206,
+      "total_cost_usd_total": 0.037477,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 456
+          "outputTokens": 499
         }
       },
       "error_type": null,
@@ -771,12 +771,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8965,
-      "total_cost_usd_total": 0.03589,
+      "duration_ms_total": 9521,
+      "total_cost_usd_total": 0.036269,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 426
+          "outputTokens": 445
         }
       },
       "error_type": null,
@@ -790,12 +790,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9850,
-      "total_cost_usd_total": 0.039507,
+      "duration_ms_total": 9634,
+      "total_cost_usd_total": 0.040045,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 569
+          "outputTokens": 596
         }
       },
       "error_type": null,
@@ -809,16 +809,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 17945,
-      "total_cost_usd_total": 0.069526,
+      "duration_ms_total": 15952,
+      "total_cost_usd_total": 0.05965,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1735
+          "outputTokens": 1330
         }
       },
       "error_type": null,
-      "solution": "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    def sign(v):\n        return (v > 0) - (v < 0)\n\n    begin, end = -1.0, 1.0\n    f_begin, f_end = poly(xs, begin), poly(xs, end)\n    expansions = 0\n    while sign(f_begin) * sign(f_end) > 0 and expansions < 200:\n        begin *= 2.0\n        end *= 2.0\n        try:\n            f_begin, f_end = poly(xs, begin), poly(xs, end)\n        except OverflowError:\n            break\n        expansions += 1\n\n    if f_begin == 0:\n        return begin\n    if f_end == 0:\n        return end\n\n    if sign(f_begin) * sign(f_end) < 0:\n        for _ in range(2000):\n            mid = (begin + end) / 2.0\n            if mid == begin or mid == end:\n                break\n            f_mid = poly(xs, mid)\n            if f_mid == 0:\n                return mid\n            if sign(f_mid) == sign(f_begin):\n                begin, f_begin = mid, f_mid\n            else:\n                end, f_end = mid, f_mid\n        return begin if abs(f_begin) <= abs(f_end) else end\n\n    # Fallback: Newton's method (no sign change found).\n    deriv = [i * c for i, c in enumerate(xs)][1:]\n    x = 0.0\n    for _ in range(1000):\n        fx = poly(xs, x)\n        dfx = poly(deriv, x) if deriv else 0.0\n        if dfx == 0:\n            x += 1e-3\n            continue\n        nx = x - fx / dfx\n        if abs(nx - x) < 1e-15:\n            x = nx\n            break\n        x = nx\n    return x\n"
+      "solution": "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    begin, end = -1.0, 1.0\n    for _ in range(2000):\n        if poly(xs, begin) * poly(xs, end) <= 0:\n            break\n        begin *= 2.0\n        end *= 2.0\n    f_begin = poly(xs, begin)\n    if f_begin == 0:\n        return begin\n    if poly(xs, end) == 0:\n        return end\n    for _ in range(2000):\n        mid = (begin + end) / 2.0\n        if mid == begin or mid == end:\n            break\n        f_mid = poly(xs, mid)\n        if f_mid == 0:\n            return mid\n        if (f_mid > 0) == (f_begin > 0):\n            begin, f_begin = mid, f_mid\n        else:\n            end = mid\n    return begin if abs(poly(xs, begin)) <= abs(poly(xs, end)) else end\n"
     },
     {
       "task_id": "HumanEval/33",
@@ -828,12 +828,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10685,
-      "total_cost_usd_total": 0.041406,
+      "duration_ms_total": 11064,
+      "total_cost_usd_total": 0.040785,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 672
+          "outputTokens": 641
         }
       },
       "error_type": null,
@@ -847,12 +847,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7421,
-      "total_cost_usd_total": 0.035439,
+      "duration_ms_total": 8876,
+      "total_cost_usd_total": 0.036558,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 432
+          "outputTokens": 488
         }
       },
       "error_type": null,
@@ -866,12 +866,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8834,
-      "total_cost_usd_total": 0.037139,
+      "duration_ms_total": 7738,
+      "total_cost_usd_total": 0.036368,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 506
+          "outputTokens": 466
         }
       },
       "error_type": null,
@@ -885,12 +885,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10679,
-      "total_cost_usd_total": 0.039737,
+      "duration_ms_total": 9197,
+      "total_cost_usd_total": 0.040131,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 609
+          "outputTokens": 636
         }
       },
       "error_type": null,
@@ -904,12 +904,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9481,
-      "total_cost_usd_total": 0.037723,
+      "duration_ms_total": 10986,
+      "total_cost_usd_total": 0.038626,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 505
+          "outputTokens": 548
         }
       },
       "error_type": null,
@@ -923,16 +923,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11439,
-      "total_cost_usd_total": 0.042609,
+      "duration_ms_total": 10324,
+      "total_cost_usd_total": 0.042012,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 675
+          "outputTokens": 644
         }
       },
       "error_type": null,
-      "solution": "\n\ndef encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # undo the cycle: move the last element of each full group back to the front.\n    groups = [(group[-1] + group[:-1]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n"
+      "solution": "\n\ndef encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # reverse the cycle in each group. Unless group has fewer elements than 3.\n    groups = [(group[-1] + group[:-1]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n"
     },
     {
       "task_id": "HumanEval/39",
@@ -942,16 +942,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 13955,
-      "total_cost_usd_total": 0.05067,
+      "duration_ms_total": 16235,
+      "total_cost_usd_total": 0.050384,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1070
+          "outputTokens": 1045
         }
       },
       "error_type": null,
-      "solution": "\n\ndef prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n    def is_prime(m: int) -> bool:\n        if m < 2:\n            return False\n        small = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)\n        for p in small:\n            if m % p == 0:\n                return m == p\n        d, s = m - 1, 0\n        while d % 2 == 0:\n            d //= 2\n            s += 1\n        for a in small:\n            x = pow(a, d, m)\n            if x == 1 or x == m - 1:\n                continue\n            for _ in range(s - 1):\n                x = x * x % m\n                if x == m - 1:\n                    break\n            else:\n                return False\n        return True\n\n    count = 0\n    a, b = 0, 1\n    while True:\n        a, b = b, a + b\n        if is_prime(a):\n            count += 1\n            if count == n:\n                return a\n"
+      "solution": "\n\ndef prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n    def is_prime(m: int) -> bool:\n        if m < 2:\n            return False\n        small = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)\n        for p in small:\n            if m % p == 0:\n                return m == p\n        d, s = m - 1, 0\n        while d % 2 == 0:\n            d //= 2\n            s += 1\n        for a in small:\n            x = pow(a, d, m)\n            if x == 1 or x == m - 1:\n                continue\n            for _ in range(s - 1):\n                x = x * x % m\n                if x == m - 1:\n                    break\n            else:\n                return False\n        return True\n\n    a, b = 0, 1\n    count = 0\n    while True:\n        a, b = b, a + b\n        if is_prime(a):\n            count += 1\n            if count == n:\n                return a\n"
     },
     {
       "task_id": "HumanEval/40",
@@ -961,16 +961,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11460,
-      "total_cost_usd_total": 0.044337,
+      "duration_ms_total": 9806,
+      "total_cost_usd_total": 0.043886,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 754
+          "outputTokens": 727
         }
       },
       "error_type": null,
-      "solution": "\n\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    s = sorted(l)\n    n = len(s)\n    for i in range(n - 2):\n        lo, hi = i + 1, n - 1\n        while lo < hi:\n            total = s[i] + s[lo] + s[hi]\n            if total == 0:\n                return True\n            if total < 0:\n                lo += 1\n            else:\n                hi -= 1\n    return False\n"
+      "solution": "\n\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    arr = sorted(l)\n    n = len(arr)\n    for i in range(n - 2):\n        lo, hi = i + 1, n - 1\n        while lo < hi:\n            s = arr[i] + arr[lo] + arr[hi]\n            if s == 0:\n                return True\n            if s < 0:\n                lo += 1\n            else:\n                hi -= 1\n    return False\n"
     },
     {
       "task_id": "HumanEval/41",
@@ -980,12 +980,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 6588,
-      "total_cost_usd_total": 0.036933,
+      "duration_ms_total": 6394,
+      "total_cost_usd_total": 0.036652,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 438
+          "outputTokens": 424
         }
       },
       "error_type": null,
@@ -999,12 +999,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8429,
-      "total_cost_usd_total": 0.035948,
+      "duration_ms_total": 7392,
+      "total_cost_usd_total": 0.035941,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 433
+          "outputTokens": 432
         }
       },
       "error_type": null,
@@ -1018,12 +1018,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11696,
-      "total_cost_usd_total": 0.042828,
+      "duration_ms_total": 9005,
+      "total_cost_usd_total": 0.040477,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 691
+          "outputTokens": 575
         }
       },
       "error_type": null,
@@ -1037,12 +1037,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10918,
-      "total_cost_usd_total": 0.040852,
+      "duration_ms_total": 9443,
+      "total_cost_usd_total": 0.041796,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 649
+          "outputTokens": 701
         }
       },
       "error_type": null,
@@ -1056,12 +1056,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8377,
-      "total_cost_usd_total": 0.034773,
+      "duration_ms_total": 7208,
+      "total_cost_usd_total": 0.034827,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 413
+          "outputTokens": 415
         }
       },
       "error_type": null,
@@ -1075,16 +1075,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10289,
-      "total_cost_usd_total": 0.043291,
+      "duration_ms_total": 10111,
+      "total_cost_usd_total": 0.043249,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 719
+          "outputTokens": 716
         }
       },
       "error_type": null,
-      "solution": "\n\ndef fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n    >>> fib4(5)\n    4\n    >>> fib4(6)\n    8\n    >>> fib4(7)\n    14\n    \"\"\"\n    a, b, c, d = 0, 0, 2, 0\n    if n < 4:\n        return [a, b, c, d][n]\n    for _ in range(n - 3):\n        a, b, c, d = b, c, d, a + b + c + d\n    return d\n"
+      "solution": "\n\ndef fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n    >>> fib4(5)\n    4\n    >>> fib4(6)\n    8\n    >>> fib4(7)\n    14\n    \"\"\"\n    a, b, c, d = 0, 0, 2, 0\n    if n < 4:\n        return (a, b, c, d)[n]\n    for _ in range(n - 3):\n        a, b, c, d = b, c, d, a + b + c + d\n    return d\n"
     },
     {
       "task_id": "HumanEval/47",
@@ -1094,12 +1094,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9942,
-      "total_cost_usd_total": 0.043005,
+      "duration_ms_total": 9844,
+      "total_cost_usd_total": 0.043069,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 768
+          "outputTokens": 771
         }
       },
       "error_type": null,
@@ -1113,12 +1113,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9135,
-      "total_cost_usd_total": 0.03619,
+      "duration_ms_total": 8091,
+      "total_cost_usd_total": 0.037444,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 449
+          "outputTokens": 511
         }
       },
       "error_type": null,
@@ -1132,12 +1132,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10500,
-      "total_cost_usd_total": 0.04244,
+      "duration_ms_total": 12646,
+      "total_cost_usd_total": 0.044344,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 713
+          "outputTokens": 798
         }
       },
       "error_type": null,
@@ -1151,12 +1151,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12047,
-      "total_cost_usd_total": 0.03945,
+      "duration_ms_total": 9437,
+      "total_cost_usd_total": 0.039429,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 591
+          "outputTokens": 590
         }
       },
       "error_type": null,
@@ -1170,16 +1170,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9504,
-      "total_cost_usd_total": 0.038261,
+      "duration_ms_total": 8877,
+      "total_cost_usd_total": 0.04004,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 502
+          "outputTokens": 590
         }
       },
       "error_type": null,
-      "solution": "\n\ndef remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    \"\"\"\n    return \"\".join(c for c in text if c.lower() not in \"aeiou\")\n"
+      "solution": "\n\ndef remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    \"\"\"\n    return \"\".join(c for c in text if c not in \"aeiouAEIOU\")\n"
     },
     {
       "task_id": "HumanEval/52",
@@ -1189,12 +1189,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8856,
-      "total_cost_usd_total": 0.035802,
+      "duration_ms_total": 8604,
+      "total_cost_usd_total": 0.037201,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 440
+          "outputTokens": 510
         }
       },
       "error_type": null,
@@ -1208,12 +1208,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8190,
-      "total_cost_usd_total": 0.035051,
+      "duration_ms_total": 7473,
+      "total_cost_usd_total": 0.03501,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 425
+          "outputTokens": 423
         }
       },
       "error_type": null,
@@ -1227,12 +1227,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9707,
-      "total_cost_usd_total": 0.037522,
+      "duration_ms_total": 8063,
+      "total_cost_usd_total": 0.038331,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 452
+          "outputTokens": 494
         }
       },
       "error_type": null,
@@ -1246,12 +1246,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8591,
-      "total_cost_usd_total": 0.037026,
+      "duration_ms_total": 9480,
+      "total_cost_usd_total": 0.03818,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 509
+          "outputTokens": 566
         }
       },
       "error_type": null,
@@ -1265,12 +1265,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10075,
-      "total_cost_usd_total": 0.040624,
+      "duration_ms_total": 10089,
+      "total_cost_usd_total": 0.040048,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 637
+          "outputTokens": 609
         }
       },
       "error_type": null,
@@ -1284,12 +1284,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8634,
-      "total_cost_usd_total": 0.039579,
+      "duration_ms_total": 11912,
+      "total_cost_usd_total": 0.038812,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 600
+          "outputTokens": 568
         }
       },
       "error_type": null,
@@ -1303,16 +1303,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12597,
-      "total_cost_usd_total": 0.044435,
+      "duration_ms_total": 8893,
+      "total_cost_usd_total": 0.037313,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 781
+          "outputTokens": 497
         }
       },
       "error_type": null,
-      "solution": "\n\ndef common(l1: list, l2: list):\n    \"\"\"Return sorted unique common elements for two lists.\n    >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])\n    [1, 5, 653]\n    >>> common([5, 3, 2, 8], [3, 2])\n    [2, 3]\n\n    \"\"\"\n    s2 = set(l2)\n    return sorted({e for e in l1 if e in s2})\n"
+      "solution": "\n\ndef common(l1: list, l2: list):\n    \"\"\"Return sorted unique common elements for two lists.\n    >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])\n    [1, 5, 653]\n    >>> common([5, 3, 2, 8], [3, 2])\n    [2, 3]\n\n    \"\"\"\n    return sorted(set(l1) & set(l2))\n"
     },
     {
       "task_id": "HumanEval/59",
@@ -1322,16 +1322,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 15418,
-      "total_cost_usd_total": 0.042848,
+      "duration_ms_total": 8622,
+      "total_cost_usd_total": 0.039587,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 782
+          "outputTokens": 615
         }
       },
       "error_type": null,
-      "solution": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    largest = 1\n    d = 2\n    while d * d <= n:\n        while n % d == 0:\n            largest = d\n            n //= d\n        d += 1\n    if n > 1:\n        largest = n\n    return largest\n"
+      "solution": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    largest = 1\n    d = 2\n    while d * d <= n:\n        while n % d == 0:\n            largest = d\n            n //= d\n        d += 1 if d == 2 else 2\n    if n > 1:\n        largest = n\n    return largest\n"
     },
     {
       "task_id": "HumanEval/60",
@@ -1341,16 +1341,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11175,
-      "total_cost_usd_total": 0.042179,
+      "duration_ms_total": 8142,
+      "total_cost_usd_total": 0.038732,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 711
+          "outputTokens": 554
         }
       },
       "error_type": null,
-      "solution": "\n\ndef sum_to_n(n: int):\n    \"\"\"sum_to_n is a function that sums numbers from 1 to n.\n    >>> sum_to_n(30)\n    465\n    >>> sum_to_n(100)\n    5050\n    >>> sum_to_n(5)\n    15\n    >>> sum_to_n(10)\n    55\n    >>> sum_to_n(1)\n    1\n    \"\"\"\n    if n <= 0:\n        return 0\n    return n * (n + 1) // 2\n"
+      "solution": "\n\ndef sum_to_n(n: int):\n    \"\"\"sum_to_n is a function that sums numbers from 1 to n.\n    >>> sum_to_n(30)\n    465\n    >>> sum_to_n(100)\n    5050\n    >>> sum_to_n(5)\n    15\n    >>> sum_to_n(10)\n    55\n    >>> sum_to_n(1)\n    1\n    \"\"\"\n    return sum(range(n + 1))\n"
     },
     {
       "task_id": "HumanEval/61",
@@ -1360,12 +1360,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8787,
-      "total_cost_usd_total": 0.040913,
+      "duration_ms_total": 8359,
+      "total_cost_usd_total": 0.039651,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 653
+          "outputTokens": 590
         }
       },
       "error_type": null,
@@ -1379,12 +1379,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9022,
-      "total_cost_usd_total": 0.038041,
+      "duration_ms_total": 8159,
+      "total_cost_usd_total": 0.0383,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 523
+          "outputTokens": 536
         }
       },
       "error_type": null,
@@ -1398,16 +1398,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10103,
-      "total_cost_usd_total": 0.041195,
+      "duration_ms_total": 10961,
+      "total_cost_usd_total": 0.042364,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 632
+          "outputTokens": 688
         }
       },
       "error_type": null,
-      "solution": "\n\ndef fibfib(n: int):\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).\n    Please write a function to efficiently compute the n-th element of the fibfib number sequence.\n    >>> fibfib(1)\n    0\n    >>> fibfib(5)\n    4\n    >>> fibfib(8)\n    24\n    \"\"\"\n    if n < 2:\n        return 0\n    a, b, c = 0, 0, 1\n    for _ in range(n - 2):\n        a, b, c = b, c, a + b + c\n    return c\n"
+      "solution": "\n\ndef fibfib(n: int):\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).\n    Please write a function to efficiently compute the n-th element of the fibfib number sequence.\n    >>> fibfib(1)\n    0\n    >>> fibfib(5)\n    4\n    >>> fibfib(8)\n    24\n    \"\"\"\n    if n < 2:\n        return 0\n    if n == 2:\n        return 1\n    a, b, c = 0, 0, 1\n    for _ in range(n - 2):\n        a, b, c = b, c, a + b + c\n    return c\n"
     },
     {
       "task_id": "HumanEval/64",
@@ -1417,12 +1417,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9594,
-      "total_cost_usd_total": 0.038493,
+      "duration_ms_total": 9161,
+      "total_cost_usd_total": 0.038952,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 516
+          "outputTokens": 539
         }
       },
       "error_type": null,
@@ -1436,12 +1436,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9980,
-      "total_cost_usd_total": 0.042113,
+      "duration_ms_total": 9034,
+      "total_cost_usd_total": 0.040787,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 715
+          "outputTokens": 649
         }
       },
       "error_type": null,
@@ -1455,12 +1455,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9335,
-      "total_cost_usd_total": 0.03974,
+      "duration_ms_total": 10697,
+      "total_cost_usd_total": 0.038959,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 597
+          "outputTokens": 559
         }
       },
       "error_type": null,
@@ -1474,16 +1474,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8080,
-      "total_cost_usd_total": 0.040784,
+      "duration_ms_total": 8936,
+      "total_cost_usd_total": 0.039933,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 560
+          "outputTokens": 527
         }
       },
       "error_type": null,
-      "solution": "\ndef fruit_distribution(s,n):\n    \"\"\"\n    In this task, you will be given a string that represents a number of apples and oranges \n    that are distributed in a basket of fruit this basket contains \n    apples, oranges, and mango fruits. Given the string that represents the total number of \n    the oranges and apples and an integer that represent the total number of the fruits \n    in the basket return the number of the mango fruits in the basket.\n    for examble:\n    fruit_distribution(\"5 apples and 6 oranges\", 19) ->19 - 5 - 6 = 8\n    fruit_distribution(\"0 apples and 1 oranges\",3) -> 3 - 0 - 1 = 2\n    fruit_distribution(\"2 apples and 3 oranges\", 100) -> 100 - 2 - 3 = 95\n    fruit_distribution(\"100 apples and 1 oranges\",120) -> 120 - 100 - 1 = 19\n    \"\"\"\n    return n - sum(int(tok) for tok in s.split(' ') if tok.isdigit())\n"
+      "solution": "\ndef fruit_distribution(s,n):\n    \"\"\"\n    In this task, you will be given a string that represents a number of apples and oranges \n    that are distributed in a basket of fruit this basket contains \n    apples, oranges, and mango fruits. Given the string that represents the total number of \n    the oranges and apples and an integer that represent the total number of the fruits \n    in the basket return the number of the mango fruits in the basket.\n    for examble:\n    fruit_distribution(\"5 apples and 6 oranges\", 19) ->19 - 5 - 6 = 8\n    fruit_distribution(\"0 apples and 1 oranges\",3) -> 3 - 0 - 1 = 2\n    fruit_distribution(\"2 apples and 3 oranges\", 100) -> 100 - 2 - 3 = 95\n    fruit_distribution(\"100 apples and 1 oranges\",120) -> 120 - 100 - 1 = 19\n    \"\"\"\n    return n - sum(int(tok) for tok in s.split() if tok.isdigit())\n"
     },
     {
       "task_id": "HumanEval/68",
@@ -1493,16 +1493,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12270,
-      "total_cost_usd_total": 0.044323,
+      "duration_ms_total": 8739,
+      "total_cost_usd_total": 0.041942,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 657
+          "outputTokens": 536
         }
       },
       "error_type": null,
-      "solution": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    best = []\n    for i, v in enumerate(arr):\n        if v % 2 == 0 and (not best or v < best[0]):\n            best = [v, i]\n    return best\n"
+      "solution": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    best = None\n    for i, v in enumerate(arr):\n        if v % 2 == 0 and (best is None or v < best[0]):\n            best = [v, i]\n    return best if best is not None else []\n"
     },
     {
       "task_id": "HumanEval/69",
@@ -1512,16 +1512,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10428,
-      "total_cost_usd_total": 0.041174,
+      "duration_ms_total": 9752,
+      "total_cost_usd_total": 0.041043,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 634
+          "outputTokens": 628
         }
       },
       "error_type": null,
-      "solution": "\ndef search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n    counts = {}\n    for x in lst:\n        counts[x] = counts.get(x, 0) + 1\n    ans = -1\n    for x, c in counts.items():\n        if x > 0 and c >= x and x > ans:\n            ans = x\n    return ans\n"
+      "solution": "\ndef search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n    counts = {}\n    for x in lst:\n        counts[x] = counts.get(x, 0) + 1\n    result = -1\n    for value, freq in counts.items():\n        if value > 0 and freq >= value and value > result:\n            result = value\n    return result\n"
     },
     {
       "task_id": "HumanEval/71",
@@ -1531,12 +1531,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9476,
-      "total_cost_usd_total": 0.040731,
+      "duration_ms_total": 9171,
+      "total_cost_usd_total": 0.041945,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 612
+          "outputTokens": 673
         }
       },
       "error_type": null,
@@ -1550,12 +1550,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8328,
-      "total_cost_usd_total": 0.040378,
+      "duration_ms_total": 8502,
+      "total_cost_usd_total": 0.039737,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 544
+          "outputTokens": 512
         }
       },
       "error_type": null,
@@ -1569,12 +1569,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10429,
-      "total_cost_usd_total": 0.043104,
+      "duration_ms_total": 9473,
+      "total_cost_usd_total": 0.042303,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 748
+          "outputTokens": 708
         }
       },
       "error_type": null,
@@ -1588,16 +1588,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9227,
-      "total_cost_usd_total": 0.040067,
+      "duration_ms_total": 7684,
+      "total_cost_usd_total": 0.038806,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 537
+          "outputTokens": 474
         }
       },
       "error_type": null,
-      "solution": "\ndef total_match(lst1, lst2):\n    '''\n    Write a function that accepts two lists of strings and returns the list that has \n    total number of chars in the all strings of the list less than the other list.\n\n    if the two lists have the same number of chars, return the first list.\n\n    Examples\n    total_match([], []) \u279e []\n    total_match(['hi', 'admin'], ['hI', 'Hi']) \u279e ['hI', 'Hi']\n    total_match(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) \u279e ['hi', 'admin']\n    total_match(['hi', 'admin'], ['hI', 'hi', 'hi']) \u279e ['hI', 'hi', 'hi']\n    total_match(['4'], ['1', '2', '3', '4', '5']) \u279e ['4']\n    '''\n    total1 = sum(len(s) for s in lst1)\n    total2 = sum(len(s) for s in lst2)\n    return lst1 if total1 <= total2 else lst2\n"
+      "solution": "\ndef total_match(lst1, lst2):\n    '''\n    Write a function that accepts two lists of strings and returns the list that has \n    total number of chars in the all strings of the list less than the other list.\n\n    if the two lists have the same number of chars, return the first list.\n\n    Examples\n    total_match([], []) \u279e []\n    total_match(['hi', 'admin'], ['hI', 'Hi']) \u279e ['hI', 'Hi']\n    total_match(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) \u279e ['hi', 'admin']\n    total_match(['hi', 'admin'], ['hI', 'hi', 'hi']) \u279e ['hI', 'hi', 'hi']\n    total_match(['4'], ['1', '2', '3', '4', '5']) \u279e ['4']\n    '''\n    l1 = sum(len(s) for s in lst1)\n    l2 = sum(len(s) for s in lst2)\n    return lst1 if l1 <= l2 else lst2\n"
     },
     {
       "task_id": "HumanEval/75",
@@ -1607,16 +1607,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 14286,
-      "total_cost_usd_total": 0.049065,
+      "duration_ms_total": 13279,
+      "total_cost_usd_total": 0.048559,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1003
+          "outputTokens": 985
         }
       },
       "error_type": null,
-      "solution": "\ndef is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less then 100. \n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    if not isinstance(a, int) or a < 8:\n        return False\n    count = 0\n    n = a\n    p = 2\n    while p * p <= n:\n        while n % p == 0:\n            if p > 100:\n                return False\n            n //= p\n            count += 1\n            if count > 3:\n                return False\n        p += 1\n    if n > 1:\n        if n > 100:\n            return False\n        count += 1\n    return count == 3\n"
+      "solution": "\ndef is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less then 100. \n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    if not isinstance(a, int) or a < 8:\n        return False\n    count = 0\n    n = a\n    p = 2\n    while p * p <= n:\n        while n % p == 0:\n            n //= p\n            count += 1\n            if count > 3:\n                return False\n        p += 1\n    if n > 1:\n        count += 1\n    return count == 3\n"
     },
     {
       "task_id": "HumanEval/76",
@@ -1626,16 +1626,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 18264,
-      "total_cost_usd_total": 0.063163,
+      "duration_ms_total": 17837,
+      "total_cost_usd_total": 0.061137,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1570
+          "outputTokens": 1489
         }
       },
       "error_type": null,
-      "solution": "\ndef is_simple_power(x, n):\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => true\n    is_simple_power(2, 2) => true\n    is_simple_power(8, 2) => true\n    is_simple_power(3, 2) => false\n    is_simple_power(3, 1) => false\n    is_simple_power(5, 3) => false\n    \"\"\"\n    if x == 1:\n        return True\n    if x < 1 or n in (-1, 0, 1):\n        return False\n    power = 1\n    while power < x:\n        power *= n\n    return power == x\n"
+      "solution": "\ndef is_simple_power(x, n):\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => true\n    is_simple_power(2, 2) => true\n    is_simple_power(8, 2) => true\n    is_simple_power(3, 2) => false\n    is_simple_power(3, 1) => false\n    is_simple_power(5, 3) => false\n    \"\"\"\n    if x < 1:\n        return False\n    if x == 1:\n        return True\n    if n in (0, 1, -1):\n        return False\n    power = 1\n    while abs(power) < x:\n        power *= n\n    return power == x\n"
     },
     {
       "task_id": "HumanEval/77",
@@ -1645,16 +1645,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 13177,
-      "total_cost_usd_total": 0.043545,
+      "duration_ms_total": 11264,
+      "total_cost_usd_total": 0.043984,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 745
+          "outputTokens": 783
         }
       },
       "error_type": null,
-      "solution": "\ndef iscube(a):\n    '''\n    Write a function that takes an integer a and returns True \n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    '''\n    n = abs(int(a))\n    lo, hi = 0, 1\n    while hi ** 3 < n:\n        hi *= 2\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        cube = mid ** 3\n        if cube == n:\n            return True\n        if cube < n:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return False\n"
+      "solution": "\ndef iscube(a):\n    '''\n    Write a function that takes an integer a and returns True \n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    '''\n    n = abs(int(a))\n    lo, hi = 0, 1\n    while hi ** 3 < n:\n        hi *= 2\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        c = mid ** 3\n        if c == n:\n            return True\n        if c < n:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return False\n"
     },
     {
       "task_id": "HumanEval/78",
@@ -1664,12 +1664,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10769,
-      "total_cost_usd_total": 0.040863,
+      "duration_ms_total": 11261,
+      "total_cost_usd_total": 0.041087,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 529
+          "outputTokens": 541
         }
       },
       "error_type": null,
@@ -1683,12 +1683,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9610,
-      "total_cost_usd_total": 0.038313,
+      "duration_ms_total": 10301,
+      "total_cost_usd_total": 0.039037,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 516
+          "outputTokens": 550
         }
       },
       "error_type": null,
@@ -1702,12 +1702,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9988,
-      "total_cost_usd_total": 0.039435,
+      "duration_ms_total": 10001,
+      "total_cost_usd_total": 0.039919,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 572
+          "outputTokens": 597
         }
       },
       "error_type": null,
@@ -1721,8 +1721,8 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12321,
-      "total_cost_usd_total": 0.051937,
+      "duration_ms_total": 13012,
+      "total_cost_usd_total": 0.052036,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
@@ -1740,12 +1740,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7678,
-      "total_cost_usd_total": 0.03802,
+      "duration_ms_total": 10469,
+      "total_cost_usd_total": 0.039613,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 534
+          "outputTokens": 613
         }
       },
       "error_type": null,
@@ -1759,16 +1759,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9405,
-      "total_cost_usd_total": 0.039898,
+      "duration_ms_total": 8904,
+      "total_cost_usd_total": 0.039391,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 649
+          "outputTokens": 624
         }
       },
       "error_type": null,
-      "solution": "\ndef starts_one_ends(n):\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \"\"\"\n    if n == 1:\n        return 1\n    return 18 * 10 ** (n - 2)\n"
+      "solution": "\ndef starts_one_ends(n):\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \"\"\"\n    if n == 1:\n        return 1\n    return 18 * (10 ** (n - 2))\n"
     },
     {
       "task_id": "HumanEval/84",
@@ -1778,12 +1778,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8878,
-      "total_cost_usd_total": 0.039906,
+      "duration_ms_total": 12180,
+      "total_cost_usd_total": 0.038025,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 598
+          "outputTokens": 504
         }
       },
       "error_type": null,
@@ -1797,16 +1797,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10541,
-      "total_cost_usd_total": 0.038185,
+      "duration_ms_total": 8851,
+      "total_cost_usd_total": 0.038219,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 568
+          "outputTokens": 573
         }
       },
       "error_type": null,
-      "solution": "\ndef add(lst):\n    \"\"\"Given a non-empty list of integers lst. add the even elements that are at odd indices..\n\n\n    Examples:\n        add([4, 2, 6, 7]) ==> 2 \n    \"\"\"\n    return sum(x for i, x in enumerate(lst) if i % 2 == 1 and x % 2 == 0)\n"
+      "solution": "\ndef add(lst):\n    \"\"\"Given a non-empty list of integers lst. add the even elements that are at odd indices..\n\n\n    Examples:\n        add([4, 2, 6, 7]) ==> 2 \n    \"\"\"\n    return sum(x for x in lst[1::2] if x % 2 == 0)\n"
     },
     {
       "task_id": "HumanEval/86",
@@ -1816,12 +1816,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11702,
-      "total_cost_usd_total": 0.041563,
+      "duration_ms_total": 8715,
+      "total_cost_usd_total": 0.039857,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 664
+          "outputTokens": 578
         }
       },
       "error_type": null,
@@ -1835,12 +1835,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10296,
-      "total_cost_usd_total": 0.042061,
+      "duration_ms_total": 8694,
+      "total_cost_usd_total": 0.041985,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 605
+          "outputTokens": 602
         }
       },
       "error_type": null,
@@ -1854,16 +1854,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 13335,
-      "total_cost_usd_total": 0.039986,
+      "duration_ms_total": 9071,
+      "total_cost_usd_total": 0.04017,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 558
+          "outputTokens": 566
         }
       },
       "error_type": null,
-      "solution": "\ndef sort_array(array):\n    \"\"\"\n    Given an array of non-negative integers, return a copy of the given array after sorting,\n    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,\n    or sort it in descending order if the sum( first index value, last index value) is even.\n\n    Note:\n    * don't change the given array.\n\n    Examples:\n    * sort_array([]) => []\n    * sort_array([5]) => [5]\n    * sort_array([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]\n    * sort_array([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]\n    \"\"\"\n    if not array:\n        return []\n    return sorted(array, reverse=(array[0] + array[-1]) % 2 == 0)\n"
+      "solution": "\ndef sort_array(array):\n    \"\"\"\n    Given an array of non-negative integers, return a copy of the given array after sorting,\n    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,\n    or sort it in descending order if the sum( first index value, last index value) is even.\n\n    Note:\n    * don't change the given array.\n\n    Examples:\n    * sort_array([]) => []\n    * sort_array([5]) => [5]\n    * sort_array([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]\n    * sort_array([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]\n    \"\"\"\n    if len(array) == 0:\n        return []\n    return sorted(array, reverse=(array[0] + array[-1]) % 2 == 0)\n"
     },
     {
       "task_id": "HumanEval/89",
@@ -1873,12 +1873,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10119,
-      "total_cost_usd_total": 0.041455,
+      "duration_ms_total": 8494,
+      "total_cost_usd_total": 0.041163,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 654
+          "outputTokens": 629
         }
       },
       "error_type": null,
@@ -1892,16 +1892,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8918,
-      "total_cost_usd_total": 0.037195,
+      "duration_ms_total": 9534,
+      "total_cost_usd_total": 0.040859,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 471
+          "outputTokens": 655
         }
       },
       "error_type": null,
-      "solution": "\ndef next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    next_smallest([1, 2, 3, 4, 5]) == 2\n    next_smallest([5, 1, 4, 3, 2]) == 2\n    next_smallest([]) == None\n    next_smallest([1, 1]) == None\n    \"\"\"\n    distinct = sorted(set(lst))\n    return distinct[1] if len(distinct) >= 2 else None\n"
+      "solution": "\ndef next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    next_smallest([1, 2, 3, 4, 5]) == 2\n    next_smallest([5, 1, 4, 3, 2]) == 2\n    next_smallest([]) == None\n    next_smallest([1, 1]) == None\n    \"\"\"\n    unique = sorted(set(lst))\n    return unique[1] if len(unique) >= 2 else None\n"
     },
     {
       "task_id": "HumanEval/91",
@@ -1911,12 +1911,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11278,
-      "total_cost_usd_total": 0.045372,
+      "duration_ms_total": 10783,
+      "total_cost_usd_total": 0.043731,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 844
+          "outputTokens": 765
         }
       },
       "error_type": null,
@@ -1930,12 +1930,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9502,
-      "total_cost_usd_total": 0.040112,
+      "duration_ms_total": 11186,
+      "total_cost_usd_total": 0.041056,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 581
+          "outputTokens": 626
         }
       },
       "error_type": null,
@@ -1949,12 +1949,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9338,
-      "total_cost_usd_total": 0.040545,
+      "duration_ms_total": 9631,
+      "total_cost_usd_total": 0.039739,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 622
+          "outputTokens": 581
         }
       },
       "error_type": null,
@@ -1968,16 +1968,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11405,
-      "total_cost_usd_total": 0.046028,
+      "duration_ms_total": 10276,
+      "total_cost_usd_total": 0.045177,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 791
+          "outputTokens": 751
         }
       },
       "error_type": null,
-      "solution": "\n\ndef skjkasdkd(lst):\n    \"\"\"You are given a list of integers.\n    You need to find the largest prime value and return the sum of its digits.\n\n    Examples:\n    For lst = [0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3] the output should be 10\n    For lst = [1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1] the output should be 25\n    For lst = [1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3] the output should be 13\n    For lst = [0,724,32,71,99,32,6,0,5,91,83,0,5,6] the output should be 11\n    For lst = [0,81,12,3,1,21] the output should be 3\n    For lst = [0,8,1,2,1,7] the output should be 7\n    \"\"\"\n    def is_prime(n):\n        if n < 2:\n            return False\n        if n % 2 == 0:\n            return n == 2\n        i = 3\n        while i * i <= n:\n            if n % i == 0:\n                return False\n            i += 2\n        return True\n\n    largest = 0\n    for x in lst:\n        if x > largest and is_prime(x):\n            largest = x\n    return sum(int(d) for d in str(largest))\n"
+      "solution": "\n\ndef skjkasdkd(lst):\n    \"\"\"You are given a list of integers.\n    You need to find the largest prime value and return the sum of its digits.\n\n    Examples:\n    For lst = [0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3] the output should be 10\n    For lst = [1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1] the output should be 25\n    For lst = [1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3] the output should be 13\n    For lst = [0,724,32,71,99,32,6,0,5,91,83,0,5,6] the output should be 11\n    For lst = [0,81,12,3,1,21] the output should be 3\n    For lst = [0,8,1,2,1,7] the output should be 7\n    \"\"\"\n    def is_prime(n):\n        if n < 2:\n            return False\n        if n < 4:\n            return True\n        if n % 2 == 0 or n % 3 == 0:\n            return False\n        i = 5\n        while i * i <= n:\n            if n % i == 0 or n % (i + 2) == 0:\n                return False\n            i += 6\n        return True\n\n    largest = 0\n    for x in lst:\n        if x > largest and is_prime(x):\n            largest = x\n    return sum(int(d) for d in str(largest))\n"
     },
     {
       "task_id": "HumanEval/95",
@@ -1987,16 +1987,16 @@
       "passed_evalplus": false,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12728,
-      "total_cost_usd_total": 0.047558,
+      "duration_ms_total": 13199,
+      "total_cost_usd_total": 0.046947,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 868
+          "outputTokens": 836
         }
       },
       "error_type": "tests_failed",
-      "solution": "\ndef check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    keys = list(dict.keys())\n    if not keys or not all(isinstance(k, str) for k in keys):\n        return False\n    return all(k.islower() for k in keys) or all(k.isupper() for k in keys)\n"
+      "solution": "\ndef check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    keys = list(dict.keys())\n    if not keys:\n        return False\n    if not all(isinstance(k, str) for k in keys):\n        return False\n    return all(k.islower() for k in keys) or all(k.isupper() for k in keys)\n"
     },
     {
       "task_id": "HumanEval/96",
@@ -2006,16 +2006,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11074,
-      "total_cost_usd_total": 0.04226,
+      "duration_ms_total": 10047,
+      "total_cost_usd_total": 0.043644,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 681
+          "outputTokens": 756
         }
       },
       "error_type": null,
-      "solution": "\ndef count_up_to(n):\n    \"\"\"Implement a function that takes an non-negative integer and returns an array of the first n\n    integers that are prime numbers and less than n.\n    for example:\n    count_up_to(5) => [2,3]\n    count_up_to(11) => [2,3,5,7]\n    count_up_to(0) => []\n    count_up_to(20) => [2,3,5,7,11,13,17,19]\n    count_up_to(1) => []\n    count_up_to(18) => [2,3,5,7,11,13,17]\n    \"\"\"\n    if n < 3:\n        return []\n    sieve = [True] * n\n    sieve[0] = sieve[1] = False\n    i = 2\n    while i * i < n:\n        if sieve[i]:\n            for j in range(i * i, n, i):\n                sieve[j] = False\n        i += 1\n    return [i for i in range(n) if sieve[i]]\n"
+      "solution": "\ndef count_up_to(n):\n    \"\"\"Implement a function that takes an non-negative integer and returns an array of the first n\n    integers that are prime numbers and less than n.\n    for example:\n    count_up_to(5) => [2,3]\n    count_up_to(11) => [2,3,5,7]\n    count_up_to(0) => []\n    count_up_to(20) => [2,3,5,7,11,13,17,19]\n    count_up_to(1) => []\n    count_up_to(18) => [2,3,5,7,11,13,17]\n    \"\"\"\n    if n < 3:\n        return []\n    sieve = bytearray([1]) * n\n    sieve[0] = sieve[1] = 0\n    i = 2\n    while i * i < n:\n        if sieve[i]:\n            sieve[i * i::i] = bytearray(len(range(i * i, n, i)))\n        i += 1\n    return [i for i in range(n) if sieve[i]]\n"
     },
     {
       "task_id": "HumanEval/97",
@@ -2025,12 +2025,12 @@
       "passed_evalplus": false,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11217,
-      "total_cost_usd_total": 0.04317,
+      "duration_ms_total": 8455,
+      "total_cost_usd_total": 0.040023,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 789
+          "outputTokens": 631
         }
       },
       "error_type": "tests_failed",
@@ -2044,12 +2044,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7687,
-      "total_cost_usd_total": 0.037452,
+      "duration_ms_total": 9083,
+      "total_cost_usd_total": 0.038531,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 518
+          "outputTokens": 572
         }
       },
       "error_type": null,
@@ -2063,16 +2063,16 @@
       "passed_evalplus": false,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11204,
-      "total_cost_usd_total": 0.046806,
+      "duration_ms_total": 10194,
+      "total_cost_usd_total": 0.04491,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 873
+          "outputTokens": 797
         }
       },
       "error_type": "error_max_turns",
-      "solution": "\ndef closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    from decimal import Decimal, ROUND_HALF_UP\n\n    num = Decimal(value.strip())\n    # Decimal's ROUND_HALF_UP rounds ties away from zero, and Decimal\n    # parsing avoids float precision issues on inputs like \"2.5000000000000001\".\n    return int(num.to_integral_value(rounding=ROUND_HALF_UP))\n"
+      "solution": "\ndef closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    from decimal import Decimal, ROUND_HALF_UP\n\n    num = Decimal(value.strip())\n    return int(num.to_integral_value(rounding=ROUND_HALF_UP))\n"
     },
     {
       "task_id": "HumanEval/100",
@@ -2082,12 +2082,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9799,
-      "total_cost_usd_total": 0.037862,
+      "duration_ms_total": 10644,
+      "total_cost_usd_total": 0.037936,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 502
+          "outputTokens": 505
         }
       },
       "error_type": null,
@@ -2101,12 +2101,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10884,
-      "total_cost_usd_total": 0.037567,
+      "duration_ms_total": 10605,
+      "total_cost_usd_total": 0.040106,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 499
+          "outputTokens": 622
         }
       },
       "error_type": null,
@@ -2120,16 +2120,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11831,
-      "total_cost_usd_total": 0.043298,
+      "duration_ms_total": 11846,
+      "total_cost_usd_total": 0.046427,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 761
+          "outputTokens": 902
         }
       },
       "error_type": null,
-      "solution": "\ndef choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n\n    For example:\n    choose_num(12, 15) = 14\n    choose_num(13, 12) = -1\n    \"\"\"\n    import math\n    candidate = math.floor(y)\n    if candidate % 2 != 0:\n        candidate -= 1\n    if candidate < x:\n        return -1\n    return candidate\n"
+      "solution": "\ndef choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n\n    For example:\n    choose_num(12, 15) = 14\n    choose_num(13, 12) = -1\n    \"\"\"\n    if x > y:\n        return -1\n    if y % 2 == 0:\n        return y\n    if x == y:\n        return -1\n    return y - 1\n"
     },
     {
       "task_id": "HumanEval/103",
@@ -2139,16 +2139,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 14839,
-      "total_cost_usd_total": 0.049461,
+      "duration_ms_total": 11077,
+      "total_cost_usd_total": 0.04585,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 987
+          "outputTokens": 828
         }
       },
       "error_type": null,
-      "solution": "\ndef rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    Example:\n    rounded_avg(1, 5) => \"0b11\"\n    rounded_avg(7, 5) => -1\n    rounded_avg(10, 20) => \"0b1111\"\n    rounded_avg(20, 33) => \"0b11010\"\n    \"\"\"\n    if n > m:\n        return -1\n    # Average of n..m is (n + m) / 2; round half to even, like Python's round()\n    total = n + m\n    avg = total // 2\n    if total % 2 == 1 and avg % 2 == 1:\n        avg += 1\n    return bin(avg)\n"
+      "solution": "\ndef rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    Example:\n    rounded_avg(1, 5) => \"0b11\"\n    rounded_avg(7, 5) => -1\n    rounded_avg(10, 20) => \"0b1111\"\n    rounded_avg(20, 33) => \"0b11010\"\n    \"\"\"\n    if n > m:\n        return -1\n    count = m - n + 1\n    summation = (n + m) * count // 2\n    return bin(round(summation / count))\n"
     },
     {
       "task_id": "HumanEval/104",
@@ -2158,12 +2158,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12634,
-      "total_cost_usd_total": 0.039871,
+      "duration_ms_total": 9229,
+      "total_cost_usd_total": 0.03951,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 613
+          "outputTokens": 595
         }
       },
       "error_type": null,
@@ -2177,16 +2177,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10969,
-      "total_cost_usd_total": 0.041028,
+      "duration_ms_total": 8428,
+      "total_cost_usd_total": 0.042082,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 530
+          "outputTokens": 581
         }
       },
       "error_type": null,
-      "solution": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    names = [\"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\"]\n    return [names[x - 1] for x in sorted((x for x in arr if 1 <= x <= 9), reverse=True)]\n"
+      "solution": "\ndef by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    names = [\"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\"]\n    digits = sorted((x for x in arr if 1 <= x <= 9), reverse=True)\n    return [names[x - 1] for x in digits]\n"
     },
     {
       "task_id": "HumanEval/106",
@@ -2196,16 +2196,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11002,
-      "total_cost_usd_total": 0.040806,
+      "duration_ms_total": 8421,
+      "total_cost_usd_total": 0.039655,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 628
+          "outputTokens": 584
         }
       },
       "error_type": null,
-      "solution": "\ndef f(n):\n    \"\"\" Implement the function f that takes n as a parameter,\n    and returns a list of size n, such that the value of the element at index i is the factorial of i if i is even\n    or the sum of numbers from 1 to i otherwise.\n    i starts from 1.\n    the factorial of i is the multiplication of the numbers from 1 to i (1 * 2 * ... * i).\n    Example:\n    f(5) == [1, 2, 6, 24, 15]\n    \"\"\"\n    result = []\n    fact = 1\n    total = 0\n    for i in range(1, n + 1):\n        fact *= i\n        total += i\n        result.append(fact if i % 2 == 0 else total)\n    return result\n"
+      "solution": "\ndef f(n):\n    \"\"\" Implement the function f that takes n as a parameter,\n    and returns a list of size n, such that the value of the element at index i is the factorial of i if i is even\n    or the sum of numbers from 1 to i otherwise.\n    i starts from 1.\n    the factorial of i is the multiplication of the numbers from 1 to i (1 * 2 * ... * i).\n    Example:\n    f(5) == [1, 2, 6, 24, 15]\n    \"\"\"\n    result = []\n    fact = 1\n    for i in range(1, n + 1):\n        fact *= i\n        if i % 2 == 0:\n            result.append(fact)\n        else:\n            result.append(i * (i + 1) // 2)\n    return result\n"
     },
     {
       "task_id": "HumanEval/107",
@@ -2215,12 +2215,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8775,
-      "total_cost_usd_total": 0.040905,
+      "duration_ms_total": 9846,
+      "total_cost_usd_total": 0.043518,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 569
+          "outputTokens": 699
         }
       },
       "error_type": null,
@@ -2234,16 +2234,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11979,
-      "total_cost_usd_total": 0.041829,
+      "duration_ms_total": 8569,
+      "total_cost_usd_total": 0.041747,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 686
+          "outputTokens": 682
         }
       },
       "error_type": null,
-      "solution": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def digits_sum(n):\n        digits = [int(d) for d in str(abs(n))]\n        if n < 0:\n            digits[0] = -digits[0]\n        return sum(digits)\n\n    return sum(1 for n in arr if digits_sum(n) > 0)\n"
+      "solution": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def digit_sum(n):\n        digits = [int(d) for d in str(abs(n))]\n        if n < 0:\n            digits[0] = -digits[0]\n        return sum(digits)\n\n    return sum(1 for n in arr if digit_sum(n) > 0)\n"
     },
     {
       "task_id": "HumanEval/109",
@@ -2253,12 +2253,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12320,
-      "total_cost_usd_total": 0.048233,
+      "duration_ms_total": 10906,
+      "total_cost_usd_total": 0.047317,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 834
+          "outputTokens": 823
         }
       },
       "error_type": null,
@@ -2272,12 +2272,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10439,
-      "total_cost_usd_total": 0.044861,
+      "duration_ms_total": 10317,
+      "total_cost_usd_total": 0.045505,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 781
+          "outputTokens": 800
         }
       },
       "error_type": null,
@@ -2291,12 +2291,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12965,
-      "total_cost_usd_total": 0.047937,
+      "duration_ms_total": 12124,
+      "total_cost_usd_total": 0.048916,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 902
+          "outputTokens": 954
         }
       },
       "error_type": null,
@@ -2310,12 +2310,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7545,
-      "total_cost_usd_total": 0.038642,
+      "duration_ms_total": 7955,
+      "total_cost_usd_total": 0.038701,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 515
+          "outputTokens": 518
         }
       },
       "error_type": null,
@@ -2329,16 +2329,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9571,
-      "total_cost_usd_total": 0.04319,
+      "duration_ms_total": 8127,
+      "total_cost_usd_total": 0.039708,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 694
+          "outputTokens": 545
         }
       },
       "error_type": null,
-      "solution": "\ndef odd_count(lst):\n    \"\"\"Given a list of strings, where each string consists of only digits, return a list.\n    Each element i of the output should be \"the number of odd elements in the\n    string i of the input.\" where all the i's should be replaced by the number\n    of odd digits in the i'th string of the input.\n\n    >>> odd_count(['1234567'])\n    [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"]\n    >>> odd_count(['3',\"11111111\"])\n    [\"the number of odd elements 1n the str1ng 1 of the 1nput.\",\n     \"the number of odd elements 8n the str8ng 8 of the 8nput.\"]\n    \"\"\"\n    res = []\n    for s in lst:\n        n = str(sum(1 for d in s if d in \"13579\"))\n        res.append(\"the number of odd elements \" + n + \"n the str\" + n +\n                   \"ng \" + n + \" of the \" + n + \"nput.\")\n    return res\n"
+      "solution": "\ndef odd_count(lst):\n    \"\"\"Given a list of strings, where each string consists of only digits, return a list.\n    Each element i of the output should be \"the number of odd elements in the\n    string i of the input.\" where all the i's should be replaced by the number\n    of odd digits in the i'th string of the input.\n\n    >>> odd_count(['1234567'])\n    [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"]\n    >>> odd_count(['3',\"11111111\"])\n    [\"the number of odd elements 1n the str1ng 1 of the 1nput.\",\n     \"the number of odd elements 8n the str8ng 8 of the 8nput.\"]\n    \"\"\"\n    result = []\n    for s in lst:\n        n = sum(1 for c in s if c in \"13579\")\n        result.append(\n            \"the number of odd elements \" + str(n) + \"n the str\" + str(n)\n            + \"ng \" + str(n) + \" of the \" + str(n) + \"nput.\"\n        )\n    return result\n"
     },
     {
       "task_id": "HumanEval/114",
@@ -2348,12 +2348,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11985,
-      "total_cost_usd_total": 0.040167,
+      "duration_ms_total": 9387,
+      "total_cost_usd_total": 0.039861,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 641
+          "outputTokens": 625
         }
       },
       "error_type": null,
@@ -2367,16 +2367,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9250,
-      "total_cost_usd_total": 0.042263,
+      "duration_ms_total": 10136,
+      "total_cost_usd_total": 0.044922,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 555
+          "outputTokens": 687
         }
       },
       "error_type": null,
-      "solution": "\ndef max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n\n    Example 1:\n        Input: \n            grid : [[0,0,1,0], [0,1,0,0], [1,1,1,1]]\n            bucket_capacity : 1\n        Output: 6\n\n    Example 2:\n        Input: \n            grid : [[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]]\n            bucket_capacity : 2\n        Output: 5\n    \n    Example 3:\n        Input: \n            grid : [[0,0,0], [0,0,0]]\n            bucket_capacity : 5\n        Output: 0\n\n    Constraints:\n        * all wells have the same length\n        * 1 <= grid.length <= 10^2\n        * 1 <= grid[:,1].length <= 10^2\n        * grid[i][j] -> 0 | 1\n        * 1 <= capacity <= 10\n    \"\"\"\n    return sum(math.ceil(sum(row) / capacity) for row in grid)\n"
+      "solution": "\ndef max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n\n    Example 1:\n        Input: \n            grid : [[0,0,1,0], [0,1,0,0], [1,1,1,1]]\n            bucket_capacity : 1\n        Output: 6\n\n    Example 2:\n        Input: \n            grid : [[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]]\n            bucket_capacity : 2\n        Output: 5\n    \n    Example 3:\n        Input: \n            grid : [[0,0,0], [0,0,0]]\n            bucket_capacity : 5\n        Output: 0\n\n    Constraints:\n        * all wells have the same length\n        * 1 <= grid.length <= 10^2\n        * 1 <= grid[:,1].length <= 10^2\n        * grid[i][j] -> 0 | 1\n        * 1 <= capacity <= 10\n    \"\"\"\n    return sum((sum(row) + capacity - 1) // capacity for row in grid)\n"
     },
     {
       "task_id": "HumanEval/116",
@@ -2386,12 +2386,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 14021,
-      "total_cost_usd_total": 0.048605,
+      "duration_ms_total": 12425,
+      "total_cost_usd_total": 0.050054,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 973
+          "outputTokens": 1049
         }
       },
       "error_type": null,
@@ -2405,16 +2405,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11916,
-      "total_cost_usd_total": 0.046038,
+      "duration_ms_total": 9728,
+      "total_cost_usd_total": 0.044497,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 825
+          "outputTokens": 743
         }
       },
       "error_type": null,
-      "solution": "\ndef select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    result = []\n    for word in s.split():\n        consonants = sum(1 for c in word if c.lower() not in \"aeiou\")\n        if consonants == n:\n            result.append(word)\n    return result\n"
+      "solution": "\ndef select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    vowels = set(\"aeiouAEIOU\")\n    result = []\n    for word in s.split():\n        consonants = sum(1 for c in word if c.isalpha() and c not in vowels)\n        if consonants == n:\n            result.append(word)\n    return result\n"
     },
     {
       "task_id": "HumanEval/118",
@@ -2424,12 +2424,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12185,
-      "total_cost_usd_total": 0.044788,
+      "duration_ms_total": 10223,
+      "total_cost_usd_total": 0.044042,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 801
+          "outputTokens": 744
         }
       },
       "error_type": null,
@@ -2443,16 +2443,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9548,
-      "total_cost_usd_total": 0.041514,
+      "duration_ms_total": 8164,
+      "total_cost_usd_total": 0.041888,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 625
+          "outputTokens": 645
         }
       },
       "error_type": null,
-      "solution": "\ndef match_parens(lst):\n    '''\n    You are given a list of two strings, both strings consist of open\n    parentheses '(' or close parentheses ')' only.\n    Your job is to check if it is possible to concatenate the two strings in\n    some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses in S\n    are balanced. For example: the string '(())()' is good, while the string\n    '())' is not.\n    Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.\n\n    Examples:\n    match_parens(['()(', ')']) == 'Yes'\n    match_parens([')', ')']) == 'No'\n    '''\n    def check(s):\n        val = 0\n        for ch in s:\n            if ch == '(':\n                val += 1\n            else:\n                val -= 1\n            if val < 0:\n                return False\n        return val == 0\n\n    a, b = lst[0], lst[1]\n    return 'Yes' if check(a + b) or check(b + a) else 'No'\n"
+      "solution": "\ndef match_parens(lst):\n    '''\n    You are given a list of two strings, both strings consist of open\n    parentheses '(' or close parentheses ')' only.\n    Your job is to check if it is possible to concatenate the two strings in\n    some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses in S\n    are balanced. For example: the string '(())()' is good, while the string\n    '())' is not.\n    Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.\n\n    Examples:\n    match_parens(['()(', ')']) == 'Yes'\n    match_parens([')', ')']) == 'No'\n    '''\n    def check(s):\n        depth = 0\n        for ch in s:\n            depth += 1 if ch == '(' else -1\n            if depth < 0:\n                return False\n        return depth == 0\n\n    a, b = lst[0], lst[1]\n    return 'Yes' if check(a + b) or check(b + a) else 'No'\n"
     },
     {
       "task_id": "HumanEval/120",
@@ -2462,16 +2462,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8550,
-      "total_cost_usd_total": 0.040784,
+      "duration_ms_total": 12277,
+      "total_cost_usd_total": 0.039998,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 571
+          "outputTokens": 531
         }
       },
       "error_type": null,
-      "solution": "\ndef maximum(arr, k):\n    \"\"\"\n    Given an array arr of integers and a positive integer k, return a sorted list \n    of length k with the maximum k numbers in arr.\n\n    Example 1:\n\n        Input: arr = [-3, -4, 5], k = 3\n        Output: [-4, -3, 5]\n\n    Example 2:\n\n        Input: arr = [4, -4, 4], k = 2\n        Output: [4, 4]\n\n    Example 3:\n\n        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1\n        Output: [2]\n\n    Note:\n        1. The length of the array will be in the range of [1, 1000].\n        2. The elements in the array will be in the range of [-1000, 1000].\n        3. 0 <= k <= len(arr)\n    \"\"\"\n    if k <= 0:\n        return []\n    return sorted(arr)[-k:]\n"
+      "solution": "\ndef maximum(arr, k):\n    \"\"\"\n    Given an array arr of integers and a positive integer k, return a sorted list \n    of length k with the maximum k numbers in arr.\n\n    Example 1:\n\n        Input: arr = [-3, -4, 5], k = 3\n        Output: [-4, -3, 5]\n\n    Example 2:\n\n        Input: arr = [4, -4, 4], k = 2\n        Output: [4, 4]\n\n    Example 3:\n\n        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1\n        Output: [2]\n\n    Note:\n        1. The length of the array will be in the range of [1, 1000].\n        2. The elements in the array will be in the range of [-1000, 1000].\n        3. 0 <= k <= len(arr)\n    \"\"\"\n    if k <= 0:\n        return []\n    return sorted(arr)[len(arr) - k:]\n"
     },
     {
       "task_id": "HumanEval/121",
@@ -2481,12 +2481,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9615,
-      "total_cost_usd_total": 0.037727,
+      "duration_ms_total": 8694,
+      "total_cost_usd_total": 0.037481,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 520
+          "outputTokens": 507
         }
       },
       "error_type": null,
@@ -2500,12 +2500,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11664,
-      "total_cost_usd_total": 0.041673,
+      "duration_ms_total": 11663,
+      "total_cost_usd_total": 0.042747,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 679
+          "outputTokens": 722
         }
       },
       "error_type": null,
@@ -2519,16 +2519,16 @@
       "passed_evalplus": false,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9535,
-      "total_cost_usd_total": 0.044043,
+      "duration_ms_total": 10846,
+      "total_cost_usd_total": 0.043327,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 688
+          "outputTokens": 668
         }
       },
       "error_type": "tests_failed",
-      "solution": "\ndef get_odd_collatz(n):\n    \"\"\"\n    Given a positive integer n, return a sorted list that has the odd numbers in collatz sequence.\n\n    The Collatz conjecture is a conjecture in mathematics that concerns a sequence defined\n    as follows: start with any positive integer n. Then each term is obtained from the \n    previous term as follows: if the previous term is even, the next term is one half of \n    the previous term. If the previous term is odd, the next term is 3 times the previous\n    term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1.\n\n    Note: \n        1. Collatz(1) is [1].\n        2. returned list sorted in increasing order.\n\n    For example:\n    get_odd_collatz(5) returns [1, 5] # The collatz sequence for 5 is [5, 16, 8, 4, 2, 1], so the odd numbers are only 1, and 5.\n    \"\"\"\n    odd_collatz = [n] if n % 2 == 1 else []\n    while n > 1:\n        if n % 2 == 0:\n            n = n // 2\n        else:\n            n = 3 * n + 1\n        if n % 2 == 1:\n            odd_collatz.append(n)\n    return sorted(odd_collatz)\n"
+      "solution": "\ndef get_odd_collatz(n):\n    \"\"\"\n    Given a positive integer n, return a sorted list that has the odd numbers in collatz sequence.\n\n    The Collatz conjecture is a conjecture in mathematics that concerns a sequence defined\n    as follows: start with any positive integer n. Then each term is obtained from the \n    previous term as follows: if the previous term is even, the next term is one half of \n    the previous term. If the previous term is odd, the next term is 3 times the previous\n    term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1.\n\n    Note: \n        1. Collatz(1) is [1].\n        2. returned list sorted in increasing order.\n\n    For example:\n    get_odd_collatz(5) returns [1, 5] # The collatz sequence for 5 is [5, 16, 8, 4, 2, 1], so the odd numbers are only 1, and 5.\n    \"\"\"\n    odds = set()\n    while n > 1:\n        if n % 2 == 1:\n            odds.add(n)\n            n = 3 * n + 1\n        else:\n            n //= 2\n    odds.add(1)\n    return sorted(odds)\n"
     },
     {
       "task_id": "HumanEval/124",
@@ -2538,16 +2538,16 @@
       "passed_evalplus": false,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 13145,
-      "total_cost_usd_total": 0.052136,
+      "duration_ms_total": 27620,
+      "total_cost_usd_total": 0.07591,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1051
+          "outputTokens": 1993
         }
       },
       "error_type": "tests_failed",
-      "solution": "\ndef valid_date(date):\n    \"\"\"You have to write a function which validates a given date string and\n    returns True if the date is valid otherwise False.\n    The date is valid if all of the following rules are satisfied:\n    1. The date string is not empty.\n    2. The number of days is not less than 1 or higher than 31 days for months 1,3,5,7,8,10,12. And the number of days is not less than 1 or higher than 30 days for months 4,6,9,11. And, the number of days is not less than 1 or higher than 29 for the month 2.\n    3. The months should not be less than 1 or higher than 12.\n    4. The date should be in the format: mm-dd-yyyy\n\n    for example: \n    valid_date('03-11-2000') => True\n\n    valid_date('15-01-2012') => False\n\n    valid_date('04-0-2040') => False\n\n    valid_date('06-04-2020') => True\n\n    valid_date('06/04/2020') => False\n    \"\"\"\n    try:\n        date = date.strip()\n        month, day, year = date.split('-')\n        month, day, year = int(month), int(day), int(year)\n    except (ValueError, AttributeError):\n        return False\n    if month < 1 or month > 12:\n        return False\n    if month in (1, 3, 5, 7, 8, 10, 12):\n        return 1 <= day <= 31\n    if month in (4, 6, 9, 11):\n        return 1 <= day <= 30\n    return 1 <= day <= 29\n"
+      "solution": "\ndef valid_date(date):\n    \"\"\"You have to write a function which validates a given date string and\n    returns True if the date is valid otherwise False.\n    The date is valid if all of the following rules are satisfied:\n    1. The date string is not empty.\n    2. The number of days is not less than 1 or higher than 31 days for months 1,3,5,7,8,10,12. And the number of days is not less than 1 or higher than 30 days for months 4,6,9,11. And, the number of days is not less than 1 or higher than 29 for the month 2.\n    3. The months should not be less than 1 or higher than 12.\n    4. The date should be in the format: mm-dd-yyyy\n\n    for example: \n    valid_date('03-11-2000') => True\n\n    valid_date('15-01-2012') => False\n\n    valid_date('04-0-2040') => False\n\n    valid_date('06-04-2020') => True\n\n    valid_date('06/04/2020') => False\n    \"\"\"\n    try:\n        date = date.strip()\n        month, day, year = date.split('-')\n        month, day, year = int(month), int(day), int(year)\n    except (AttributeError, ValueError):\n        return False\n    if month < 1 or month > 12:\n        return False\n    if month in (1, 3, 5, 7, 8, 10, 12):\n        max_day = 31\n    elif month in (4, 6, 9, 11):\n        max_day = 30\n    else:\n        max_day = 29\n    return 1 <= day <= max_day\n"
     },
     {
       "task_id": "HumanEval/125",
@@ -2557,16 +2557,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 13442,
-      "total_cost_usd_total": 0.046787,
+      "duration_ms_total": 22573,
+      "total_cost_usd_total": 0.046166,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 881
+          "outputTokens": 860
         }
       },
       "error_type": null,
-      "solution": "\ndef split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n    if \" \" in txt:\n        return txt.split()\n    elif \",\" in txt:\n        return txt.replace(\",\", \" \").split()\n    else:\n        return len([c for c in txt if c.islower() and ord(c) % 2 == 0])\n"
+      "solution": "\ndef split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n    if \" \" in txt:\n        return txt.split()\n    elif \",\" in txt:\n        return txt.replace(\",\", \" \").split()\n    else:\n        return len([c for c in txt if c.islower() and (ord(c) - ord('a')) % 2 == 1])\n"
     },
     {
       "task_id": "HumanEval/126",
@@ -2576,12 +2576,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10382,
-      "total_cost_usd_total": 0.043268,
+      "duration_ms_total": 9802,
+      "total_cost_usd_total": 0.042862,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 668
+          "outputTokens": 647
         }
       },
       "error_type": null,
@@ -2595,16 +2595,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11349,
-      "total_cost_usd_total": 0.045787,
+      "duration_ms_total": 12951,
+      "total_cost_usd_total": 0.043601,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 759
+          "outputTokens": 661
         }
       },
       "error_type": null,
-      "solution": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    start = max(interval1[0], interval2[0])\n    end = min(interval1[1], interval2[1])\n    length = end - start\n    if length < 2:\n        return \"NO\"\n    if length % 2 == 0:\n        return \"YES\" if length == 2 else \"NO\"\n    i = 3\n    while i * i <= length:\n        if length % i == 0:\n            return \"NO\"\n        i += 2\n    return \"YES\"\n"
+      "solution": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    start = max(interval1[0], interval2[0])\n    end = min(interval1[1], interval2[1])\n    length = end - start\n    if length < 2:\n        return \"NO\"\n    i = 2\n    while i * i <= length:\n        if length % i == 0:\n            return \"NO\"\n        i += 1\n    return \"YES\"\n"
     },
     {
       "task_id": "HumanEval/128",
@@ -2614,16 +2614,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9371,
-      "total_cost_usd_total": 0.039989,
+      "duration_ms_total": 8746,
+      "total_cost_usd_total": 0.039908,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 598
+          "outputTokens": 592
         }
       },
       "error_type": null,
-      "solution": "\ndef prod_signs(arr):\n    \"\"\"\n    You are given an array arr of integers and you need to return\n    sum of magnitudes of integers multiplied by product of all signs\n    of each number in the array, represented by 1, -1 or 0.\n    Note: return None for empty arr.\n\n    Example:\n    >>> prod_signs([1, 2, 2, -4]) == -9\n    >>> prod_signs([0, 1]) == 0\n    >>> prod_signs([]) == None\n    \"\"\"\n    if not arr:\n        return None\n    sign = 1\n    for x in arr:\n        if x == 0:\n            return 0\n        if x < 0:\n            sign = -sign\n    return sign * sum(abs(x) for x in arr)\n"
+      "solution": "\ndef prod_signs(arr):\n    \"\"\"\n    You are given an array arr of integers and you need to return\n    sum of magnitudes of integers multiplied by product of all signs\n    of each number in the array, represented by 1, -1 or 0.\n    Note: return None for empty arr.\n\n    Example:\n    >>> prod_signs([1, 2, 2, -4]) == -9\n    >>> prod_signs([0, 1]) == 0\n    >>> prod_signs([]) == None\n    \"\"\"\n    if not arr:\n        return None\n    sign = 1\n    for x in arr:\n        if x == 0:\n            sign = 0\n            break\n        if x < 0:\n            sign = -sign\n    return sign * sum(abs(x) for x in arr)\n"
     },
     {
       "task_id": "HumanEval/129",
@@ -2633,16 +2633,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12843,
-      "total_cost_usd_total": 0.049197,
+      "duration_ms_total": 11370,
+      "total_cost_usd_total": 0.049041,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 825
+          "outputTokens": 817
         }
       },
       "error_type": null,
-      "solution": "\ndef minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n    \"\"\"\n    n = len(grid)\n    smallest = n * n + 1\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] == 1:\n                for di, dj in ((-1, 0), (1, 0), (0, -1), (0, 1)):\n                    ni, nj = i + di, j + dj\n                    if 0 <= ni < n and 0 <= nj < n:\n                        smallest = min(smallest, grid[ni][nj])\n    return [1 if idx % 2 == 0 else smallest for idx in range(k)]\n"
+      "solution": "\ndef minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n    \"\"\"\n    n = len(grid)\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] == 1:\n                r, c = i, j\n    best = min(\n        grid[r + dr][c + dc]\n        for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1))\n        if 0 <= r + dr < n and 0 <= c + dc < n\n    )\n    return [1 if i % 2 == 0 else best for i in range(k)]\n"
     },
     {
       "task_id": "HumanEval/130",
@@ -2652,16 +2652,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12978,
-      "total_cost_usd_total": 0.050313,
+      "duration_ms_total": 14777,
+      "total_cost_usd_total": 0.050557,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 976
+          "outputTokens": 988
         }
       },
       "error_type": null,
-      "solution": "\ndef tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8 \n    You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n    \"\"\"\n    if n == 0:\n        return [1]\n    seq = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            seq.append(i / 2 + 1)\n        else:\n            # tri(i + 1) is even, so it equals (i + 1) / 2 + 1 = (i + 3) / 2\n            seq.append(seq[i - 1] + seq[i - 2] + (i + 3) / 2)\n    return seq\n"
+      "solution": "\ndef tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8 \n    You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n    \"\"\"\n    if n == 0:\n        return [1]\n    seq = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            seq.append(i / 2 + 1)\n        else:\n            seq.append(seq[i - 1] + seq[i - 2] + (i + 3) / 2)\n    return seq\n"
     },
     {
       "task_id": "HumanEval/131",
@@ -2671,16 +2671,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9477,
-      "total_cost_usd_total": 0.037676,
+      "duration_ms_total": 9348,
+      "total_cost_usd_total": 0.03974,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 527
+          "outputTokens": 627
         }
       },
       "error_type": null,
-      "solution": "\ndef digits(n):\n    \"\"\"Given a positive integer n, return the product of the odd digits.\n    Return 0 if all digits are even.\n    For example:\n    digits(1)  == 1\n    digits(4)  == 0\n    digits(235) == 15\n    \"\"\"\n    product = 1\n    found_odd = False\n    for ch in str(n):\n        d = int(ch)\n        if d % 2 == 1:\n            product *= d\n            found_odd = True\n    return product if found_odd else 0\n"
+      "solution": "\ndef digits(n):\n    \"\"\"Given a positive integer n, return the product of the odd digits.\n    Return 0 if all digits are even.\n    For example:\n    digits(1)  == 1\n    digits(4)  == 0\n    digits(235) == 15\n    \"\"\"\n    product = 1\n    found_odd = False\n    for ch in str(abs(n)):\n        d = int(ch)\n        if d % 2 == 1:\n            product *= d\n            found_odd = True\n    return product if found_odd else 0\n"
     },
     {
       "task_id": "HumanEval/132",
@@ -2690,16 +2690,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 15241,
-      "total_cost_usd_total": 0.055694,
+      "duration_ms_total": 15483,
+      "total_cost_usd_total": 0.057268,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1257
+          "outputTokens": 1322
         }
       },
       "error_type": null,
-      "solution": "\ndef is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if and only if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested.\n\n    is_nested('[[]]') \u279e True\n    is_nested('[]]]]]]][[[[[]') \u279e False\n    is_nested('[][]') \u279e False\n    is_nested('[]') \u279e False\n    is_nested('[[][]]') \u279e True\n    is_nested('[[]][[') \u279e True\n    '''\n    opening = [i for i, c in enumerate(string) if c == '[']\n    closing = [i for i, c in enumerate(string) if c == ']']\n    closing.reverse()\n    cnt = 0\n    j = 0\n    for idx in opening:\n        if j < len(closing) and idx < closing[j]:\n            cnt += 1\n            j += 1\n    return cnt >= 2\n"
+      "solution": "\ndef is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if and only if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested.\n\n    is_nested('[[]]') \u279e True\n    is_nested('[]]]]]]][[[[[]') \u279e False\n    is_nested('[][]') \u279e False\n    is_nested('[]') \u279e False\n    is_nested('[[][]]') \u279e True\n    is_nested('[[]][[') \u279e True\n    '''\n    opening_bracket_index = []\n    closing_bracket_index = []\n    for i, ch in enumerate(string):\n        if ch == '[':\n            opening_bracket_index.append(i)\n        else:\n            closing_bracket_index.append(i)\n    closing_bracket_index.reverse()\n    cnt = 0\n    i = 0\n    l = len(closing_bracket_index)\n    for idx in opening_bracket_index:\n        if i < l and idx < closing_bracket_index[i]:\n            cnt += 1\n            i += 1\n    return cnt >= 2\n"
     },
     {
       "task_id": "HumanEval/133",
@@ -2709,12 +2709,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9468,
-      "total_cost_usd_total": 0.040576,
+      "duration_ms_total": 7676,
+      "total_cost_usd_total": 0.038539,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 622
+          "outputTokens": 521
         }
       },
       "error_type": null,
@@ -2728,12 +2728,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9337,
-      "total_cost_usd_total": 0.043405,
+      "duration_ms_total": 9375,
+      "total_cost_usd_total": 0.043299,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 732
+          "outputTokens": 726
         }
       },
       "error_type": null,
@@ -2747,12 +2747,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9769,
-      "total_cost_usd_total": 0.038275,
+      "duration_ms_total": 7819,
+      "total_cost_usd_total": 0.039409,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 537
+          "outputTokens": 593
         }
       },
       "error_type": null,
@@ -2766,12 +2766,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 7991,
-      "total_cost_usd_total": 0.039749,
+      "duration_ms_total": 7037,
+      "total_cost_usd_total": 0.038318,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 567
+          "outputTokens": 504
         }
       },
       "error_type": null,
@@ -2785,12 +2785,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11242,
-      "total_cost_usd_total": 0.044453,
+      "duration_ms_total": 11621,
+      "total_cost_usd_total": 0.045507,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 805
+          "outputTokens": 857
         }
       },
       "error_type": null,
@@ -2804,12 +2804,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8101,
-      "total_cost_usd_total": 0.037196,
+      "duration_ms_total": 7957,
+      "total_cost_usd_total": 0.037455,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 502
+          "outputTokens": 515
         }
       },
       "error_type": null,
@@ -2823,16 +2823,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8266,
-      "total_cost_usd_total": 0.037745,
+      "duration_ms_total": 9376,
+      "total_cost_usd_total": 0.039799,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 510
+          "outputTokens": 612
         }
       },
       "error_type": null,
-      "solution": "\ndef special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n    result = 1\n    fact = 1\n    for i in range(1, n + 1):\n        fact *= i\n        result *= fact\n    return result\n"
+      "solution": "\ndef special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n    fact = 1\n    result = 1\n    for i in range(1, n + 1):\n        fact *= i\n        result *= fact\n    return result\n"
     },
     {
       "task_id": "HumanEval/140",
@@ -2842,35 +2842,35 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11262,
-      "total_cost_usd_total": 0.045705,
+      "duration_ms_total": 8452,
+      "total_cost_usd_total": 0.040834,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 817
+          "outputTokens": 626
         }
       },
       "error_type": null,
-      "solution": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    import re\n    return re.sub(r' {3,}', '-', text).replace(' ', '_')\n"
+      "solution": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    import re\n\n    def repl(match):\n        run = match.group(0)\n        return \"-\" if len(run) > 2 else \"_\" * len(run)\n\n    return re.sub(r\" +\", repl, text)\n"
     },
     {
       "task_id": "HumanEval/141",
       "function_name": "file_name_check",
-      "passed": false,
+      "passed": true,
       "passed_base": true,
-      "passed_evalplus": false,
+      "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 17301,
-      "total_cost_usd_total": 0.059517,
+      "duration_ms_total": 11899,
+      "total_cost_usd_total": 0.050501,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1361
+          "outputTokens": 995
         }
       },
-      "error_type": "tests_failed",
-      "solution": "\ndef file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    Examples:\n    file_name_check(\"example.txt\") # => 'Yes'\n    file_name_check(\"1example.dll\") # => 'No' (the name should start with a latin alphapet letter)\n    \"\"\"\n    parts = file_name.split('.')\n    if len(parts) != 2:\n        return 'No'\n    name, ext = parts\n    if ext not in ('txt', 'exe', 'dll'):\n        return 'No'\n    if not name or not ('a' <= name[0] <= 'z' or 'A' <= name[0] <= 'Z'):\n        return 'No'\n    if sum(1 for c in file_name if '0' <= c <= '9') > 3:\n        return 'No'\n    return 'Yes'\n"
+      "error_type": null,
+      "solution": "\ndef file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    Examples:\n    file_name_check(\"example.txt\") # => 'Yes'\n    file_name_check(\"1example.dll\") # => 'No' (the name should start with a latin alphapet letter)\n    \"\"\"\n    parts = file_name.split('.')\n    if len(parts) != 2:\n        return 'No'\n    name, ext = parts\n    if ext not in ('txt', 'exe', 'dll'):\n        return 'No'\n    if not name or not name[0].isalpha():\n        return 'No'\n    if sum(1 for c in file_name if c.isdigit()) > 3:\n        return 'No'\n    return 'Yes'\n"
     },
     {
       "task_id": "HumanEval/142",
@@ -2880,12 +2880,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9911,
-      "total_cost_usd_total": 0.040272,
+      "duration_ms_total": 9024,
+      "total_cost_usd_total": 0.040871,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 581
+          "outputTokens": 611
         }
       },
       "error_type": null,
@@ -2899,12 +2899,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9570,
-      "total_cost_usd_total": 0.04242,
+      "duration_ms_total": 8971,
+      "total_cost_usd_total": 0.041829,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 666
+          "outputTokens": 644
         }
       },
       "error_type": null,
@@ -2918,16 +2918,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9617,
-      "total_cost_usd_total": 0.041871,
+      "duration_ms_total": 8612,
+      "total_cost_usd_total": 0.04123,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 672
+          "outputTokens": 642
         }
       },
       "error_type": null,
-      "solution": "\ndef simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = True\n    simplify(\"1/6\", \"2/1\") = False\n    simplify(\"7/10\", \"10/2\") = False\n    \"\"\"\n    a, b = (int(p) for p in x.split(\"/\"))\n    c, d = (int(p) for p in n.split(\"/\"))\n    return (a * c) % (b * d) == 0\n"
+      "solution": "\ndef simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = True\n    simplify(\"1/6\", \"2/1\") = False\n    simplify(\"7/10\", \"10/2\") = False\n    \"\"\"\n    a, b = map(int, x.split(\"/\"))\n    c, d = map(int, n.split(\"/\"))\n    return (a * c) % (b * d) == 0\n"
     },
     {
       "task_id": "HumanEval/145",
@@ -2937,12 +2937,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9186,
-      "total_cost_usd_total": 0.042928,
+      "duration_ms_total": 9742,
+      "total_cost_usd_total": 0.044397,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 728
+          "outputTokens": 802
         }
       },
       "error_type": null,
@@ -2956,16 +2956,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9104,
-      "total_cost_usd_total": 0.042855,
+      "duration_ms_total": 11541,
+      "total_cost_usd_total": 0.041364,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 728
+          "outputTokens": 677
         }
       },
       "error_type": null,
-      "solution": "\ndef specialFilter(nums):\n    \"\"\"Write a function that takes an array of numbers as input and returns \n    the number of elements in the array that are greater than 10 and both \n    first and last digits of a number are odd (1, 3, 5, 7, 9).\n    For example:\n    specialFilter([15, -73, 14, -15]) => 1 \n    specialFilter([33, -2, -3, 45, 21, 109]) => 2\n    \"\"\"\n    odd_digits = \"13579\"\n    count = 0\n    for num in nums:\n        if num > 10:\n            s = str(num)\n            if s[0] in odd_digits and s[-1] in odd_digits:\n                count += 1\n    return count\n"
+      "solution": "\ndef specialFilter(nums):\n    \"\"\"Write a function that takes an array of numbers as input and returns \n    the number of elements in the array that are greater than 10 and both \n    first and last digits of a number are odd (1, 3, 5, 7, 9).\n    For example:\n    specialFilter([15, -73, 14, -15]) => 1 \n    specialFilter([33, -2, -3, 45, 21, 109]) => 2\n    \"\"\"\n    odd_digits = set(\"13579\")\n    count = 0\n    for num in nums:\n        if num > 10:\n            s = str(num)\n            if s[0] in odd_digits and s[-1] in odd_digits:\n                count += 1\n    return count\n"
     },
     {
       "task_id": "HumanEval/147",
@@ -2975,16 +2975,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12666,
-      "total_cost_usd_total": 0.050679,
+      "duration_ms_total": 15289,
+      "total_cost_usd_total": 0.055708,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 1041
+          "outputTokens": 1260
         }
       },
       "error_type": null,
-      "solution": "\ndef get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, \n    and a[i] + a[j] + a[k] is a multiple of 3.\n\n    Example :\n        Input: n = 5\n        Output: 1\n        Explanation: \n        a = [1, 3, 7, 13, 21]\n        The only valid triple is (1, 7, 13).\n    \"\"\"\n    # a[i] mod 3 is 0 when i % 3 == 2, otherwise 1; a valid triple needs\n    # all three residues equal.\n    if n < 3:\n        return 0\n    zeros = (n + 1) // 3\n    ones = n - zeros\n\n    def choose3(m):\n        return m * (m - 1) * (m - 2) // 6\n\n    return choose3(zeros) + choose3(ones)\n"
+      "solution": "\ndef get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, \n    and a[i] + a[j] + a[k] is a multiple of 3.\n\n    Example :\n        Input: n = 5\n        Output: 1\n        Explanation: \n        a = [1, 3, 7, 13, 21]\n        The only valid triple is (1, 7, 13).\n    \"\"\"\n    counts = [0, 0, 0]\n    for i in range(1, n + 1):\n        counts[(i * i - i + 1) % 3] += 1\n\n    total = 0\n    for r1 in range(3):\n        for r2 in range(r1, 3):\n            r3 = (-(r1 + r2)) % 3\n            if r3 < r2:\n                continue\n            if r1 == r2 == r3:\n                c = counts[r1]\n                total += c * (c - 1) * (c - 2) // 6\n            elif r1 == r2:\n                c = counts[r1]\n                total += c * (c - 1) // 2 * counts[r3]\n            elif r2 == r3:\n                c = counts[r2]\n                total += counts[r1] * c * (c - 1) // 2\n            else:\n                total += counts[r1] * counts[r2] * counts[r3]\n    return total\n"
     },
     {
       "task_id": "HumanEval/148",
@@ -2994,16 +2994,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 15557,
-      "total_cost_usd_total": 0.045069,
+      "duration_ms_total": 11181,
+      "total_cost_usd_total": 0.046097,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 737
+          "outputTokens": 785
         }
       },
       "error_type": null,
-      "solution": "\ndef bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    Examples\n    bf(\"Jupiter\", \"Neptune\") ==> (\"Saturn\", \"Uranus\")\n    bf(\"Earth\", \"Mercury\") ==> (\"Venus\")\n    bf(\"Mercury\", \"Uranus\") ==> (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")\n    '''\n    planets = (\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\n    if planet1 not in planets or planet2 not in planets or planet1 == planet2:\n        return ()\n    i, j = planets.index(planet1), planets.index(planet2)\n    if i > j:\n        i, j = j, i\n    return planets[i + 1:j]\n"
+      "solution": "\ndef bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    Examples\n    bf(\"Jupiter\", \"Neptune\") ==> (\"Saturn\", \"Uranus\")\n    bf(\"Earth\", \"Mercury\") ==> (\"Venus\")\n    bf(\"Mercury\", \"Uranus\") ==> (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")\n    '''\n    planets = (\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\n    if planet1 not in planets or planet2 not in planets:\n        return ()\n    i, j = planets.index(planet1), planets.index(planet2)\n    lo, hi = min(i, j), max(i, j)\n    return planets[lo + 1:hi]\n"
     },
     {
       "task_id": "HumanEval/149",
@@ -3013,12 +3013,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10713,
-      "total_cost_usd_total": 0.045909,
+      "duration_ms_total": 8330,
+      "total_cost_usd_total": 0.041488,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 843
+          "outputTokens": 622
         }
       },
       "error_type": null,
@@ -3032,12 +3032,12 @@
       "passed_evalplus": false,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8220,
-      "total_cost_usd_total": 0.038244,
+      "duration_ms_total": 8046,
+      "total_cost_usd_total": 0.037903,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 547
+          "outputTokens": 530
         }
       },
       "error_type": "tests_failed",
@@ -3051,16 +3051,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11187,
-      "total_cost_usd_total": 0.045324,
+      "duration_ms_total": 11525,
+      "total_cost_usd_total": 0.042138,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 814
+          "outputTokens": 668
         }
       },
       "error_type": null,
-      "solution": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum(x * x for x in lst if isinstance(x, int) and x > 0 and x % 2 == 1)\n"
+      "solution": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum(x ** 2 for x in lst\n               if isinstance(x, int) and x > 0 and x % 2 == 1)\n"
     },
     {
       "task_id": "HumanEval/152",
@@ -3070,12 +3070,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 9575,
-      "total_cost_usd_total": 0.039306,
+      "duration_ms_total": 13267,
+      "total_cost_usd_total": 0.041115,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 501
+          "outputTokens": 590
         }
       },
       "error_type": null,
@@ -3089,12 +3089,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10912,
-      "total_cost_usd_total": 0.047239,
+      "duration_ms_total": 16083,
+      "total_cost_usd_total": 0.046398,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 802
+          "outputTokens": 763
         }
       },
       "error_type": null,
@@ -3108,12 +3108,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10908,
-      "total_cost_usd_total": 0.04317,
+      "duration_ms_total": 10039,
+      "total_cost_usd_total": 0.043319,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 713
+          "outputTokens": 726
         }
       },
       "error_type": null,
@@ -3127,12 +3127,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8244,
-      "total_cost_usd_total": 0.038398,
+      "duration_ms_total": 8636,
+      "total_cost_usd_total": 0.037512,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 562
+          "outputTokens": 517
         }
       },
       "error_type": null,
@@ -3146,12 +3146,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 12261,
-      "total_cost_usd_total": 0.043303,
+      "duration_ms_total": 11402,
+      "total_cost_usd_total": 0.042562,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 740
+          "outputTokens": 703
         }
       },
       "error_type": null,
@@ -3165,12 +3165,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 15793,
-      "total_cost_usd_total": 0.041939,
+      "duration_ms_total": 9438,
+      "total_cost_usd_total": 0.041353,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 688
+          "outputTokens": 664
         }
       },
       "error_type": null,
@@ -3184,16 +3184,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11470,
-      "total_cost_usd_total": 0.041618,
+      "duration_ms_total": 8982,
+      "total_cost_usd_total": 0.039721,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 664
+          "outputTokens": 591
         }
       },
       "error_type": null,
-      "solution": "\ndef find_max(words):\n    \"\"\"Write a function that accepts a list of strings.\n    The list contains different words. Return the word with maximum number\n    of unique characters. If multiple strings have maximum number of unique\n    characters, return the one which comes first in lexicographical order.\n\n    find_max([\"name\", \"of\", \"string\"]) == \"string\"\n    find_max([\"name\", \"enam\", \"game\"]) == \"enam\"\n    find_max([\"aaaaaaa\", \"bb\" ,\"cc\"]) == \"\"aaaaaaa\"\n    \"\"\"\n    return sorted(words, key=lambda x: (-len(set(x)), x))[0]\n"
+      "solution": "\ndef find_max(words):\n    \"\"\"Write a function that accepts a list of strings.\n    The list contains different words. Return the word with maximum number\n    of unique characters. If multiple strings have maximum number of unique\n    characters, return the one which comes first in lexicographical order.\n\n    find_max([\"name\", \"of\", \"string\"]) == \"string\"\n    find_max([\"name\", \"enam\", \"game\"]) == \"enam\"\n    find_max([\"aaaaaaa\", \"bb\" ,\"cc\"]) == \"\"aaaaaaa\"\n    \"\"\"\n    return sorted(words, key=lambda w: (-len(set(w)), w))[0]\n"
     },
     {
       "task_id": "HumanEval/159",
@@ -3203,12 +3203,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8626,
-      "total_cost_usd_total": 0.040837,
+      "duration_ms_total": 8623,
+      "total_cost_usd_total": 0.040956,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 516
+          "outputTokens": 518
         }
       },
       "error_type": null,
@@ -3222,16 +3222,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11138,
-      "total_cost_usd_total": 0.044925,
+      "duration_ms_total": 11995,
+      "total_cost_usd_total": 0.047508,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 734
+          "outputTokens": 845
         }
       },
       "error_type": null,
-      "solution": "\ndef do_algebra(operator, operand):\n    \"\"\"\n    Given two lists operator, and operand. The first list has basic algebra operations, and \n    the second list is a list of integers. Use the two given lists to build the algebric \n    expression and return the evaluation of this expression.\n\n    The basic algebra operations:\n    Addition ( + ) \n    Subtraction ( - ) \n    Multiplication ( * ) \n    Floor division ( // ) \n    Exponentiation ( ** ) \n\n    Example:\n    operator['+', '*', '-']\n    array = [2, 3, 4, 5]\n    result = 2 + 3 * 4 - 5\n    => result = 9\n\n    Note:\n        The length of operator list is equal to the length of operand list minus one.\n        Operand is a list of of non-negative integers.\n        Operator list has at least one operator, and operand list has at least two operands.\n\n    \"\"\"\n    allowed = {'+', '-', '*', '//', '**'}\n    expression = str(int(operand[0]))\n    for op, num in zip(operator, operand[1:]):\n        if op not in allowed:\n            raise ValueError(\"Unsupported operator: %r\" % (op,))\n        expression += ' ' + op + ' ' + str(int(num))\n    return eval(expression)\n"
+      "solution": "\ndef do_algebra(operator, operand):\n    \"\"\"\n    Given two lists operator, and operand. The first list has basic algebra operations, and \n    the second list is a list of integers. Use the two given lists to build the algebric \n    expression and return the evaluation of this expression.\n\n    The basic algebra operations:\n    Addition ( + ) \n    Subtraction ( - ) \n    Multiplication ( * ) \n    Floor division ( // ) \n    Exponentiation ( ** ) \n\n    Example:\n    operator['+', '*', '-']\n    array = [2, 3, 4, 5]\n    result = 2 + 3 * 4 - 5\n    => result = 9\n\n    Note:\n        The length of operator list is equal to the length of operand list minus one.\n        Operand is a list of of non-negative integers.\n        Operator list has at least one operator, and operand list has at least two operands.\n\n    \"\"\"\n    allowed = {'+', '-', '*', '//', '**'}\n    expression = str(int(operand[0]))\n    for op, num in zip(operator, operand[1:]):\n        if op not in allowed:\n            raise ValueError(\"Unsupported operator: {}\".format(op))\n        expression += op + str(int(num))\n    return eval(expression, {\"__builtins__\": {}}, {})\n"
     },
     {
       "task_id": "HumanEval/161",
@@ -3241,16 +3241,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 10726,
-      "total_cost_usd_total": 0.041731,
+      "duration_ms_total": 8382,
+      "total_cost_usd_total": 0.04046,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 661
+          "outputTokens": 613
         }
       },
       "error_type": null,
-      "solution": "\ndef solve(s):\n    \"\"\"You are given a string s.\n    if s[i] is a letter, reverse its case from lower to upper or vise versa, \n    otherwise keep it as it is.\n    If the string contains no letters, reverse the string.\n    The function should return the resulted string.\n    Examples\n    solve(\"1234\") = \"4321\"\n    solve(\"ab\") = \"AB\"\n    solve(\"#a@C\") = \"#A@c\"\n    \"\"\"\n    if not any(c.isalpha() for c in s):\n        return s[::-1]\n    return \"\".join(c.swapcase() if c.isalpha() else c for c in s)\n"
+      "solution": "\ndef solve(s):\n    \"\"\"You are given a string s.\n    if s[i] is a letter, reverse its case from lower to upper or vise versa, \n    otherwise keep it as it is.\n    If the string contains no letters, reverse the string.\n    The function should return the resulted string.\n    Examples\n    solve(\"1234\") = \"4321\"\n    solve(\"ab\") = \"AB\"\n    solve(\"#a@C\") = \"#A@c\"\n    \"\"\"\n    if not any(ch.isalpha() for ch in s):\n        return s[::-1]\n    return \"\".join(ch.swapcase() if ch.isalpha() else ch for ch in s)\n"
     },
     {
       "task_id": "HumanEval/162",
@@ -3260,16 +3260,16 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 8509,
-      "total_cost_usd_total": 0.040446,
+      "duration_ms_total": 11219,
+      "total_cost_usd_total": 0.041955,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 665
+          "outputTokens": 739
         }
       },
       "error_type": null,
-      "solution": "\ndef string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string.\n    If 'text' is an empty string, return None.\n\n    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'\n    \"\"\"\n    import hashlib\n    if not text:\n        return None\n    return hashlib.md5(text.encode('utf-8')).hexdigest()\n"
+      "solution": "\ndef string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string.\n    If 'text' is an empty string, return None.\n\n    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'\n    \"\"\"\n    import hashlib\n    if not text:\n        return None\n    return hashlib.md5(text.encode('ascii')).hexdigest()\n"
     },
     {
       "task_id": "HumanEval/163",
@@ -3279,12 +3279,12 @@
       "passed_evalplus": true,
       "attempts_used": 1,
       "num_turns_total": 4,
-      "duration_ms_total": 11215,
-      "total_cost_usd_total": 0.042153,
+      "duration_ms_total": 9264,
+      "total_cost_usd_total": 0.043617,
       "modelUsage": {
         "claude-opus-5-5": {
           "inputTokens": 6,
-          "outputTokens": 713
+          "outputTokens": 767
         }
       },
       "error_type": null,
